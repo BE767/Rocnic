@@ -19,15 +19,11 @@
     <body style="background-color:#EAEAEA">
         <div class="container-fluid">
             <div>
-                <section class="vw-100 vh-100"><!-- Trabajar dentro de esta seccion para que Abarque toda la pagina -->
+                <section><!-- Trabajar dentro de esta seccion para que Abarque toda la pagina -->
                     <div class="container text-center">
                         <div class="row">
                             <br>
                             <br>
-                            <br>
-                            <br>
-                            <br>
-                            <br><!--  -->
                             <br>
                             <br>
                         </div>
