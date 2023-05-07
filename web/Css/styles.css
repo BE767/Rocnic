@@ -46,6 +46,11 @@ body {
 }
 
 .container{
-    align-items: center;
-    
+    align-items: center;  
 }
+
+.imagen {
+      background-image: url("https://via.placeholder.com/500x500");
+      background-size: cover;
+      height: 100%;
+    }

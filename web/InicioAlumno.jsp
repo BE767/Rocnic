@@ -32,9 +32,15 @@
                         </a>
                     </div>
                 </nav>
-                
+
                 <div class="container-fluid">
-                    
+                    <div class="row">
+                        <div class="col-lg-6 col-md-8 col-sm-10 col-12"> 
+                        </div>
+                        <div class="col-5"> </div>
+                        <div class="col-4">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
