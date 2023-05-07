@@ -1,0 +1,51 @@
+body {
+    background-color: #EAEAEA;
+}
+.rectangulo {
+    background-color: white;
+    height: 80vh;
+    width: 80vw;
+    margin: 40px auto;
+    padding: 30px;
+}
+.triangulo {
+    height: 0;
+    width: 0;
+    border-style: solid;
+    border-width: 0 50px 50px 50px;
+    border-color: transparent transparent white transparent;
+    position: relative;
+    top: -25px;
+}
+.triangulo:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -50px;
+    height: 50px;
+    width: 50px;
+    background-color: white;
+    transform: rotate(45deg);
+}
+.triangulo:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -50px;
+    height: 50px;
+    width: 50px;
+    background-color: white;
+    transform: rotate(-45deg);
+}
+
+.card-title {
+    text-align: center;
+    font-family: 'Comfortaa', cursive;
+    font-family: 'Krub', sans-serif;
+    font-family: 'Mulish', sans-serif;
+}
+
+.container{
+    align-items: center;
+    
+}
