@@ -22,31 +22,25 @@
     </head>
 
     <body style="background-color:#EAEAEA">
-        <div class="rectangulo">
-            <div class="container">
-                <nav class="navbar navbar-light bg-light">
-                    <div class="container-fluid">
-                        <a class="navbar-brand" href="#">
-                            <img src="/docs/5.0/assets/brand/bootstrap-logo.svg" alt="" width="30" height="24" class="d-inline-block align-text-top">
-                            Bootstrap
-                        </a>
-                    </div>
-                </nav>
 
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-8 col-sm-10 col-12"> 
-                        </div>
-                        <div class="col-5"> </div>
-                        <div class="col-4">
-                        </div>
-                    </div>
+        <div class="container-fluid">
+
+            <div class="rectangulo row">
+                <div class="col-md-4  d-flex flex-column justify-content-center  bg-primary">
+                    <div class="col-md-8">
+                    <!-- Contenido adicional aquí -->
                 </div>
+                    <button class="btn btn-light mb-2">Botón 1</button>
+                    <BR><!-- comment -->
+                    <BR>
+                    <button class="btn btn-light">Botón 2</button>
+                </div>
+               
             </div>
-        </div>
 
+
+        </div>
     </div>
 </body>
 
 </html>
-
