@@ -25,18 +25,22 @@
 
         <div class="container-fluid">
 
-            <div class="rectangulo row" >     
-                <div class="col-md-4">
-                    <img src="inicio.png" class="img-fluid rounded-   h-100" alt="imagen">  
+            <div class="rectangulo row">
+                <div class="col-md-4  d-flex flex-column justify-content-center  bg-primary">
+                    <div class="col-md-8">
+                    <!-- Contenido adicional aquí -->
                 </div>
-                <div class="col-md-4">
-                    <img src="inicio.png" class="img-fluid rounded-   h-100" alt="imagen">  
+                    <button class="btn btn-light mb-2">Botón 1</button>
+                    <BR><!-- comment -->
+                    <BR>
+                    <button class="btn btn-light">Botón 2</button>
                 </div>
-                <div class="col-md-4">
-                    <img src="inicio.png" class="img-fluid rounded-   h-100" alt="imagen">  
-                </div> 
+               
             </div>
+
+
         </div>
-    </body>
+    </div>
+</body>
 
 </html>
