@@ -1,46 +1,65 @@
-<%-- 
-    Document   : InicioAlumno
-    Created on : 7 may. 2023, 07:26:12
-    Author     : Evelyn
---%>
+<%-- Document : InicioAlumno Created on : 7 may. 2023, 07:26:12 Author : Evelyn --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Estatus</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&family=Krub:wght@300;400;700&family=Mulish:wght@200&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="Css/styles.css">
-    </head>
+    <%@page contentType="text/html" pageEncoding="UTF-8" %>
+        <!DOCTYPE html>
+        <html>
 
-    <body style="background-color:#EAEAEA">
+        <head>
+            <title>Inicio
+            </title>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+                integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+                crossorigin="anonymous">
+            <link rel="stylesheet" href="css/estilos.css">
+            <link rel="stylesheet" href="css/estilos2.css">
+            <link rel="shortcut icon" href="imagenes/Patita.png">
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+                crossorigin="anonymous"></script>
+        </head>
 
-        <div class="container-fluid">
+        <body style="background-color:#C0CAD2">
+            <div class="containery">
+                <div class="rectanguloy">
+                    <div class="encabezado">
+                        <img src="imagenes/Usuarioa.png" class="logo">
+                        <h1 class="titulo">Alumnos</h1>
+                    </div>
+                    <div class="rectangulo-consulta">
+                        <h1 class="titulo-consulta">CONSULTA</h1>
+                    </div>
+                    <div class="folio">
 
-            <div class="rectangulo row">
-                <div class="col-md-4  d-flex flex-column justify-content-center  bg-primary">
-                    <div class="col-md-8">
-                    <!-- Contenido adicional aquí -->
+                        <h2 class="titulo-folio">Folio</h2>
+                        <div class="campo-entrada">
+                            <input type="text" id="folioInput" name="folioInput" placeholder="Escriba aquí">
+                        </div>
+                    </div>
+                    <div class="campo-buscar">
+                        <button type="submit">Buscar</button>
+                    </div>
                 </div>
-                    <button class="btn btn-light mb-2">Botón 1</button>
-                    <BR><!-- comment -->
-                    <BR>
-                    <button class="btn btn-light">Botón 2</button>
+                <div class="rectangulo-dentro">
+                    <h1 class="titulo" style="text-align: center; color: white;">REPORTES</h1>
+                    <div class="botones text-center">
+                        <a href="https://www.example.com">
+                            <button class="btn btn-primary btn-sm" type="button"
+                                style="margin-top: 50px; color: #727272;">SOFTWARE</button>
+                        </a>
+                        <a href="InicioAlumno.jsp">
+                            <button class="btn btn-primary btn-sm" type="button"
+                                style="color: #727272;">HARDWARE</button>
+                        </a>
+                    </div>
                 </div>
-               
             </div>
+        </body>
 
 
-        </div>
-    </div>
-</body>
 
-</html>
+
+
+
+        </html>

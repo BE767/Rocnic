@@ -9,6 +9,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 body {
   padding: 60px;
 }
+
 .containery {
   display: flex;
   justify-content: center;
@@ -16,6 +17,7 @@ body {
   height: auto;
   max-height: 100vh;
   flex-wrap: wrap;
+  
 }
 
 .rectangulo {
@@ -27,30 +29,94 @@ body {
   position: relative;
   box-sizing: border-box;
 }
+
 .rectangulo h1 {
   text-align: center;
+  font-family: Courier;
 }
+
 .botones {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: auto;
+  
+    
+    margin-top: 10px;
+    flex-wrap: wrap;
 }
 
 .botones button {
-  margin: 40px;
+  margin: 15% 10px;
+  background-color: #455C6A;
+  font-size: 1.2em;
 }
+@media only screen and (max-width: 1200px) {
+  .botones button {
+    width: 80%;
+  }
+}
+
 .btn-primary {
   background-color: #455C6A;
 }
+
 .btn {
   width: 200px;
-  height: 50px
+  height: 40px 
+  font-size: 16px;
+  text-transform: uppercase;
+
 }
+
 .imagen {
   width: 65%;
   height: 80vh;
   margin: 0 -20px;
   box-sizing: border-box;
+}
+
+.rectanguloy {
+  width: 100%;
+  height: 80vh;
+  margin: 0 -20px;
+  background-color: white;
+  padding: 20px;
+  position: relative;
+  box-sizing: border-box;
+  border-radius: 20px;
+}
+
+.encabezado {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 70px;
+  /* Ajusta el ancho de acuerdo a tu imagen */
+  margin-right: 30px;
+  /* Espacio entre la imagen y el texto */
+  margin-left: 20px;
+  /* Margen a la izquierda del logo */
+}
+
+.titulo {
+  font-size: 30px;
+  /* Tamaño de fuente del título */
+  margin: 5px;
+  
+  font-family: Courier;
+
+}
+.rectangulo-dentro {
+  width: 25%;
+  height: 320px;
+  background-color:#455C6A ;
+  position: absolute;
+  top: 57%;
+  border-radius: 10px;
+  left: 25%;
+  transform: translateX(-50%) translateY(-50%);
 }

@@ -1,0 +1,104 @@
+html {
+    overflow: hidden;
+  }
+  .botones {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .botones button {
+    margin: 15% 10px;
+    background-color: #BDCDD0;
+    font-size: 1.2em;
+  }
+  
+  @media only screen and (max-width: 1200px) {
+    .botones button {
+      width: 80%;
+    }
+  }
+.rectangulo-consulta {
+    background-color: #455C6A;
+    border-radius: 10px;
+    width: 20%;
+    margin: 30px 35% 10px auto;
+    padding: 5px;
+    text-align: center;
+   
+  }
+  
+  
+  
+
+.titulo-consulta {
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    margin-top: 10px;
+   
+    font-family: Courier;
+}
+.folio {
+    text-align: center;
+    margin-top:30px;
+
+    color:black;
+}
+
+.titulo-folio {
+    color: #727272;
+    font-size: 25px;
+    font-family: Courier;
+}
+.campo-entrada {
+    width: calc(100% - 180);
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    overflow: hidden;
+    display: inline-block;
+    position: relative;
+    left: 60px;
+    top: 20px;
+   
+}
+
+input[type="text"] {
+    padding: 10px;
+    border: none;
+    outline: none;
+    width: 200px;
+    background-color: #fff;
+    font-size: 16px;
+    color: #333;
+}
+.campo-buscar {
+    margin-top: 40px;
+    text-align: center;
+    
+   
+   
+}
+
+.campo-buscar button {
+    background-color: #455C6A;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 20px;
+}
+
+.campo-buscar button:hover {
+    background-color: #008abe;
+  }
+
+ 
+  
+  
+  
