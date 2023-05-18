@@ -11,21 +11,26 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import org.rocnic.dao.Rol;
+import org.rocnic.dao.Usuario;
 
 /**
  *
  * @author gerdoc
  */
-public class RolService extends Conexion<Rol>
+public class UsuarioService extends Conexion<Usuario>
 {
-    public List<Rol> getRolList() 
+
+    public UsuarioService() 
     {
-        List<Rol> rolList = null;
+    }
+    
+    public List<Usuario> getUsuarioList() 
+    {
+        List<Usuario> usuarioList = null;
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
-        Rol rol = null;
+        Usuario usuario = null;
 
         try 
         {
@@ -38,22 +43,25 @@ public class RolService extends Conexion<Rol>
             if (statement == null) {
                 return null;
             }
-            resultSet = statement.executeQuery("SELECT * FROM ROL");
+            resultSet = statement.executeQuery("SELECT * FROM USUARIO");
             if (resultSet == null) 
             {
                 return null;
             }
-            rolList = new ArrayList<>();
+            usuarioList = new ArrayList<>();
             while (resultSet.next()) 
             {
-                rol = new Rol();
-                rol.setRol(resultSet.getString(1));
-                rol.setDescripcion(resultSet.getString(2));
-                rolList.add(rol);
+                usuario = new Usuario();
+                usuario.setUsuario(resultSet.getString(1 ) );
+                usuario.setPassword(resultSet.getString(2 ) );
+                usuario.setNombre( resultSet.getString(3 ) );
+                usuario.setCorreo(resultSet.getString( 4 ) );
+                usuario.setUltimoLogin( resultSet.getDate(5 ) );
+                usuarioList.add(usuario);
             }
             resultSet.close();
             closeConnection(connection);
-            return rolList;
+            return usuarioList;
         } 
         catch (SQLException ex) 
         {
@@ -62,11 +70,11 @@ public class RolService extends Conexion<Rol>
         return null;
     }
     
-    public boolean addRol( Rol rol )
+    public boolean addUsuario( Usuario usuario )
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "INSERT INTO ROL(ROL,DESCRIPCION) VALUES(?,?)";
+        String sql = "INSERT INTO USUARIO(USUARIO,PASSWORD,NOMBRE,CORREO,ULTIMO_LOGIN) VALUES(?,?,?,?,?)";
         int row = 0;
         try 
         {
@@ -80,8 +88,11 @@ public class RolService extends Conexion<Rol>
             {
                 return false;
             }
-            preparedStatement.setString(1, rol.getRol());
-            preparedStatement.setString(2, rol.getDescripcion());
+            preparedStatement.setString(1, usuario.getUsuario( ) );
+            preparedStatement.setString(2, usuario.getPassword( ) );
+            preparedStatement.setString(3, usuario.getNombre( ) );
+            preparedStatement.setString(4, usuario.getCorreo() );
+            preparedStatement.setDate(5, dateUtil2DateSql( usuario.getUltimoLogin( ) ) );
             row = preparedStatement.executeUpdate();
             closeConnection(connection);
             return row == 1;
@@ -93,11 +104,11 @@ public class RolService extends Conexion<Rol>
         return false;
     }
     
-    public boolean updateRol( Rol rol )
+    public boolean updateUsuario( Usuario usuario )
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "update ROL SET DESCRIPCION=? WHERE ROL = ?";
+        String sql = "update USUARIO SET PASSWORD = ?,NOMBRE = ?,CORREO = ?, ULTIMO_LOGIN = ? WHERE USUARIO = ?";
         int row = 0;
         try 
         {
@@ -111,8 +122,11 @@ public class RolService extends Conexion<Rol>
             {
                 return false;
             }
-            preparedStatement.setString(1, rol.getDescripcion());
-            preparedStatement.setString(2, rol.getRol());
+            preparedStatement.setString(1, usuario.getPassword( ) );
+            preparedStatement.setString(2, usuario.getNombre( ) );
+            preparedStatement.setString(3, usuario.getCorreo() );
+            preparedStatement.setDate(4, dateUtil2DateSql( usuario.getUltimoLogin( ) ) );
+            preparedStatement.setString(5, usuario.getUsuario( ) );
             row = preparedStatement.executeUpdate();
             closeConnection(connection);
             return row == 1;
@@ -124,11 +138,11 @@ public class RolService extends Conexion<Rol>
         return false;
     }
     
-    public boolean deleteRol( Rol rol )
+    public boolean deleteUsuario( Usuario usuario )
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "DELETE FROM ROL WHERE ROL = ?";
+        String sql = "DELETE FROM USUARIO WHERE USUARIO = ?";
         int row = 0;
         try 
         {
@@ -142,7 +156,7 @@ public class RolService extends Conexion<Rol>
             {
                 return false;
             }
-            preparedStatement.setString(1, rol.getRol() );
+            preparedStatement.setString(1, usuario.getUsuario() );
             row = preparedStatement.executeUpdate();
             closeConnection(connection);
             return row == 1;
@@ -154,9 +168,9 @@ public class RolService extends Conexion<Rol>
         return false;
     }
     
-    public Rol getRolByRol( String rol) 
+    public Usuario getUsuarioByUsuario( String usuario) 
     {
-        Rol aux = null;
+        Usuario aux = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -167,23 +181,25 @@ public class RolService extends Conexion<Rol>
             {
                 return null;
             }
-            preparedStatement = connection.prepareStatement("SELECT * FROM ROL WHERE ROL = ?" );
+            preparedStatement = connection.prepareStatement("SELECT * FROM USUARIO WHERE USUARIO = ?" );
             if (preparedStatement == null) 
             {
                 return null;
             }
-            preparedStatement.setString(1, rol );
+            preparedStatement.setString(1, usuario );
             resultSet = preparedStatement.executeQuery();
             if (resultSet == null) 
             {
                 return null;
             }
-            aux = new Rol ( );
+            aux = new Usuario ( );
             while (resultSet.next()) 
             {
-                
-                aux.setRol(resultSet.getString(1));
-                aux.setDescripcion(resultSet.getString(2));
+                aux.setUsuario(resultSet.getString(1 ) );
+                aux.setPassword(resultSet.getString(2 ) );
+                aux.setNombre( resultSet.getString(3 ) );
+                aux.setCorreo(resultSet.getString( 4 ) );
+                aux.setUltimoLogin( resultSet.getDate(5 ) );
             }
             resultSet.close();
             closeConnection(connection);

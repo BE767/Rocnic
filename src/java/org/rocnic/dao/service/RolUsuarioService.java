@@ -12,20 +12,22 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import org.rocnic.dao.Rol;
+import org.rocnic.dao.RolUsuario;
+import org.rocnic.dao.Usuario;
 
 /**
  *
  * @author gerdoc
  */
-public class RolService extends Conexion<Rol>
+public class RolUsuarioService extends Conexion<RolUsuario>
 {
-    public List<Rol> getRolList() 
+    public List<RolUsuario> getRolUsuarioList() 
     {
-        List<Rol> rolList = null;
+        List<RolUsuario> rolUsuarioList = null;
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
-        Rol rol = null;
+        RolUsuario rolUsuario = null;
 
         try 
         {
@@ -38,22 +40,22 @@ public class RolService extends Conexion<Rol>
             if (statement == null) {
                 return null;
             }
-            resultSet = statement.executeQuery("SELECT * FROM ROL");
+            resultSet = statement.executeQuery("SELECT * FROM ROL_Usuario");
             if (resultSet == null) 
             {
                 return null;
             }
-            rolList = new ArrayList<>();
+            rolUsuarioList = new ArrayList<>();
             while (resultSet.next()) 
             {
-                rol = new Rol();
-                rol.setRol(resultSet.getString(1));
-                rol.setDescripcion(resultSet.getString(2));
-                rolList.add(rol);
+                rolUsuario = new RolUsuario();
+                rolUsuario.setRol( new Rol( resultSet.getString(1) ) );
+                rolUsuario.setUsuario( new Usuario( resultSet.getString(2) ) );
+                rolUsuarioList.add(rolUsuario);
             }
             resultSet.close();
             closeConnection(connection);
-            return rolList;
+            return rolUsuarioList;
         } 
         catch (SQLException ex) 
         {
@@ -62,11 +64,11 @@ public class RolService extends Conexion<Rol>
         return null;
     }
     
-    public boolean addRol( Rol rol )
+    public boolean addRolUsuario( RolUsuario rolUsuario )
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "INSERT INTO ROL(ROL,DESCRIPCION) VALUES(?,?)";
+        String sql = "INSERT INTO ROL_Usuario(ROL_ROL,Usuario_USUARIO) VALUES(?,?)";
         int row = 0;
         try 
         {
@@ -80,8 +82,8 @@ public class RolService extends Conexion<Rol>
             {
                 return false;
             }
-            preparedStatement.setString(1, rol.getRol());
-            preparedStatement.setString(2, rol.getDescripcion());
+            preparedStatement.setString(1, rolUsuario.getRol().getRol() );
+            preparedStatement.setString(2, rolUsuario.getUsuario().getUsuario() );
             row = preparedStatement.executeUpdate();
             closeConnection(connection);
             return row == 1;
@@ -93,11 +95,16 @@ public class RolService extends Conexion<Rol>
         return false;
     }
     
-    public boolean updateRol( Rol rol )
+    public boolean updateRolUsuario( RolUsuario rolUsuario )
+    {
+        return false;
+    }
+    
+    public boolean deleteRolUsuario( RolUsuario rolUsuario )
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "update ROL SET DESCRIPCION=? WHERE ROL = ?";
+        String sql = "DELETE FROM ROL_Usuario WHERE ROL_ROL = ? AND Usuario_USUARIO = ?";
         int row = 0;
         try 
         {
@@ -111,8 +118,8 @@ public class RolService extends Conexion<Rol>
             {
                 return false;
             }
-            preparedStatement.setString(1, rol.getDescripcion());
-            preparedStatement.setString(2, rol.getRol());
+            preparedStatement.setString(1, rolUsuario.getRol().getRol());
+            preparedStatement.setString(2, rolUsuario.getUsuario().getUsuario() );
             row = preparedStatement.executeUpdate();
             closeConnection(connection);
             return row == 1;
@@ -124,39 +131,9 @@ public class RolService extends Conexion<Rol>
         return false;
     }
     
-    public boolean deleteRol( Rol rol )
+    public RolUsuario getRolUsuarioByRolUsuario( String rol , String usuario) 
     {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        String sql = "DELETE FROM ROL WHERE ROL = ?";
-        int row = 0;
-        try 
-        {
-            connection = getConnection( );
-            if( connection == null )
-            {
-                return false;
-            }
-            preparedStatement = connection.prepareStatement(sql);
-            if( preparedStatement == null )
-            {
-                return false;
-            }
-            preparedStatement.setString(1, rol.getRol() );
-            row = preparedStatement.executeUpdate();
-            closeConnection(connection);
-            return row == 1;
-        } 
-        catch (SQLException ex) 
-        {
-            ex.printStackTrace();
-        }
-        return false;
-    }
-    
-    public Rol getRolByRol( String rol) 
-    {
-        Rol aux = null;
+        RolUsuario aux = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -167,23 +144,24 @@ public class RolService extends Conexion<Rol>
             {
                 return null;
             }
-            preparedStatement = connection.prepareStatement("SELECT * FROM ROL WHERE ROL = ?" );
+            preparedStatement = connection.prepareStatement("SELECT * FROM ROL_Usuario WHERE ROL_ROL = ? AND Usuario_USUARIO = ?" );
             if (preparedStatement == null) 
             {
                 return null;
             }
             preparedStatement.setString(1, rol );
+            preparedStatement.setString(2, usuario );
             resultSet = preparedStatement.executeQuery();
             if (resultSet == null) 
             {
                 return null;
             }
-            aux = new Rol ( );
+            aux = new RolUsuario ( );
             while (resultSet.next()) 
             {
                 
-                aux.setRol(resultSet.getString(1));
-                aux.setDescripcion(resultSet.getString(2));
+                aux.setRol( new Rol( resultSet.getString(1)) );
+                aux.setUsuario( new Usuario( resultSet.getString(2)) );
             }
             resultSet.close();
             closeConnection(connection);
