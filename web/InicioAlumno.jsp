@@ -44,7 +44,7 @@
                 <div class="rectangulo-dentro">
                     <h1 class="titulo" style="text-align: center; color: white;">REPORTES</h1>
                     <div class="botones text-center">
-                        <a href="https://www.example.com">
+                        <a href="ReporteSoft.jsp">
                             <button class="btn btn-primary btn-sm" type="button"
                                 style="margin-top: 50px; color: #727272;">SOFTWARE</button>
                         </a>
