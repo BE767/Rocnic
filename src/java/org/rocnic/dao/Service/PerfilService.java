@@ -11,15 +11,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import org.rocnic.dao.Rol;
+import org.rocnic.dao.Perfiles;
 
 /**
  *
  * @author gerdoc
  */
-public class RolService extends Conexion<Rol>
+public class PerfilService extends Conexion<Perfiles>
 {
-    public List<Rol> getRolList() 
+    public List<Perfiles> getRolList() 
     {
         List<Rol> rolList = null;
         Connection connection = null;
