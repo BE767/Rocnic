@@ -1,0 +1,200 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package org.rocnic.dao.service;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import org.rocnic.dao.Laboratorio;
+
+/**
+ *
+ * @author gerdoc
+ */
+public class LaboratorioService extends Conexion<Laboratorio>
+{
+    public List<Laboratorio> getRolList() 
+    {
+        List<Laboratorio> rolLaboratorio = null;
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        Laboratorio laboratorio = null;
+        
+        try 
+        {
+            connection = getConnection();
+            if (connection == null) 
+            {
+                return null;
+            }
+            statement = connection.createStatement();
+            if (statement == null) {
+                return null;
+            }
+            resultSet = statement.executeQuery("SELECT * FROM ROL");
+            if (resultSet == null) 
+            {
+                return null;
+            }
+            rolLaboratorio = new ArrayList<>();
+            while (resultSet.next()) 
+            {
+                laboratorio = new Laboratorio();
+                laboratorio.setIdLaboratorio(resultSet.getInt(1));
+                laboratorio.set(resultSet.getString(2));
+                rolList.add(laboratorio);
+            }
+            resultSet.close();
+            closeConnection(connection);
+            return rolList;
+        } 
+        catch (SQLException ex) 
+        {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+    
+    public boolean addRol( Rol rol )
+    {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        String sql = "INSERT INTO ROL(ROL,DESCRIPCION) VALUES(?,?)";
+        int row = 0;
+        try 
+        {
+            connection = getConnection( );
+            if( connection == null )
+            {
+                return false;
+            }
+            preparedStatement = connection.prepareStatement(sql);
+            if( preparedStatement == null )
+            {
+                return false;
+            }
+            preparedStatement.setString(1, rol.getRol());
+            preparedStatement.setString(2, rol.getDescripcion());
+            row = preparedStatement.executeUpdate();
+            closeConnection(connection);
+            return row == 1;
+        } 
+        catch (SQLException ex) 
+        {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+    
+    public boolean updateRol( Rol rol )
+    {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        String sql = "update ROL SET DESCRIPCION=? WHERE ROL = ?";
+        int row = 0;
+        try 
+        {
+            connection = getConnection( );
+            if( connection == null )
+            {
+                return false;
+            }
+            preparedStatement = connection.prepareStatement(sql);
+            if( preparedStatement == null )
+            {
+                return false;
+            }
+            preparedStatement.setString(1, rol.getDescripcion());
+            preparedStatement.setString(2, rol.getRol());
+            row = preparedStatement.executeUpdate();
+            closeConnection(connection);
+            return row == 1;
+        } 
+        catch (SQLException ex) 
+        {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+    
+    public boolean deleteRol( Rol rol )
+    {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        String sql = "DELETE FROM ROL WHERE ROL = ?";
+        int row = 0;
+        try 
+        {
+            connection = getConnection( );
+            if( connection == null )
+            {
+                return false;
+            }
+            preparedStatement = connection.prepareStatement(sql);
+            if( preparedStatement == null )
+            {
+                return false;
+            }
+            preparedStatement.setString(1, rol.getRol() );
+            row = preparedStatement.executeUpdate();
+            closeConnection(connection);
+            return row == 1;
+        } 
+        catch (SQLException ex) 
+        {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+    
+    public Rol getRolByRol( String rol) 
+    {
+        Rol aux = null;
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try 
+        {
+            connection = getConnection();
+            if (connection == null) 
+            {
+                return null;
+            }
+            preparedStatement = connection.prepareStatement("SELECT * FROM ROL WHERE ROL = ?" );
+            if (preparedStatement == null) 
+            {
+                return null;
+            }
+            preparedStatement.setString(1, rol );
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet == null) 
+            {
+                return null;
+            }
+            aux = new Rol ( );
+            while (resultSet.next()) 
+            {
+                
+                aux.setRol(resultSet.getString(1));
+                aux.setDescripcion(resultSet.getString(2));
+            }
+            resultSet.close();
+            closeConnection(connection);
+            return aux;
+        } 
+        catch (SQLException ex) 
+        {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+    
+    
+}
