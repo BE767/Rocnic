@@ -11,21 +11,21 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import org.rocnic.dao.EstatusReporte;
+import org.rocnic.dao.TipoError;
 
 /**
  *
  * @author gerdoc
  */
-public class EstatusReporteService extends Conexion<EstatusReporte>
+public class TipoErrorService extends Conexion<TipoError>
 {
-    public List<EstatusReporte> getEstatusReporteList() 
+    public List<TipoError> getTipoErrorList() 
     {
-        List<EstatusReporte> EstatusReporteList = null;
+        List<TipoError> TipoErrorList = null;
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
-        EstatusReporte estatusReporte = null;
+        TipoError tipoError = null;
 
         try 
         {
@@ -38,22 +38,23 @@ public class EstatusReporteService extends Conexion<EstatusReporte>
             if (statement == null) {
                 return null;
             }
-            resultSet = statement.executeQuery("SELECT * FROM estatusreporte");
+            resultSet = statement.executeQuery("SELECT * FROM tipoerror");
             if (resultSet == null) 
             {
                 return null;
             }
-            EstatusReporteList = new ArrayList<>();
+            TipoErrorList = new ArrayList<>();
             while (resultSet.next()) 
             {
-                estatusReporte = new EstatusReporte();
-                estatusReporte.setIdEstatusReporte(resultSet.getInt(1));
-                estatusReporte.setNombreEstatus(resultSet.getString(2));
-                EstatusReporteList.add(estatusReporte);
+                tipoError = new TipoError();
+                tipoError.setIdTipoError(resultSet.getInt(1));
+                TipoError.setIdTipoReporte(resultSet.getInt(1));
+                tipoError.setNombreError(resultSet.getString(2));
+                TipoErrorList.add(tipoError);
             }
             resultSet.close();
             closeConnection(connection);
-            return EstatusReporteList;
+            return TipoErrorList;
         } 
         catch (SQLException ex) 
         {
@@ -62,13 +63,11 @@ public class EstatusReporteService extends Conexion<EstatusReporte>
         return null;
     }
     
-    
-    
-    public boolean addEstatusReporte( EstatusReporte estatusReporte )
+    public boolean addRol( TipoError tipoError )
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "INSERT INTO estatusreporte(IdEstatusReporte,NombreEstatus) VALUES(?,?)";
+        String sql = "INSERT INTO ROL(ROL,DESCRIPCION) VALUES(?,?)";
         int row = 0;
         try 
         {
@@ -82,8 +81,8 @@ public class EstatusReporteService extends Conexion<EstatusReporte>
             {
                 return false;
             }
-            preparedStatement.setInt(1, estatusReporte.getIdEstatusReporte());
-            preparedStatement.setString(2, estatusReporte.getNombreEstatus());
+            preparedStatement.setString(1, rol.getRol());
+            preparedStatement.setString(2, rol.getDescripcion());
             row = preparedStatement.executeUpdate();
             closeConnection(connection);
             return row == 1;
@@ -95,11 +94,11 @@ public class EstatusReporteService extends Conexion<EstatusReporte>
         return false;
     }
     
-    public boolean updateEstatusReporte( EstatusReporte estatusReporte)
+    public boolean updateRol( TipoError tipoError)
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "update estatusreporte SET NombreEstatus=? WHERE IdEstatusReporte = ?";
+        String sql = "update ROL SET DESCRIPCION=? WHERE ROL = ?";
         int row = 0;
         try 
         {
@@ -113,8 +112,8 @@ public class EstatusReporteService extends Conexion<EstatusReporte>
             {
                 return false;
             }
-            preparedStatement.setString(2, estatusReporte.getNombreEstatus());
-            preparedStatement.setInt(1, estatusReporte.getIdEstatusReporte());
+            preparedStatement.setString(1, rol.getDescripcion());
+            preparedStatement.setString(2, rol.getRol());
             row = preparedStatement.executeUpdate();
             closeConnection(connection);
             return row == 1;
@@ -126,14 +125,11 @@ public class EstatusReporteService extends Conexion<EstatusReporte>
         return false;
     }
     
-    
-    
-    
-    public boolean deleteEstatusReporte( EstatusReporte estatusReporte )
+    public boolean deleteRol( TipoError tipoError )
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "DELETE FROM estatusreporte WHERE IdEstatusReporte = ?";
+        String sql = "DELETE FROM ROL WHERE ROL = ?";
         int row = 0;
         try 
         {
@@ -147,7 +143,7 @@ public class EstatusReporteService extends Conexion<EstatusReporte>
             {
                 return false;
             }
-            preparedStatement.setInt(1, estatusReporte.getIdEstatusReporte());
+            preparedStatement.setString(1, rol.getRol() );
             row = preparedStatement.executeUpdate();
             closeConnection(connection);
             return row == 1;
@@ -159,12 +155,9 @@ public class EstatusReporteService extends Conexion<EstatusReporte>
         return false;
     }
     
-    
-    
-    
-    public EstatusReporte getEstatusReporteByEstatusReporte( String rol) 
+    public Rol getRolByRol( TipoError tipoError) 
     {
-        EstatusReporte aux = null;
+        Rol aux = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -175,7 +168,7 @@ public class EstatusReporteService extends Conexion<EstatusReporte>
             {
                 return null;
             }
-            preparedStatement = connection.prepareStatement("SELECT * FROM estatusreporte WHERE IdEstatusReporte = ?" );
+            preparedStatement = connection.prepareStatement("SELECT * FROM ROL WHERE ROL = ?" );
             if (preparedStatement == null) 
             {
                 return null;
@@ -186,12 +179,12 @@ public class EstatusReporteService extends Conexion<EstatusReporte>
             {
                 return null;
             }
-            aux = new EstatusReporte ( );
+            aux = new Rol ( );
             while (resultSet.next()) 
             {
-
-                aux.setIdEstatusReporte(resultSet.getInt(1));
-                aux.setNombreEstatus(resultSet.getString(2));
+                
+                aux.setRol(resultSet.getString(1));
+                aux.setDescripcion(resultSet.getString(2));
             }
             resultSet.close();
             closeConnection(connection);
