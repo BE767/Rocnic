@@ -26,7 +26,7 @@ public class EstatusReporteService extends Conexion<EstatusReporte>
         Statement statement = null;
         ResultSet resultSet = null;
         EstatusReporte estatusReporte = null;
-
+        
         try 
         {
             connection = getConnection();

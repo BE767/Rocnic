@@ -15,13 +15,21 @@ public class Usuarios implements Serializable {
 
     public Usuarios() {
     }
-   
-     private int IdUsuario;
-     private Perfiles IdPerfil;
-     private String Usuario;
-     private String Contraseña;
-     private String Nombre;
-     private String Boleta;
+
+    private String Usuario;
+    private String Contraseña;
+    private String Nombre;
+    private String Boleta;
+    private int IdUsuario;
+    private int IdPerfil;
+
+    public int getIdPerfil() {
+        return IdPerfil;
+    }
+
+    public void setIdPerfil(int IdPerfil) {
+        this.IdPerfil = IdPerfil;
+    }
 
     public int getIdUsuario() {
         return IdUsuario;
@@ -29,14 +37,6 @@ public class Usuarios implements Serializable {
 
     public void setIdUsuario(int IdUsuario) {
         this.IdUsuario = IdUsuario;
-    }
-
-    public Perfiles getIdPerfil() {
-        return IdPerfil;
-    }
-
-    public void setIdPerfil(Perfiles IdPerfil) {
-        this.IdPerfil = IdPerfil;
     }
 
     public String getUsuario() {
@@ -70,5 +70,5 @@ public class Usuarios implements Serializable {
     public void setBoleta(String Boleta) {
         this.Boleta = Boleta;
     }
-     
+
 }
