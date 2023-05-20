@@ -11,23 +11,21 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import org.rocnic.dao.Rol;
-import org.rocnic.dao.RolUsuario;
-import org.rocnic.dao.Usuario;
+import org.rocnic.dao.EstatusReporte;
 
 /**
  *
  * @author gerdoc
  */
-public class RolUsuarioService extends Conexion<RolUsuario>
+public class EstatusReporteService extends Conexion<EstatusReporte>
 {
-    public List<RolUsuario> getRolUsuarioList() 
+    public List<EstatusReporte> getEstatusReporteList() 
     {
-        List<RolUsuario> rolUsuarioList = null;
+        List<EstatusReporte> EstatusReporteList = null;
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
-        RolUsuario rolUsuario = null;
+        EstatusReporte estatusReporte = null;
 
         try 
         {
@@ -40,22 +38,22 @@ public class RolUsuarioService extends Conexion<RolUsuario>
             if (statement == null) {
                 return null;
             }
-            resultSet = statement.executeQuery("SELECT * FROM ROL_Usuario");
+            resultSet = statement.executeQuery("SELECT * FROM estatusreporte");
             if (resultSet == null) 
             {
                 return null;
             }
-            rolUsuarioList = new ArrayList<>();
+            EstatusReporteList = new ArrayList<>();
             while (resultSet.next()) 
             {
-                rolUsuario = new RolUsuario();
-                rolUsuario.setRol( new Rol( resultSet.getString(1) ) );
-                rolUsuario.setUsuario( new Usuario( resultSet.getString(2) ) );
-                rolUsuarioList.add(rolUsuario);
+                estatusReporte = new EstatusReporte();
+                estatusReporte.setIdEstatusReporte(resultSet.getInt(1));
+                estatusReporte.setNombreEstatus(resultSet.getString(2));
+                EstatusReporteList.add(estatusReporte);
             }
             resultSet.close();
             closeConnection(connection);
-            return rolUsuarioList;
+            return EstatusReporteList;
         } 
         catch (SQLException ex) 
         {
@@ -64,11 +62,13 @@ public class RolUsuarioService extends Conexion<RolUsuario>
         return null;
     }
     
-    public boolean addRolUsuario( RolUsuario rolUsuario )
+    
+    
+    public boolean addEstatusReporte( EstatusReporte estatusReporte )
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "INSERT INTO ROL_Usuario(ROL_ROL,Usuario_USUARIO) VALUES(?,?)";
+        String sql = "INSERT INTO estatusreporte(IdEstatusReporte,NombreEstatus) VALUES(?,?)";
         int row = 0;
         try 
         {
@@ -82,8 +82,8 @@ public class RolUsuarioService extends Conexion<RolUsuario>
             {
                 return false;
             }
-            preparedStatement.setString(1, rolUsuario.getRol().getRol() );
-            preparedStatement.setString(2, rolUsuario.getUsuario().getUsuario() );
+            preparedStatement.setInt(1, estatusReporte.getIdEstatusReporte());
+            preparedStatement.setString(2, estatusReporte.getNombreEstatus());
             row = preparedStatement.executeUpdate();
             closeConnection(connection);
             return row == 1;
@@ -95,16 +95,11 @@ public class RolUsuarioService extends Conexion<RolUsuario>
         return false;
     }
     
-    public boolean updateRolUsuario( RolUsuario rolUsuario )
-    {
-        return false;
-    }
-    
-    public boolean deleteRolUsuario( RolUsuario rolUsuario )
+    public boolean updateEstatusReporte( EstatusReporte estatusReporte)
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "DELETE FROM ROL_Usuario WHERE ROL_ROL = ? AND Usuario_USUARIO = ?";
+        String sql = "update estatusreporte SET NombreEstatus=? WHERE IdEstatusReporte = ?";
         int row = 0;
         try 
         {
@@ -118,8 +113,8 @@ public class RolUsuarioService extends Conexion<RolUsuario>
             {
                 return false;
             }
-            preparedStatement.setString(1, rolUsuario.getRol().getRol());
-            preparedStatement.setString(2, rolUsuario.getUsuario().getUsuario() );
+            preparedStatement.setString(2, estatusReporte.getNombreEstatus());
+            preparedStatement.setInt(1, estatusReporte.getIdEstatusReporte());
             row = preparedStatement.executeUpdate();
             closeConnection(connection);
             return row == 1;
@@ -131,9 +126,45 @@ public class RolUsuarioService extends Conexion<RolUsuario>
         return false;
     }
     
-    public RolUsuario getRolUsuarioByRolUsuario( String rol , String usuario) 
+    
+    
+    
+    public boolean deleteEstatusReporte( EstatusReporte estatusReporte )
     {
-        RolUsuario aux = null;
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        String sql = "DELETE FROM estatusreporte WHERE IdEstatusReporte = ?";
+        int row = 0;
+        try 
+        {
+            connection = getConnection( );
+            if( connection == null )
+            {
+                return false;
+            }
+            preparedStatement = connection.prepareStatement(sql);
+            if( preparedStatement == null )
+            {
+                return false;
+            }
+            preparedStatement.setInt(1, estatusReporte.getIdEstatusReporte());
+            row = preparedStatement.executeUpdate();
+            closeConnection(connection);
+            return row == 1;
+        } 
+        catch (SQLException ex) 
+        {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+    
+    
+    
+    
+    public EstatusReporte getEstatusReporteByEstatusReporte( String rol) 
+    {
+        EstatusReporte aux = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -144,24 +175,23 @@ public class RolUsuarioService extends Conexion<RolUsuario>
             {
                 return null;
             }
-            preparedStatement = connection.prepareStatement("SELECT * FROM ROL_Usuario WHERE ROL_ROL = ? AND Usuario_USUARIO = ?" );
+            preparedStatement = connection.prepareStatement("SELECT * FROM estatusreporte WHERE IdEstatusReporte = ?" );
             if (preparedStatement == null) 
             {
                 return null;
             }
             preparedStatement.setString(1, rol );
-            preparedStatement.setString(2, usuario );
             resultSet = preparedStatement.executeQuery();
             if (resultSet == null) 
             {
                 return null;
             }
-            aux = new RolUsuario ( );
+            aux = new EstatusReporte ( );
             while (resultSet.next()) 
             {
-                
-                aux.setRol( new Rol( resultSet.getString(1)) );
-                aux.setUsuario( new Usuario( resultSet.getString(2)) );
+
+                aux.setIdEstatusReporte(resultSet.getInt(1));
+                aux.setNombreEstatus(resultSet.getString(2));
             }
             resultSet.close();
             closeConnection(connection);
@@ -173,6 +203,4 @@ public class RolUsuarioService extends Conexion<RolUsuario>
         }
         return null;
     }
-    
-    
 }

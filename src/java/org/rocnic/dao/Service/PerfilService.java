@@ -11,190 +11,156 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import org.rocnic.dao.Rol;
+import org.rocnic.dao.Perfiles;
 
 /**
  *
  * @author gerdoc
  */
-public class RolService extends Conexion<Rol>
-{
-    public List<Rol> getRolList() 
-    {
-        List<Rol> rolList = null;
+public class PerfilService extends Conexion<Perfiles> {
+
+    public List<Perfiles> getPerfilList() {
+        List<Perfiles> PerfilList = null;
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
-        Rol rol = null;
-
-        try 
-        {
+        Perfiles perfil = null;
+        try {
             connection = getConnection();
-            if (connection == null) 
-            {
+            if (connection == null) {
                 return null;
             }
             statement = connection.createStatement();
             if (statement == null) {
                 return null;
             }
-            resultSet = statement.executeQuery("SELECT * FROM ROL");
-            if (resultSet == null) 
-            {
+            resultSet = statement.executeQuery("SELECT * FROM perfiles");
+            if (resultSet == null) {
                 return null;
             }
-            rolList = new ArrayList<>();
-            while (resultSet.next()) 
-            {
-                rol = new Rol();
-                rol.setRol(resultSet.getString(1));
-                rol.setDescripcion(resultSet.getString(2));
-                rolList.add(rol);
+            PerfilList = new ArrayList<>();
+            while (resultSet.next()) {
+                perfil = new Perfiles();
+                perfil.setIdPerfil(resultSet.getInt(1));
+                perfil.setNombrePerfil(resultSet.getString(2));
+                PerfilList.add(perfil);
             }
             resultSet.close();
             closeConnection(connection);
-            return rolList;
-        } 
-        catch (SQLException ex) 
-        {
+            return PerfilList;
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return null;
     }
-    
-    public boolean addRol( Rol rol )
-    {
+
+    public boolean addPerfil(Perfiles perfil) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "INSERT INTO ROL(ROL,DESCRIPCION) VALUES(?,?)";
+        String sql = "INSERT INTO perfiles(IdPerfil,NombrePerfil) VALUES(?,?)";
         int row = 0;
-        try 
-        {
-            connection = getConnection( );
-            if( connection == null )
-            {
+        try {
+            connection = getConnection();
+            if (connection == null) {
                 return false;
             }
             preparedStatement = connection.prepareStatement(sql);
-            if( preparedStatement == null )
-            {
+            if (preparedStatement == null) {
                 return false;
             }
-            preparedStatement.setString(1, rol.getRol());
-            preparedStatement.setString(2, rol.getDescripcion());
+            preparedStatement.setInt(1, perfil.getIdPerfil());
+            preparedStatement.setString(2, perfil.getNombrePerfil());
             row = preparedStatement.executeUpdate();
             closeConnection(connection);
             return row == 1;
-        } 
-        catch (SQLException ex) 
-        {
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean updatePerfil(Perfiles perfil) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        String sql = "update perfiles SET NombrePerfil=? WHERE IdPerfil = ?";
+        int row = 0;
+        try {
+            connection = getConnection();
+            if (connection == null) {
+                return false;
+            }
+            preparedStatement = connection.prepareStatement(sql);
+            if (preparedStatement == null) {
+                return false;
+            }
+            preparedStatement.setString(2, perfil.getNombrePerfil());
+            preparedStatement.setInt(1, perfil.getIdPerfil());
+            row = preparedStatement.executeUpdate();
+            closeConnection(connection);
+            return row == 1;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean deletePerfil(Perfiles perfil) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        String sql = "DELETE FROM perfiles WHERE IdPerfil = ?";
+        int row = 0;
+        try {
+            connection = getConnection();
+            if (connection == null) {
+                return false;
+            }
+            preparedStatement = connection.prepareStatement(sql);
+            if (preparedStatement == null) {
+                return false;
+            }
+            preparedStatement.setInt(1, perfil.getIdPerfil());
+            row = preparedStatement.executeUpdate();
+            closeConnection(connection);
+            return row == 1;
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return false;
     }
     
-    public boolean updateRol( Rol rol )
-    {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        String sql = "update ROL SET DESCRIPCION=? WHERE ROL = ?";
-        int row = 0;
-        try 
-        {
-            connection = getConnection( );
-            if( connection == null )
-            {
-                return false;
-            }
-            preparedStatement = connection.prepareStatement(sql);
-            if( preparedStatement == null )
-            {
-                return false;
-            }
-            preparedStatement.setString(1, rol.getDescripcion());
-            preparedStatement.setString(2, rol.getRol());
-            row = preparedStatement.executeUpdate();
-            closeConnection(connection);
-            return row == 1;
-        } 
-        catch (SQLException ex) 
-        {
-            ex.printStackTrace();
-        }
-        return false;
-    }
     
-    public boolean deleteRol( Rol rol )
-    {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        String sql = "DELETE FROM ROL WHERE ROL = ?";
-        int row = 0;
-        try 
-        {
-            connection = getConnection( );
-            if( connection == null )
-            {
-                return false;
-            }
-            preparedStatement = connection.prepareStatement(sql);
-            if( preparedStatement == null )
-            {
-                return false;
-            }
-            preparedStatement.setString(1, rol.getRol() );
-            row = preparedStatement.executeUpdate();
-            closeConnection(connection);
-            return row == 1;
-        } 
-        catch (SQLException ex) 
-        {
-            ex.printStackTrace();
-        }
-        return false;
-    }
     
-    public Rol getRolByRol( String rol) 
-    {
-        Rol aux = null;
+    public Perfiles getPerfilByPerfil(String rol) {
+        Perfiles aux = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        try 
-        {
+        try {
             connection = getConnection();
-            if (connection == null) 
-            {
+            if (connection == null) {
                 return null;
             }
-            preparedStatement = connection.prepareStatement("SELECT * FROM ROL WHERE ROL = ?" );
-            if (preparedStatement == null) 
-            {
+            preparedStatement = connection.prepareStatement("SELECT * FROM perfiles WHERE IdPerfil = ?");
+            if (preparedStatement == null) {
                 return null;
             }
-            preparedStatement.setString(1, rol );
+            preparedStatement.setString(1, rol);
             resultSet = preparedStatement.executeQuery();
-            if (resultSet == null) 
-            {
+            if (resultSet == null) {
                 return null;
             }
-            aux = new Rol ( );
-            while (resultSet.next()) 
-            {
-                
-                aux.setRol(resultSet.getString(1));
-                aux.setDescripcion(resultSet.getString(2));
+            aux = new Perfiles();
+            while (resultSet.next()) {
+
+                aux.setIdPerfil(resultSet.getInt(1));
+                aux.setNombrePerfil(resultSet.getString(2));
             }
             resultSet.close();
             closeConnection(connection);
             return aux;
-        } 
-        catch (SQLException ex) 
-        {
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return null;
     }
-    
-    
 }

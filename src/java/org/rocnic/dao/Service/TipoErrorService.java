@@ -11,26 +11,21 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import org.rocnic.dao.Usuario;
+import org.rocnic.dao.TipoError;
 
 /**
  *
  * @author gerdoc
  */
-public class UsuarioService extends Conexion<Usuario>
+public class TipoErrorService extends Conexion<TipoError>
 {
-
-    public UsuarioService() 
+    public List<TipoError> getTipoErrorList() 
     {
-    }
-    
-    public List<Usuario> getUsuarioList() 
-    {
-        List<Usuario> usuarioList = null;
+        List<TipoError> TipoErrorList = null;
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
-        Usuario usuario = null;
+        TipoError tipoError = null;
 
         try 
         {
@@ -43,25 +38,23 @@ public class UsuarioService extends Conexion<Usuario>
             if (statement == null) {
                 return null;
             }
-            resultSet = statement.executeQuery("SELECT * FROM USUARIO");
+            resultSet = statement.executeQuery("SELECT * FROM tipoerror");
             if (resultSet == null) 
             {
                 return null;
             }
-            usuarioList = new ArrayList<>();
+            TipoErrorList = new ArrayList<>();
             while (resultSet.next()) 
             {
-                usuario = new Usuario();
-                usuario.setUsuario(resultSet.getString(1 ) );
-                usuario.setPassword(resultSet.getString(2 ) );
-                usuario.setNombre( resultSet.getString(3 ) );
-                usuario.setCorreo(resultSet.getString( 4 ) );
-                usuario.setUltimoLogin( resultSet.getDate(5 ) );
-                usuarioList.add(usuario);
+                tipoError = new TipoError();
+                tipoError.setIdTipoError(resultSet.getInt(1));
+                TipoError.setIdTipoReporte(resultSet.getInt(1));
+                tipoError.setNombreError(resultSet.getString(2));
+                TipoErrorList.add(tipoError);
             }
             resultSet.close();
             closeConnection(connection);
-            return usuarioList;
+            return TipoErrorList;
         } 
         catch (SQLException ex) 
         {
@@ -70,11 +63,11 @@ public class UsuarioService extends Conexion<Usuario>
         return null;
     }
     
-    public boolean addUsuario( Usuario usuario )
+    public boolean addRol( TipoError tipoError )
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "INSERT INTO USUARIO(USUARIO,PASSWORD,NOMBRE,CORREO,ULTIMO_LOGIN) VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO ROL(ROL,DESCRIPCION) VALUES(?,?)";
         int row = 0;
         try 
         {
@@ -88,11 +81,8 @@ public class UsuarioService extends Conexion<Usuario>
             {
                 return false;
             }
-            preparedStatement.setString(1, usuario.getUsuario( ) );
-            preparedStatement.setString(2, usuario.getPassword( ) );
-            preparedStatement.setString(3, usuario.getNombre( ) );
-            preparedStatement.setString(4, usuario.getCorreo() );
-            preparedStatement.setDate(5, dateUtil2DateSql( usuario.getUltimoLogin( ) ) );
+            preparedStatement.setString(1, rol.getRol());
+            preparedStatement.setString(2, rol.getDescripcion());
             row = preparedStatement.executeUpdate();
             closeConnection(connection);
             return row == 1;
@@ -104,11 +94,11 @@ public class UsuarioService extends Conexion<Usuario>
         return false;
     }
     
-    public boolean updateUsuario( Usuario usuario )
+    public boolean updateRol( TipoError tipoError)
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "update USUARIO SET PASSWORD = ?,NOMBRE = ?,CORREO = ?, ULTIMO_LOGIN = ? WHERE USUARIO = ?";
+        String sql = "update ROL SET DESCRIPCION=? WHERE ROL = ?";
         int row = 0;
         try 
         {
@@ -122,11 +112,8 @@ public class UsuarioService extends Conexion<Usuario>
             {
                 return false;
             }
-            preparedStatement.setString(1, usuario.getPassword( ) );
-            preparedStatement.setString(2, usuario.getNombre( ) );
-            preparedStatement.setString(3, usuario.getCorreo() );
-            preparedStatement.setDate(4, dateUtil2DateSql( usuario.getUltimoLogin( ) ) );
-            preparedStatement.setString(5, usuario.getUsuario( ) );
+            preparedStatement.setString(1, rol.getDescripcion());
+            preparedStatement.setString(2, rol.getRol());
             row = preparedStatement.executeUpdate();
             closeConnection(connection);
             return row == 1;
@@ -138,11 +125,11 @@ public class UsuarioService extends Conexion<Usuario>
         return false;
     }
     
-    public boolean deleteUsuario( Usuario usuario )
+    public boolean deleteRol( TipoError tipoError )
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "DELETE FROM USUARIO WHERE USUARIO = ?";
+        String sql = "DELETE FROM ROL WHERE ROL = ?";
         int row = 0;
         try 
         {
@@ -156,7 +143,7 @@ public class UsuarioService extends Conexion<Usuario>
             {
                 return false;
             }
-            preparedStatement.setString(1, usuario.getUsuario() );
+            preparedStatement.setString(1, rol.getRol() );
             row = preparedStatement.executeUpdate();
             closeConnection(connection);
             return row == 1;
@@ -168,9 +155,9 @@ public class UsuarioService extends Conexion<Usuario>
         return false;
     }
     
-    public Usuario getUsuarioByUsuario( String usuario) 
+    public Rol getRolByRol( TipoError tipoError) 
     {
-        Usuario aux = null;
+        Rol aux = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -181,25 +168,23 @@ public class UsuarioService extends Conexion<Usuario>
             {
                 return null;
             }
-            preparedStatement = connection.prepareStatement("SELECT * FROM USUARIO WHERE USUARIO = ?" );
+            preparedStatement = connection.prepareStatement("SELECT * FROM ROL WHERE ROL = ?" );
             if (preparedStatement == null) 
             {
                 return null;
             }
-            preparedStatement.setString(1, usuario );
+            preparedStatement.setString(1, rol );
             resultSet = preparedStatement.executeQuery();
             if (resultSet == null) 
             {
                 return null;
             }
-            aux = new Usuario ( );
+            aux = new Rol ( );
             while (resultSet.next()) 
             {
-                aux.setUsuario(resultSet.getString(1 ) );
-                aux.setPassword(resultSet.getString(2 ) );
-                aux.setNombre( resultSet.getString(3 ) );
-                aux.setCorreo(resultSet.getString( 4 ) );
-                aux.setUltimoLogin( resultSet.getDate(5 ) );
+                
+                aux.setRol(resultSet.getString(1));
+                aux.setDescripcion(resultSet.getString(2));
             }
             resultSet.close();
             closeConnection(connection);
@@ -211,6 +196,4 @@ public class UsuarioService extends Conexion<Usuario>
         }
         return null;
     }
-    
-    
 }
