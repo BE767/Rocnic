@@ -1,6 +1,10 @@
-<%-- Document : ReporteSoft Created on : 15 may 2023, 21:33:02 Author : PC --%>
+<%-- 
+    Document   : ReporteHard
+    Created on : 19 may. 2023, 22:28:30
+    Author     : cesar
+--%>
 
-    <%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
         <!DOCTYPE html>
         <html>
 
@@ -28,7 +32,7 @@
                 <div class="rectanguloy">
                     <form>
                         <div class="encabezado">
-                            <h1 class="titulo">SOFTWARE</h1>
+                            <h1 class="titulo">Hardware</h1>
                         </div>
                         <div style="margin-top: 20px; margin-left: 50px;">
                             <label for="numero">#EQUIPO</label>
@@ -50,24 +54,19 @@
                                             <div style="margin-top: 40px;">SELECCION</div>
                                             <div class="campo">
                                                 <input type="checkbox" id="internet" name="internet" style="display: inline-block;">
-                                                <label for="internet" style="display: inline-block; margin-left: 5px; vertical-align: middle;">Internet</label>
+                                                <label for="internet" style="display: inline-block; margin-left: 5px; vertical-align: middle;">Monitor</label>
                                             </div>
                                             <div class="campo">
                                                 <input type="checkbox" id="SOFTWARE_MAL_INSTALADO" name="SOFTWARE_MAL_INSTALADO" style="display: inline-block;">
-                                                <label for="SOFTWARE_MAL_INSTALADO" style="display: inline-block; margin-left: 5px; vertical-align: middle;">SOFTWARE MAL INSTALADO</label>
+                                                <label for="SOFTWARE_MAL_INSTALADO" style="display: inline-block; margin-left: 5px; vertical-align: middle;">Raton</label>
                                             </div>
                                             <div class="campo">
                                                 <input type="checkbox" id="CPU" name="CPU" style="display: inline-block;">
                                                 <label for="CPU" style="display: inline-block; margin-left: 5px; vertical-align: middle;">CPU</label>
+                                                <div class="campo-buscar">
+                        <button type="submit">Buscar</button>
+                    </div>
                                             </div>
-                                        </div>
-                                        <div class="campo" style="margin-left: 100px; margin-right: auto;">
-                                            <input type="checkbox" id="otro" name="otro" style="display: inline-block;">
-                                            <label for="otro" style="display: inline-block; margin-left: 10px; vertical-align: middle;">Otro</label>
-                                            <input type="text" id="campo-texto" name="campo-texto" style="margin-top: 120px; margin-right: 40px; width: 100%; height: 100px; resize: vertical;">
-                                        </div>
-                                        <div class="campo-buscar">
-                                        <button type="submit">Buscar</button>
                                         </div>
                                         
                                     </div>
