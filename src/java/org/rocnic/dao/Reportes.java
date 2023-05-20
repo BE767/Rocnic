@@ -23,10 +23,10 @@ public class Reportes implements Serializable
     private Date FechaActualizacion;
     private Date UsuarioActualizacion;
     private Date UsuarioCreacion;
-    private Laboratorio IdLaboratorio;
-    private Usuarios IdUsuario;
-    private TipoError IdTipoError;
-    private EstatusReporte IdEstatusReporte;
+    private int IdLaboratorio;
+    private int IdUsuario;
+    private int IdTipoError;
+    private int IdEstatusReporte;
 
     public int getIdReporte() {
         return IdReporte;
@@ -68,35 +68,37 @@ public class Reportes implements Serializable
         this.UsuarioCreacion = UsuarioCreacion;
     }
 
-    public Laboratorio getIdLaboratorio() {
+    public int getIdLaboratorio() {
         return IdLaboratorio;
     }
 
-    public void setIdLaboratorio(Laboratorio IdLaboratorio) {
+    public void setIdLaboratorio(int IdLaboratorio) {
         this.IdLaboratorio = IdLaboratorio;
     }
 
-    public Usuarios getIdUsuario() {
+    public int getIdUsuario() {
         return IdUsuario;
     }
 
-    public void setIdUsuario(Usuarios IdUsuario) {
+    public void setIdUsuario(int IdUsuario) {
         this.IdUsuario = IdUsuario;
     }
 
-    public TipoError getIdTipoError() {
+    public int getIdTipoError() {
         return IdTipoError;
     }
 
-    public void setIdTipoError(TipoError IdTipoError) {
+    public void setIdTipoError(int IdTipoError) {
         this.IdTipoError = IdTipoError;
     }
 
-    public EstatusReporte getIdEstatusReporte() {
+    public int getIdEstatusReporte() {
         return IdEstatusReporte;
     }
 
-    public void setIdEstatusReporte(EstatusReporte IdEstatusReporte) {
+    public void setIdEstatusReporte(int IdEstatusReporte) {
         this.IdEstatusReporte = IdEstatusReporte;
     }
+
+  
 }
