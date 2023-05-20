@@ -3,19 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
+            <file>file:/C:/Users/cesar/OneDrive/Escritorio/Rocnic/web/CambiosUsuarios.jsp</file>
+            <file>file:/C:/Users/cesar/OneDrive/Escritorio/Rocnic/web/InicioMaestro.jsp</file>
+            <file>file:/C:/Users/cesar/OneDrive/Escritorio/Rocnic/web/BajasUsuarios.jsp</file>
             <file>file:/C:/Users/cesar/OneDrive/Escritorio/Rocnic/web/InicioAlumno.jsp</file>
+            <file>file:/C:/Users/cesar/OneDrive/Escritorio/Rocnic/web/ReporteHard.jsp</file>
+            <file>file:/C:/Users/cesar/OneDrive/Escritorio/Rocnic/web/AltasEquipos.jsp</file>
+            <file>file:/C:/Users/cesar/OneDrive/Escritorio/Rocnic/web/Consulta.jsp</file>
+            <file>file:/C:/Users/cesar/OneDrive/Escritorio/Rocnic/web/LoginMaestro-UDI.jsp</file>
+            <file>file:/C:/Users/cesar/OneDrive/Escritorio/Rocnic/web/ConsultaEquipos.jsp</file>
+            <file>file:/C:/Users/cesar/OneDrive/Escritorio/Rocnic/web/AltasUsuarios.jsp</file>
+            <file>file:/C:/Users/cesar/OneDrive/Escritorio/Rocnic/web/CambiosEquipos.jsp</file>
             <file>file:/C:/Users/cesar/OneDrive/Escritorio/Rocnic/web/ReporteSoft.jsp</file>
-            <file>file:/C:/Users/cesar/OneDrive/Escritorio/Rocnic/web/UDIinicio.jsp</file>
+            <file>file:/C:/Users/cesar/OneDrive/Escritorio/Rocnic/web/BajasEquipos.jsp</file>
+            <file>file:/C:/Users/cesar/OneDrive/Escritorio/Rocnic/web/ConsultasUsuarios.jsp</file>
             <file>file:/C:/Users/cesar/OneDrive/Escritorio/Rocnic/web/index.html</file>
-=======
-            <file>file:/C:/Users/Evelyn/Documents/BATIZ/4IM9/Desarrollo%20Web/Proyectos/Rocnic/src/java/org/rocnic/dao/Service/PerfilService.java</file>
-            <file>file:/C:/Users/Evelyn/Documents/BATIZ/4IM9/Desarrollo%20Web/Proyectos/Rocnic/src/java/org/rocnic/dao/Service/EstatusReporteService.java</file>
-            <file>file:/C:/Users/Evelyn/Documents/BATIZ/4IM9/Desarrollo%20Web/Proyectos/Rocnic/src/java/org/rocnic/dao/TipoError.java</file>
-            <file>file:/C:/Users/Evelyn/Documents/BATIZ/4IM9/Desarrollo%20Web/Proyectos/Rocnic/src/java/org/rocnic/dao/Service/Conexion.java</file>
-            <file>file:/C:/Users/Evelyn/Documents/BATIZ/4IM9/Desarrollo%20Web/Proyectos/Rocnic/web/InicioAlumno.jsp</file>
-            <file>file:/C:/Users/Evelyn/Documents/BATIZ/4IM9/Desarrollo%20Web/Proyectos/Rocnic/src/java/org/rocnic/dao/Service/TipoErrorService.java</file>
->>>>>>> d067028ba3ea363cf3a46361d52923fa4bc69a31
         </group>
     </open-files>
 </project-private>
