@@ -15,7 +15,15 @@ public class Laboratorio  implements Serializable
     private int IdLaboratorio;
     private String NombreLaboratorio;
     private int NumeroDeEquipo;
-    private Periferico IdPeriferico;
+    private int IdPeriferico;
+
+    public int getIdPeriferico() {
+        return IdPeriferico;
+    }
+
+    public void setIdPeriferico(int IdPeriferico) {
+        this.IdPeriferico = IdPeriferico;
+    }
 
     public int getIdLaboratorio() {
         return IdLaboratorio;
@@ -41,13 +49,7 @@ public class Laboratorio  implements Serializable
         this.NumeroDeEquipo = NumeroDeEquipo;
     }
 
-    public Periferico getIdPeriferico() {
-        return IdPeriferico;
-    }
-
-    public void setIdPeriferico(Periferico IdPeriferico) {
-        this.IdPeriferico = IdPeriferico;
-    }
+ 
     
     
     

@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import org.rocnic.dao.TipoError;
+import org.rocnic.dao.TipoReporte;
 
 /**
  *
@@ -26,6 +27,7 @@ public class TipoErrorService extends Conexion<TipoError>
         Statement statement = null;
         ResultSet resultSet = null;
         TipoError tipoError = null;
+        TipoReporte tipoReporte =null;
 
         try 
         {
@@ -48,7 +50,8 @@ public class TipoErrorService extends Conexion<TipoError>
             {
                 tipoError = new TipoError();
                 tipoError.setIdTipoError(resultSet.getInt(1));
-                TipoError.setIdTipoReporte(resultSet.getInt(1));
+                tipoReporte.setIdTipoReporte(resultSet.getInt(1));
+                TipoError.setIdTipoReporte(resultSet.ge(1));
                 tipoError.setNombreError(resultSet.getString(2));
                 TipoErrorList.add(tipoError);
             }
