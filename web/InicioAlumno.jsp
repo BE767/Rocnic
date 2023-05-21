@@ -48,7 +48,7 @@
                             <button class="btn btn-primary btn-sm" type="button"
                                 style="margin-top: 50px; color: #727272;">SOFTWARE</button>
                         </a>
-                        <a href="InicioAlumno.jsp">
+                        <a href="ReporteHard.jsp">
                             <button class="btn btn-primary btn-sm" type="button"
                                 style="color: #727272;">HARDWARE</button>
                         </a>

@@ -66,16 +66,11 @@
                                             <label for="otro" style="display: inline-block; margin-left: 10px; vertical-align: middle;">Otro</label>
                                             <input type="text" id="campo-texto" name="campo-texto" style="margin-top: 120px; margin-right: 40px; width: 100%; height: 100px; resize: vertical;">
                                         </div>
-                                        <div class="campo-buscar">
-                                        <button type="submit">Buscar</button>
-                                        </div>
-                                        
                                     </div>
                                 </div>
-                    </form>
-                </div>
+                            </div>
+                </form>
+                
             </div>
         </body>
-
-
-        </html>
+</html>
