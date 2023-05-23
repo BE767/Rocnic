@@ -34,7 +34,9 @@
                               <label for="contrasena" style="font-size: 23px;">Contraseña:</label>
                               <input type="password" id="contrasena" name="contrasena">
                           
-                              <button type="submit" value="Enviar">Ingresar</button>
+                            <a href="InicioUDI.jsp" >
+                                <button type="submit">Ingresar</button>
+                              </a>
                             </form>
                           </div>
                     </div>

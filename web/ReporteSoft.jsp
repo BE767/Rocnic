@@ -56,10 +56,7 @@
                                                 <input type="checkbox" id="SOFTWARE_MAL_INSTALADO" name="SOFTWARE_MAL_INSTALADO" style="display: inline-block;">
                                                 <label for="SOFTWARE_MAL_INSTALADO" style="display: inline-block; margin-left: 5px; vertical-align: middle;">SOFTWARE MAL INSTALADO</label>
                                             </div>
-                                            <div class="campo">
-                                                <input type="checkbox" id="CPU" name="CPU" style="display: inline-block;">
-                                                <label for="CPU" style="display: inline-block; margin-left: 5px; vertical-align: middle;">CPU</label>
-                                            </div>
+                                           
                                         </div>
                                         <div class="campo" style="margin-left: 100px; margin-right: auto;">
                                             <input type="checkbox" id="otro" name="otro" style="display: inline-block;">

@@ -107,6 +107,17 @@ body {
     height: 100%;
     width: 100%;
 }
+.boton {
+    background-color: #BDCDD0;
+    color: #727272;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    transition: background-color 0.3s;
+  }
+
+ 
 @media screen and (max-width: 768px) {
     body {
         display: flex;
