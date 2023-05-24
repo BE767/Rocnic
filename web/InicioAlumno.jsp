@@ -38,7 +38,7 @@
                         </div>
                     </div>
                     <div class="campo-buscar">
-                        <button type="submit">Buscar</button>
+                        <a href="ConsultaAlu.jsp"><button type="submit">Buscar</button></a>
                     </div>
                 </div>
                 <div class="rectangulo-dentro">

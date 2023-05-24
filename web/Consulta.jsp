@@ -30,7 +30,7 @@
                 <div class="rectanguloy">
                     <div class="encabezado">
                         <img src="imagenes/Usuarioa.png" class="logo">
-                        <h1 class="titulo">CAMBIOS USUARIOS</h1>
+                        <h1 class="titulo">CONSULTA</h1>
                     </div>
                     <style>
                         .table-container {

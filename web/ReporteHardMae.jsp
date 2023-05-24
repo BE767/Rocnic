@@ -1,10 +1,4 @@
-<%-- 
-    Document   : ReporteHard
-    Created on : 19 may. 2023, 22:28:30
-    Author     : cesar
---%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
         <!DOCTYPE html>
         <html>
 
@@ -38,11 +32,11 @@
                             <label for="numero">#EQUIPO</label>
                             <input type="text" id="EQUIPO" name="EQUIPO" value=""
                                 style="margin-left: 20px; width: 30px;">
-                            <span style="margin-left: 60px;">Laboratorio</span>
-                            <input type="text" id="Laboratorio" name="Laboratorio" value=""
+                            <span style="margin-left: 60px;">LAB</span>
+                            <input type="text" id="LAB" name="LAB" value=""
                                 style="display: inline-block; width: 110px; margin-left: 15px;">
-                            <span style="margin-left:130px;">Boleta</span>
-                            <input type="text" id="Boleta" name="Boleta" value=""
+                            <span style="margin-left:130px;">USUARIO</span>
+                            <input type="text" id="USUARIO" name="USUARIO" value=""
                                 style="display: inline-block; width: 160px; margin-left: 15px;">
 
                             <span style="margin-left: 50px;">Fecha</span>

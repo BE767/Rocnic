@@ -34,7 +34,7 @@
                             <input type="text" id="EQUIPO" name="EQUIPO" value="" style="margin-left: 20px; width: 30px;">
                             <span style="margin-left: 60px;">Laboratorio</span>
                             <input type="text" id="Laboratorio" name="Laboratorio" value="" style="display: inline-block; width: 110px; margin-left: 15px;">
-                            <span style="margin-left: 130px;">Boleta</span>
+                            <span style="margin-left: 130px;">USUARIO</span>
                             <input type="text" id="Boleta" name="Boleta" value="" style="display: inline-block; width: 160px; margin-left: 15px;">
                             <span style="margin-left: 50px;">Fecha</span>
                             <input type="text" id="Fecha" name="Fecha" value="" style="display: inline-block; width: 110px; margin-left: 15px;" readonly="true">

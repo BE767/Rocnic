@@ -87,7 +87,7 @@
                             <button class="boton">EQUIPOS</button>
                             </a>
                             <a href="Consulta.jsp" >
-                                <button class="boton">REPORTES</button>
+                                <button class="boton">HISTORIAL</button>
                                 </a>
                     </div>
 

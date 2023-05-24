@@ -13,8 +13,8 @@
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
                 integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
                 crossorigin="anonymous">
-            <link rel="stylesheet" href="css/estilos.css">
-            
+            <link rel="stylesheet" href="css/estiloinimae.css">
+
             <link rel="shortcut icon" href="imagenes/Patita.png">
             <script src="Funciones/js1.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
@@ -29,8 +29,49 @@
                         <img src="imagenes/Usuarioa.png" class="logo">
                         <h1 class="titulo">Maestros</h1>
                     </div>
+                    <div class="rectangulo-dentro">
+
+
+                        <h1 class="titulo" style="text-align: center; color: white;">REPORTES</h1>
+                        <div class="botones-container" style="text-align: center;">
+                            <a href="ReporteSofrtMae.jsp">
+                                <button class="boton">SOFTWARE</button>
+                            </a>
+                            <a href="ReporteHardMae.jsp">
+                                <button class="boton">HARDWARE</button>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="rectangulo-dentro2">
+
+
+                        <h1 class="titulo" style="text-align: center; color: white;">HISTORIAL</h1>
+                        <div class="botones-container" style="text-align: center;">
+                            <a href="Historial.jsp">
+                                <button class="boton1">BUSCAR</button>
+                            </a>
+                            
+                        </div>
+                    </div>
+
+                    <div class="rectangulo-dentro4">
+
+
+                        <h1 class="titulo" style="text-align: center; color: #455C6A;">CONSULTA</h1>
+                        <h2 class="titulo-folio">Folio</h2>
+                            <div class="campo-entrada">
+                                <input type="text" id="folioInput" name="folioInput" placeholder="Escriba aquí">
+                            
+                            </div>
+                            
+                            <button class="boton" type="submit">BUSCAR</button>
+                        </div>
+                        
+                        
+                        
+                            
+                    </div>
                 </div>
-            </div>
         </body>
 
         </html>
