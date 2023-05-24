@@ -23,11 +23,52 @@ public class Reportes implements Serializable
     private Date FechaActualizacion;
     private Date UsuarioActualizacion;
     private Date UsuarioCreacion;
+    private int IdTipoReporte;
     private int IdLaboratorio;
     private int IdUsuario;
     private int IdTipoError;
     private int IdEstatusReporte;
 
+    public int getIdTipoReporte() {
+        return IdTipoReporte;
+    }
+
+    public void setIdTipoReporte(int IdTipoReporte) {
+        this.IdTipoReporte = IdTipoReporte;
+    }
+
+    public int getIdLaboratorio() {
+        return IdLaboratorio;
+    }
+
+    public void setIdLaboratorio(int IdLaboratorio) {
+        this.IdLaboratorio = IdLaboratorio;
+    }
+
+    public int getIdUsuario() {
+        return IdUsuario;
+    }
+
+    public void setIdUsuario(int IdUsuario) {
+        this.IdUsuario = IdUsuario;
+    }
+
+    public int getIdTipoError() {
+        return IdTipoError;
+    }
+
+    public void setIdTipoError(int IdTipoError) {
+        this.IdTipoError = IdTipoError;
+    }
+
+    public int getIdEstatusReporte() {
+        return IdEstatusReporte;
+    }
+
+    public void setIdEstatusReporte(int IdEstatusReporte) {
+        this.IdEstatusReporte = IdEstatusReporte;
+    }
+    
     public int getIdReporte() {
         return IdReporte;
     }
@@ -68,37 +109,7 @@ public class Reportes implements Serializable
         this.UsuarioCreacion = UsuarioCreacion;
     }
 
-    public int getIdLaboratorio() {
-        return IdLaboratorio;
-    }
-
-    public void setIdLaboratorio(int IdLaboratorio) {
-        this.IdLaboratorio = IdLaboratorio;
-    }
-
-    public int getIdUsuario() {
-        return IdUsuario;
-    }
-
-    public void setIdUsuario(int IdUsuario) {
-        this.IdUsuario = IdUsuario;
-    }
-
-    public int getIdTipoError() {
-        return IdTipoError;
-    }
-
-    public void setIdTipoError(int IdTipoError) {
-        this.IdTipoError = IdTipoError;
-    }
-
-    public int getIdEstatusReporte() {
-        return IdEstatusReporte;
-    }
-
-    public void setIdEstatusReporte(int IdEstatusReporte) {
-        this.IdEstatusReporte = IdEstatusReporte;
-    }
+   
 
   
 }

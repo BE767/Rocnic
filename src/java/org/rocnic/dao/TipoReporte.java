@@ -44,7 +44,4 @@ public class TipoReporte  implements Serializable
     public void setFechaCreacion(Date FechaCreacion) {
         this.FechaCreacion = FechaCreacion;
     }
-    
-    
-    
 }

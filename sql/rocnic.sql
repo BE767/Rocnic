@@ -5,12 +5,13 @@ use RocnicEstatus;
 
 
 create table Perfiles(
-IdPerfil int primary key,
+IdPerfil int primary key  not null auto_increment ,
 NombrePerfil varchar (20)
 );
 
+
 create table TipoReporte(
-IdTipoReporte int primary key,
+IdTipoReporte int primary key  not null auto_increment,
 NombreTipoReporte varchar (20),
 FechaCreacion datetime
 );
@@ -21,17 +22,17 @@ IdLaboratorio int
 );*/
 
 create table EstatusReporte(
-IdEstatusReporte int primary key,
+IdEstatusReporte int primary key not null auto_increment,
 NombreEstatus varchar (20)
 );
 
 create table Perifericos(
-IdPeriferico int primary key,
+IdPeriferico int primary key not null auto_increment,
 NombrePerifericos varchar (20)
 );
 
 create table Usuarios(
-IdUsuario int primary key,
+IdUsuario int primary key not null auto_increment,
 IdPerfil int,
 Usuario varchar (20),
 Contraseña varchar (20),
@@ -41,16 +42,21 @@ foreign key (IdPerfil) references Perfiles (IdPerfil) on delete cascade on updat
 );
 
 create table Laboratorio(
-IdLaboratorio int primary key,
-NombreLaboratorio varchar(16) ,
-NumeroEquipo int,
-IdPeriferico int,
-foreign key (IdPeriferico) references Perifericos (IdPeriferico) on delete cascade on update cascade
+IdLaboratorio int primary key not null auto_increment, 
+NombreLaboratorio varchar(16) 
 );
 
+create table Equipos (
+IdEquipo int primary key not null auto_increment,
+NombreEquipo varchar(20),
+IdLaboratorio int,
+IdPeriferico int,
+foreign key (IdLaboratorio) references Laboratorio (IdLaboratorio) on delete cascade on update cascade,
+foreign key (IdPeriferico) references perifericos (IdPeriferico) on delete cascade on update cascade
+);
 
 create table TipoError(
-IdTipoError int primary key,
+IdTipoError int primary key not null auto_increment,
 NombreError varchar (20),
 IdTipoReporte int,
 foreign key (IdTipoReporte) references TipoReporte (IdTipoReporte) on delete cascade on update cascade
@@ -59,7 +65,7 @@ foreign key (IdTipoReporte) references TipoReporte (IdTipoReporte) on delete cas
 
 
 create table Reportes(
-IdReporte int primary key,
+IdReporte int primary key not null auto_increment,
 IdTipoReporte int,
 IdLaboratorio int,
 IdUsuario int,
@@ -75,9 +81,6 @@ foreign key (IdUsuario) references Usuarios (IdUsuario) on delete cascade on upd
 foreign key (IdTipoError) references TipoError (IdTipoError) on delete cascade on update cascade,
 foreign key (IdEstatusReporte) references EstatusReporte (IdEstatusReporte) on delete cascade on update cascade
 );
-
-
-
 
 
 

@@ -13,12 +13,14 @@ import java.io.Serializable;
 public class Periferico  implements Serializable
 {
 
-    public Periferico() {
+    public Periferico()
+    {
     }
    
     
    private int IdPeriferico;
    private String NombrePeriferico;
+   
 
     public int getIdPeriferico() {
         return IdPeriferico;

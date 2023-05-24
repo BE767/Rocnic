@@ -20,6 +20,16 @@ public class TipoError implements Serializable
     private String NombreError;
     private int IdTipoReporte;
 
+    public int getIdTipoReporte() {
+        return IdTipoReporte;
+    }
+
+    public void setIdTipoReporte(int IdTipoReporte) {
+        this.IdTipoReporte = IdTipoReporte;
+    }
+
+  
+
     public int getIdTipoError() {
         return IdTipoError;
     }
@@ -36,12 +46,6 @@ public class TipoError implements Serializable
         this.NombreError = NombreError;
     }
 
-    public int getIdTipoReporte() {
-        return IdTipoReporte;
-    }
-
-    public void setIdTipoReporte(int IdTipoReporte) {
-        this.IdTipoReporte = IdTipoReporte;
-    }
+   
   
 }

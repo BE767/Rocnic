@@ -8,16 +8,17 @@ import java.io.Serializable;
 
 /**
  *
- * @author alumno
+ * @author Evelyn
  */
-public class EstatusReporte  implements Serializable
+public class EstatusReporte implements Serializable 
+
 {
 
     public EstatusReporte() {
     }
-    
+   
     private int IdEstatusReporte;
-    private  String NombreEstatus;
+    private String NombreEstatus;
 
     public int getIdEstatusReporte() {
         return IdEstatusReporte;
@@ -34,5 +35,6 @@ public class EstatusReporte  implements Serializable
     public void setNombreEstatus(String NombreEstatus) {
         this.NombreEstatus = NombreEstatus;
     }
+    
     
 }

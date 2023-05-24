@@ -12,15 +12,14 @@ import java.util.Date;
 
 /**
  *
- * @author gerdoc
- * @param <T>
+ * @author Evelyn
  */
-public abstract class Conexion<T> implements Serializable 
-{
+public class Conexion <T> implements Serializable
 
+{
     public static String user = "root";
     public static String password = "main";
-    public static String db = "Prueba";
+    public static String db = "rocnicestatus";
     public static String port = "3306";
 
     public boolean testDriver() 
@@ -87,7 +86,7 @@ public abstract class Conexion<T> implements Serializable
         }
     }
     
-    public Date dateSql2DateUtil( java.sql.Date date )
+     public Date dateSql2DateUtil( java.sql.Date date )
     {
         return new Date( date.getTime( ) );
     }
@@ -96,5 +95,7 @@ public abstract class Conexion<T> implements Serializable
     {
         return new java.sql.Date( date.getTime( ) );
     }
-
+    
+    
+    
 }

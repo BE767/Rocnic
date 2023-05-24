@@ -16,6 +16,9 @@ public class Laboratorio  implements Serializable
     private String NombreLaboratorio;
     private int NumeroDeEquipo;
     private int IdPeriferico;
+    
+    public Laboratorio() {
+    }
 
     public int getIdPeriferico() {
         return IdPeriferico;

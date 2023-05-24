@@ -41,9 +41,6 @@
                           </div>
                     </div>
                 </div>
-
-
-
             </div>
             <div class="contenedor2">
                 <div class="imagena">
