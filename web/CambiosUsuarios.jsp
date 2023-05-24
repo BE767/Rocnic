@@ -75,7 +75,6 @@
                 </div>
             </div>
         </div>
-
         <%
             String accion = request.getParameter("accion");
             UsuariosService ususervice = new UsuariosService();

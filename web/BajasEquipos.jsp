@@ -39,11 +39,20 @@
                     </div>
                     <div style="margin-top: 20px; margin-left: 50px;">
                         <label for="numero">#EQUIPO</label>
-                        <input type="text" id="EQUIPO" name="EQUIPO" value=""
+                        <input type="text" id="nombreequipo" name="nombreequipo" 
                                style="margin-left: 20px; width: 30px;">
-                        <span style="margin-left: 60px;">Laboratorio</span>
-                        <input type="text" id="Laboratorio" name="Laboratorio" value=""
-                               style="display: inline-block; width: 110px; margin-left: 15px;">
+
+
+                        <label for="laboratorio">
+                            <span>Laboratorio</span>
+                            <select name="idLaboratorio" id="idLaboratorio">
+                                <option value="-1">Seleccione Laboratorio</option>
+                                <option value="1">Base de Datos</option>
+                                <option value="2">Nuevas Tecnologias</option>
+                                <option value="3">Desarrollo Web</option>
+                            </select>
+                        </label>
+
                         <span style="margin-left: 50px;">Fecha</span>
                         <input type="text" id="Fecha" name="Fecha" value=""
                                style="display: inline-block; width: 110px; margin-left: 15px;" readonly="true">
@@ -72,8 +81,7 @@
                                         <input type="text" id="campo-texto" name="campo-texto" style="margin-top: 120px; margin-right: 40px; width: 100%; height: 100px; resize: vertical;">
                                     </div>
                                 </div>
-                                <button type="submit" name="accion" id="accion" value="borrar">Bajas</button>
-
+                                <button class="boton-enviar" type="submit"  name="accion" id="accion" value="borrar" style="margin-top: 20%;";>Borrar</button>
                             </div>
                         </div>
                     </div>
@@ -84,23 +92,36 @@
             String accion = request.getParameter("accion");
             EquipoService equipoService = new EquipoService();
             Equipos equipo = new Equipos();
+
             if ("borrar".equals(accion)) {
-                equipo.setIdEquipo(Integer.parseInt(request.getParameter("campo2")));
-                if (equipoService.deleteEquipo(equipo)) {
+                equipo.setIdEquipo(Integer.parseInt(request.getParameter("nombreequipo")));
+                equipo.setIdLaboratorio(Integer.parseInt(request.getParameter("idLaboratorio")));
+
+                // Verificar si el equipo existe antes de eliminarlo
+                if (!equipoService.existeEquipos(equipo.getIdEquipo())) {
         %>
         <script>
-            alert("Se ha eliminado el equipo");
+            alert("El equipo no existe");
         </script>
         <%
         } else {
         %>
         <script>
-            alert("No se pudo eliminar el equipo");
+            if (confirm("¿Estás seguro de que deseas eliminar el equipo?")) {
+                // Eliminar el equipo
+                if (equipoService.deleteEquipo(equipo)) {
+                    alert("Se ha eliminado el equipo exitosamente");
+                    window.location.href = "pagina_destino"; // Redirige a la página de destino después de la eliminación exitosa
+                } else {
+                    alert("No se pudo eliminar el equipo");
+                }
+            } else {
+                alert("Eliminación del equipo cancelada");
+            }
         </script>
         <%
                 }
             }
         %>
-
     </body>
 </html>

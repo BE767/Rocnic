@@ -1,12 +1,15 @@
+<%-- 
+    Document   : ReporteHardware
+    Created on : 24 may. 2023, 17:39:20
+    Author     : Evelyn
+--%>
 
 <%@page import="org.rocnic.dao.Reportes"%>
 <%@page import="org.rocnic.dao.service.ReporteServices"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-
     <head>
-        <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,10 +24,9 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
-
+        <title>Reporte de Hadware</title>
     </head>
-
-    <body style="background-color:#C0CAD2">
+        <body style="background-color:#C0CAD2">
         <div class="containery">
             <div class="rectanguloy">
                 <form>
@@ -97,5 +99,4 @@
                             }
                         %>  
     </body>
-
 </html>

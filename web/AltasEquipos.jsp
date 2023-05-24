@@ -36,12 +36,20 @@
                         <h1 class="titulo">Altas Equipos</h1>
                     </div>
                     <div style="margin-top: 20px; margin-left: 50px;">
+
+
                         <label for="numero">#EQUIPO</label>
-                        <input type="text" id="EQUIPO" name="EQUIPO" value=""
+                        <input type="text" id="nombreEquipo" name="nombreEquipo" 
                                style="margin-left: 20px; width: 30px;">
-                        <span style="margin-left: 60px;">Laboratorio</span>
-                        <input type="text" id="idLaboratorio" name="idLaboratorio" value=""
-                               style="display: inline-block; width: 110px; margin-left: 15px;">
+                        <label for="laboratorio">
+                            <span>Perfil:</span>
+                            <select name="idLaboratorio" id="idLaboratorio">
+                                <option value="-1">Seleccione Laboratorio</option>
+                                <option value="1">Base de Datos</option>
+                                <option value="2">Nuevas Tecnologias</option>
+                                <option value="3">Desarrollo Web</option>
+                            </select>
+                        </label>
                         <span style="margin-left: 50px;">Fecha</span>
                         <input type="text" id="Fecha" name="Fecha" value=""
                                style="display: inline-block; width: 110px; margin-left: 15px;" readonly="true">
@@ -66,7 +74,7 @@
                                         <label for="CPU" style="display: inline-block; margin-left: 5px; vertical-align: middle;">Teclado</label>
                                     </div>
                                 </div>
-                                <button class="boton-enviar" type="submit" style="margin-top: 20%;";>Enviar</button>
+                                <button class="boton-enviar" type="submit"  name="accion" id="accion" value="enviar" style="margin-top: 20%;";>Enviar</button>
                             </div>
                         </div>
                 </form>
@@ -75,10 +83,28 @@
                     if ("enviar".equals(accion)) {
                         EquipoService equipoService = new EquipoService();
                         Equipos equipo = new Equipos();
-                        equipo.setIdLaboratorio(Integer.parseInt(request.getParameter("idLaboratorio")));
-                        equipo.setIdPeriferico(Integer.parseInt(request.getParameter("Raton")));
-                        equipo.setNombreEquipo(request.getParameter("nombreEquipo"));
-                        if (equipoService.addEquipos(equipo)) {
+
+                        String idLaboratorioParam = request.getParameter("idLaboratorio");
+                        if (idLaboratorioParam != null && !idLaboratorioParam.isEmpty()) {
+                            equipo.setIdLaboratorio(Integer.parseInt(idLaboratorioParam));
+                        } else {
+                            // Manejar el caso cuando no se ha seleccionado ningún laboratorio
+                            // Puedes asignar un valor por defecto o mostrar un mensaje de error
+                            equipo.setIdLaboratorio(0); // Por ejemplo, asignar un valor 0 como valor por defecto
+                        }
+
+                        String nombreEquipo = request.getParameter("nombreEquipo");
+                        if (nombreEquipo != null && !nombreEquipo.isEmpty()) {
+                            equipo.setNombreEquipo(nombreEquipo);
+
+                            if (equipoService.existeEquipo(equipo.getNombreEquipo(), equipo.getIdLaboratorio())) {
+                %>
+                <script>
+                    alert("Ya existe un equipo con el mismo nombre en el laboratorio seleccionado");
+                </script>
+                <%
+                } else {
+                    if (equipoService.addEquipos(equipo)) {
                 %>
                 <script>
                     alert("Se ha dado de alta al Equipo");
@@ -88,6 +114,14 @@
                 %>
                 <script>
                     alert("Ha ocurrido un error");
+                </script>
+                <%
+                        }
+                    }
+                } else {
+                %>
+                <script>
+                    alert("Es necesario llenar todos los campos");
                 </script>
                 <%
                         }

@@ -30,9 +30,6 @@
             <div class="rectanguloy">
             </div>
         </div>
-
-
-
         <%
             String accion = request.getParameter("accion");
             EquipoService equipoService = new EquipoService();

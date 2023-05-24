@@ -61,7 +61,7 @@ public class EquipoService extends Conexion<Equipos> {
     public boolean addEquipos(Equipos equipo) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "INSERT INTO equipos (IdLaboratorio, IdPeriferico, NombreEquipo) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO equipos (IdLaboratorio, NombreEquipo) VALUES (?, ?)";
         int row = 0;
         try {
             connection = getConnection();
@@ -73,8 +73,7 @@ public class EquipoService extends Conexion<Equipos> {
                 return false;
             }
             preparedStatement.setInt(1, equipo.getIdLaboratorio());
-            preparedStatement.setInt(2, equipo.getIdPeriferico());
-            preparedStatement.setString(3, equipo.getNombreEquipo());
+            preparedStatement.setString(2, equipo.getNombreEquipo());
             row = preparedStatement.executeUpdate();
 
             closeConnection(connection);
@@ -171,9 +170,76 @@ public class EquipoService extends Conexion<Equipos> {
         }
         return false;
     }
+    
+    
+    
 
     public List<Equipos> getEquiposById(int idEquipo) {
-    List<Equipos> equipos = new ArrayList<>();
+        List<Equipos> equipos = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = getConnection();
+            if (connection == null) {
+                return equipos;
+            }
+
+            preparedStatement = connection.prepareStatement("SELECT * FROM equipos WHERE IdEquipo = ?");
+            if (preparedStatement == null) {
+                return equipos;
+            }
+
+            preparedStatement.setInt(1, idEquipo);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet == null) {
+                return equipos;
+            }
+
+            while (resultSet.next()) {
+                Equipos equipo = new Equipos();
+                equipo.setIdEquipo(resultSet.getInt("IdEquipo"));
+                equipo.setIdLaboratorio(resultSet.getInt("IdLaboratorio"));
+                equipo.setIdPeriferico(resultSet.getInt("IdPeriferico"));
+                equipo.setNombreEquipo(resultSet.getString("NombreEquipo"));
+
+                equipos.add(equipo);
+            }
+
+            resultSet.close();
+            closeConnection(connection);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return equipos;
+    }
+
+  public boolean existeEquipo(String nombreEquipo, int idLaboratorio) {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet resultSet = null;
+    String sql = "SELECT * FROM equipos WHERE NombreEquipo = ? AND IdLaboratorio = ?";
+    try {
+        connection = getConnection();
+        preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, nombreEquipo);
+        preparedStatement.setInt(2, idLaboratorio);
+        resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+            int count = resultSet.getInt(1);
+            return count > 0;
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+    return false;
+}
+
+  
+  public boolean existeEquipos(int idEquipo) {
     Connection connection = null;
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
@@ -181,41 +247,32 @@ public class EquipoService extends Conexion<Equipos> {
     try {
         connection = getConnection();
         if (connection == null) {
-            return equipos;
+            return false;
         }
         
-        preparedStatement = connection.prepareStatement("SELECT * FROM equipos WHERE IdEquipo = ?");
+        preparedStatement = connection.prepareStatement("SELECT * FROM equipos WHERE NombreEquipo = ?");
         if (preparedStatement == null) {
-            return equipos;
+            return false;
         }
         
         preparedStatement.setInt(1, idEquipo);
         resultSet = preparedStatement.executeQuery();
+        
         if (resultSet == null) {
-            return equipos;
+            return false;
         }
-
-        while (resultSet.next()) {
-            Equipos equipo = new Equipos();
-            equipo.setIdEquipo(resultSet.getInt("IdEquipo"));
-            equipo.setIdLaboratorio(resultSet.getInt("IdLaboratorio"));
-            equipo.setIdPeriferico(resultSet.getInt("IdPeriferico"));
-            equipo.setNombreEquipo(resultSet.getString("NombreEquipo"));
-            
-            equipos.add(equipo);
-        }
+        
+        boolean existe = resultSet.next();
         
         resultSet.close();
         closeConnection(connection);
         
+        return existe;
     } catch (SQLException ex) {
         ex.printStackTrace();
     }
     
-    return equipos;
+    return false;
 }
 
-    
-    
-    
 }

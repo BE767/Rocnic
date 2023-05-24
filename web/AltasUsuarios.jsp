@@ -7,7 +7,6 @@ Author : cesar
 <%@page import="org.rocnic.dao.Usuarios"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 
-
 <!DOCTYPE html>
 <html>
 
@@ -45,8 +44,14 @@ Author : cesar
 
                         <label for="perfil">
                             <span>Perfil:</span>
-                            <input type="text" id="perfil" name="perfil">
+                            <select name="perfil" id="perfil">
+                                <option value="-1">Seleccione Perfil</option>
+                                <option value="1">UDI</option>
+                                <option value="2">Maestro</option>
+                                <option value="3">Alumno</option>
+                            </select>
                         </label>
+
 
                         <label for="usuario">
                             <span>Usuario:</span>
@@ -63,41 +68,51 @@ Author : cesar
                 </div>
             </div>
         </div>
-                <%
-                String accion = request.getParameter("accion");
-                if ("enviar".equals(accion)) {
-                    UsuariosService ususervice = new UsuariosService();
-                    Usuarios usuario = new Usuarios();
-                    usuario.setIdPerfil(Integer.parseInt(request.getParameter("perfil")));
-                    usuario.setUsuario(request.getParameter("usuario"));
-                    usuario.setContraseña(request.getParameter("contrasena"));
-                    usuario.setNombre(request.getParameter("nombre"));
+        <%
+            String accion = request.getParameter("accion");
+            if ("enviar".equals(accion)) {
+                UsuariosService ususervice = new UsuariosService();
+                Usuarios usuario = new Usuarios();
+                usuario.setUsuario(request.getParameter("usuario"));
+                usuario.setContraseña(request.getParameter("contrasena"));
+                usuario.setNombre(request.getParameter("nombre"));
 
-                    // Verificar si el usuario y contraseña ya existen
-                    if (ususervice.existeUsuario(usuario.getUsuario(), usuario.getContraseña())) {
-            %>
-            <script>
-                alert("El usuario y contraseña ya existen");
-            </script>
-            <%
-            } else {
-                // Proceder con el alta del usuario si no existe
-                if (ususervice.addUsuarios(usuario)) {
-            %>
-            <script>
-                alert("Se ha dado de alta al Usuario");
-            </script>
-            <%
-            } else {
-            %>
-            <script>
-                alert("Ha ocurrido un error");
-            </script>
-            <%
-                        }
+                String perfilParam = request.getParameter("perfil");
+                
+                if (perfilParam != null && !perfilParam.isEmpty()) {
+                    usuario.setIdPerfil(Integer.parseInt(perfilParam));
+                } else {
+                    // Manejar el caso cuando no se ha seleccionado ningún perfil
+                    // Puedes asignar un valor por defecto o mostrar un mensaje de error
+                    usuario.setIdPerfil(0); // Por ejemplo, asignar un valor 0 como valor por defecto
+                }
+
+                // Verificar si el usuario y contraseña ya existen
+                if (ususervice.existeUsuario(usuario.getUsuario(), usuario.getContraseña())) {
+        %>
+        <script>
+            alert("El usuario y contraseña ya existen");
+        </script>
+        <%
+        } else {
+            // Proceder con el alta del usuario si no existe
+            if (ususervice.addUsuarios(usuario)) {
+        %>
+        <script>
+            alert("Se ha dado de alta al Usuario");
+        </script>
+        <%
+        } else {
+        %>
+        <script>
+            alert("Ha ocurrido un error");
+        </script>
+        <%
                     }
                 }
-             %>
+            }
+        %>
+
     </body>
 
 </html>
