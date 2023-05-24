@@ -60,7 +60,6 @@
                                 <span>Perfil:</span>
                                 <input type="text" id="perfil" name="perfil">
                             </label>
-
                             <label for="Usuario">
                                 <span>Usuario</span>
                                 <input type="password" id="contrasena" name="contrasena">

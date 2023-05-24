@@ -94,9 +94,8 @@
                             alert("Disculpa se ha generado una exepcion");
                         </script>
                         <%
-                                }
-
-                            }
+            }
+        }
     %>         
         </body>
 </html>
