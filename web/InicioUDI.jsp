@@ -59,7 +59,6 @@
                             <button class="boton">EQUIPOS</button>
                             </a>
                     </div>
-
                 </div>
                 <div class="rectangulo-dentro3">
 

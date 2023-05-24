@@ -63,30 +63,41 @@ Author : cesar
                 </div>
             </div>
         </div>
-    </body>
-    <%
-        String accion = request.getParameter("accion");
-        if ("enviar".equals(accion)) {
-            UsuariosService ususervice = new UsuariosService();
-            Usuarios usuario = new Usuarios();
-            usuario.setIdPerfil(Integer.parseInt(request.getParameter("perfil")));
-            usuario.setUsuario(request.getParameter("usuario"));
-            usuario.setContraseña(request.getParameter("contrasena"));
-            usuario.setNombre(request.getParameter("nombre"));
-            if (ususervice.addUsuarios(usuario)) {
-        %>
-        <script>
-            alert("Se ha dado de alta al Usuario");
-        </script>
-        <%
-        } else {
-        %>
-        <script>
-            alert("ha ocurrido un error")
-                    );
-        </script>
-        <%
+                <%
+                String accion = request.getParameter("accion");
+                if ("enviar".equals(accion)) {
+                    UsuariosService ususervice = new UsuariosService();
+                    Usuarios usuario = new Usuarios();
+                    usuario.setIdPerfil(Integer.parseInt(request.getParameter("perfil")));
+                    usuario.setUsuario(request.getParameter("usuario"));
+                    usuario.setContraseña(request.getParameter("contrasena"));
+                    usuario.setNombre(request.getParameter("nombre"));
+
+                    // Verificar si el usuario y contraseña ya existen
+                    if (ususervice.existeUsuario(usuario.getUsuario(), usuario.getContraseña())) {
+            %>
+            <script>
+                alert("El usuario y contraseña ya existen");
+            </script>
+            <%
+            } else {
+                // Proceder con el alta del usuario si no existe
+                if (ususervice.addUsuarios(usuario)) {
+            %>
+            <script>
+                alert("Se ha dado de alta al Usuario");
+            </script>
+            <%
+            } else {
+            %>
+            <script>
+                alert("Ha ocurrido un error");
+            </script>
+            <%
+                        }
+                    }
                 }
-            }
-        %>
+             %>
+    </body>
+
 </html>

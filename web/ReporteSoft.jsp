@@ -1,6 +1,11 @@
 <%-- Document : ReporteSoft Created on : 15 may 2023, 21:33:02 Author : PC --%>
 
-    <%@page contentType="text/html" pageEncoding="UTF-8" %>
+    <%@page import="org.rocnic.dao.service.ReporteServices"%>
+<%@page import="org.rocnic.dao.Reportes"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="org.rocnic.dao.service.Conexion"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
         <!DOCTYPE html>
         <html>
 
@@ -37,33 +42,55 @@
                             <span style="margin-left: 130px;">Boleta</span>
                             <input type="text" id="Boleta" name="Boleta" value="" style="display: inline-block; width: 160px; margin-left: 15px;">
                             <span style="margin-left: 50px;">Fecha</span>
-                            <input type="text" id="Fecha" name="Fecha" value="" style="display: inline-block; width: 110px; margin-left: 15px;" readonly="true">
-                            <div>
-                                <div style="display: flex; margin-top: 20px;">
-                                    <div>
-                                        <div style="margin-top: 40px;">SELECCION</div>
-                                        <div class="campo">
-                                            <input type="checkbox" id="internet" name="internet" style="display: inline-block;">
-                                            <label for="internet" style="display: inline-block; margin-left: 5px; vertical-align: middle;">Internet</label>
+                            <input type="text" id="Fecha" name="Fecha" value=""
+                                style="display: inline-block; width: 110px; margin-left: 15px;" readonly="true">
+                                <div>
+                                    <div style="display: flex;  margin-top: 20px; ">
+                                        <div>
+                                            <div style="margin-top: 40px;">SELECCION</div>
+                                            <div class="campo">
+                                                <input type="checkbox" id="internet" name="internet" style="display: inline-block;">
+                                                <label for="internet" style="display: inline-block; margin-left: 5px; vertical-align: middle;">Internet</label>
+                                            </div>
+                                            <div class="campo">
+                                                <input type="checkbox" id="SOFTWARE_MAL_INSTALADO" name="SOFTWARE_MAL_INSTALADO" style="display: inline-block;">
+                                                <label for="SOFTWARE_MAL_INSTALADO" style="display: inline-block; margin-left: 5px; vertical-align: middle;">SOFTWARE MAL INSTALADO</label>
+                                            </div>
                                         </div>
-                                        <div class="campo">
-                                            <input type="checkbox" id="SOFTWARE_MAL_INSTALADO" name="SOFTWARE_MAL_INSTALADO" style="display: inline-block;">
-                                            <label for="SOFTWARE_MAL_INSTALADO" style="display: inline-block; margin-left: 5px; vertical-align: middle;">SOFTWARE MAL INSTALADO</label>
+                                        <div class="campo" style="margin-left: 100px; margin-right: auto;">
+                                            <input type="checkbox" id="otro" name="otro" style="display: inline-block;">
+                                            <label for="otro" style="display: inline-block; margin-left: 10px; vertical-align: middle;">Otro</label>
+                                            <input type="text" id="campo-texto" name="campo-texto" style="margin-top: 120px; margin-right: 40px; width: 100%; height: 100px; resize: vertical;">
                                         </div>
-                                    </div>
-                                    <div class="campo" style="margin-left: 100px; margin-right: auto;">
-                                        <input type="checkbox" id="otro" name="otro" style="display: inline-block;">
-                                        <label for="otro" style="display: inline-block; margin-left: 10px; vertical-align: middle;">Otro</label>
-                                        <input type="text" id="campo-texto" name="campo-texto" style="margin-top: 120px; margin-right: 40px; width: 100%; height: 100px; resize: vertical;">
                                     </div>
                                 </div>
-                                <button class="boton-enviar" type="submit">Enviar</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                            </div>       
+                </form>
             </div>
-            
-            
+                 <%
+                            String accion = request.getParameter("accion");
+                            if ("enviar".equals(accion)) {
+                                ReporteServices reporteservice = new ReporteServices();
+                                Reportes reportes = new Reportes();
+                                reportes.setIdEquipos(Integer.parseInt(request.getParameter("EQUIPO")));
+                                reportes.setIdLaboratorio(Integer.parseInt(request.getParameter("Laboratorio")));
+                                reportes.setIdTipoError(Integer.parseInt(request.getParameter("internet")));
+                                reportes.setIdUsuario(Integer.parseInt(request.getParameter("Usuario")));
+                                if (reporteservice.addReportes(reportes))
+                                {
+                        %>
+                        <script>
+                            alert("Has Levantado un Error");
+                        </script>
+                        <%
+                        } else {
+                        %>
+                        <script>
+                            alert("Disculpa se ha generado una exepcion");
+                        </script>
+                        <%
+            }
+        }
+    %>         
         </body>
 </html>

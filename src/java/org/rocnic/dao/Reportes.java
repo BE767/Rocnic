@@ -28,6 +28,17 @@ public class Reportes implements Serializable
     private int IdUsuario;
     private int IdTipoError;
     private int IdEstatusReporte;
+    private int IdEquipos;
+
+    public int getIdEquipos() {
+        return IdEquipos;
+    }
+
+    public void setIdEquipos(int IdEquipos) {
+        this.IdEquipos = IdEquipos;
+    }
+
+ 
 
     public int getIdTipoReporte() {
         return IdTipoReporte;

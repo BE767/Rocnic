@@ -4,26 +4,31 @@
     Author     : cesar
 --%>
 
+<%@page import="org.rocnic.dao.Reportes"%>
+<%@page import="org.rocnic.dao.service.ReporteServices"%>
+<%@page import="java.util.List"%>
+<%@page import="org.rocnic.dao.Usuarios"%>
+<%@page import="org.rocnic.dao.service.UsuariosService"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <title>TODO supply a title</title>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-                integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-                crossorigin="anonymous">
-            <link rel="stylesheet" href="css/estilos.css">
-            <link rel="stylesheet" href="css/estilossoft.css">
-            <link rel="shortcut icon" href="imagenes/Patita.png">
-            <script src="Funciones/js1.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+              crossorigin="anonymous">
+        <link rel="stylesheet" href="css/estilos.css">
+        <link rel="stylesheet" href="css/estilossoft.css">
+        <link rel="shortcut icon" href="imagenes/Patita.png">
+        <script src="Funciones/js1.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-                crossorigin="anonymous"></script>
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     </head>
         <body style="background-color:#C0CAD2">
             <div class="containery">
@@ -46,35 +51,47 @@
                         <table class="table-bordered table pull-right" id="mytable" cellspacing="0" style="width: 100%;">
                           <thead>
                             <tr role="row">
-                              <th>Folio</th>
-                              <th>Lab</th>
-                              <th>#Maquina</th>
-                              <th>Error</th>
-                              <th>Usuario</th>
-                              
+                                <th>Folio</th>
+                                <th>Lab</th>
+                                <th>#Maquina</th>
+                                <th>Error</th>
+                                <th>Usuario</th>
                             </tr>
-                          </thead>
-                          <tbody>
-                           
-                          </tbody>
-                        </table>
-                      </div>
-                       <script>
-                        
-                        $(document).ready(function(){
-                        $("#search").keyup(function(){
-                        _this = this;
-                     
-                        $.each($("#mytable tbody tr"), function() {
-                        if($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1)
-                        $(this).hide();
-                        else
-                        $(this).show();
-                        });
-                        });
-                       });
-                       </script>
+                        </thead>
+                        <% ReporteServices reporte = new ReporteServices();
+                            List<Reportes> list = reporte.getReportesList();
+                            if (list != null && list.size() > 0) {
+                            for (Reportes rol : list) {
+                        %>
+                         <tbody>
+                        <tr>
+                            <td><%=rol.getIdReporte()%></td>
+                            <td><%=rol.getIdLaboratorio()%></td>
+                            <td><%=rol.getIdEquipos()%></td>
+                            <td><%=rol.getIdTipoError() %></td>
+                            <td><%=rol.getIdUsuario() %></td>
+                        </tr>
+                        <%}
+                            }
+                        %>
+                        </tbody>
+                    </table>
                 </div>
+                <script>
+                    $(document).ready(function () {
+                        $("#search").keyup(function () {
+                            _this = this;
+
+                            $.each($("#mytable tbody tr"), function () {
+                                if ($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1)
+                                    $(this).hide();
+                                else
+                                    $(this).show();
+                            });
+                        });
+                    });
+                </script>
             </div>
-        </body>
+        </div>
+    </body>
 </html>

@@ -3,6 +3,8 @@
     Created on : 19 may. 2023, 22:37:22
     Author     : cesar
 --%>
+<%@page import="org.rocnic.dao.Equipos"%>
+<%@page import="org.rocnic.dao.service.EquipoService"%>
 <%@page import="org.rocnic.dao.service.UsuariosService"%>
 <%@page import="org.rocnic.dao.Usuarios"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
@@ -70,7 +72,7 @@
                                         <input type="text" id="campo-texto" name="campo-texto" style="margin-top: 120px; margin-right: 40px; width: 100%; height: 100px; resize: vertical;">
                                     </div>
                                 </div>
-                                <button type="submit" name="accion" id="accion" value="enviar">Bajas</button>
+                                <button type="submit" name="accion" id="accion" value="borrar">Bajas</button>
 
                             </div>
                         </div>
@@ -78,6 +80,27 @@
                 </form>
             </div>
         </div>
-       
+        <%
+            String accion = request.getParameter("accion");
+            EquipoService equipoService = new EquipoService();
+            Equipos equipo = new Equipos();
+            if ("borrar".equals(accion)) {
+                equipo.setIdEquipo(Integer.parseInt(request.getParameter("campo2")));
+                if (equipoService.deleteEquipo(equipo)) {
+        %>
+        <script>
+            alert("Se ha eliminado el equipo");
+        </script>
+        <%
+        } else {
+        %>
+        <script>
+            alert("No se pudo eliminar el equipo");
+        </script>
+        <%
+                }
+            }
+        %>
+
     </body>
 </html>

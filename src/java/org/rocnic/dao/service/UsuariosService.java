@@ -93,7 +93,7 @@ public class UsuariosService extends Conexion<Usuarios>
     public boolean updateUsuarios(Usuarios usuario) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "UPDATE usuarios SET IdPerfil=?, Usuario=?, Contraseña=?, Nombre=?, Boleta=? WHERE IdUsuario=?";
+        String sql = "UPDATE usuarios SET IdPerfil=?, Usuario=?, Contraseña=?, Nombre=?  WHERE IdUsuario=?";
         int row = 0;
         try {
             connection = getConnection();
@@ -108,8 +108,7 @@ public class UsuariosService extends Conexion<Usuarios>
             preparedStatement.setString(2, usuario.getUsuario());
             preparedStatement.setString(3, usuario.getContraseña());
             preparedStatement.setString(4, usuario.getNombre());
-            preparedStatement.setString(5, usuario.getBoleta());
-            preparedStatement.setInt(6, usuario.getIdUsuario());
+            preparedStatement.setInt(5, usuario.getIdUsuario());
             row = preparedStatement.executeUpdate();
             closeConnection(connection);
             return row == 1;
@@ -299,5 +298,59 @@ public class UsuariosService extends Conexion<Usuarios>
         return usuarios;
     }
 
+    
+    // ...
 
+    public boolean existeUsuario(String usuario, String contraseña) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        String sql = "SELECT * FROM usuarios WHERE usuario = ? AND contraseña = ?";
+        try {
+            connection = getConnection();
+            if (connection == null) {
+                return false;
+            }
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, usuario);
+            preparedStatement.setString(2, contraseña);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                int count = resultSet.getInt(1);
+                return count > 0;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } 
+        return false;
+    }
+
+     public boolean existeUsuario(int idUsuario) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        String sql = "SELECT * FROM usuarios WHERE idUsuario = ?";
+        try {
+            connection = getConnection();
+            if (connection == null) {
+                return false;
+            }
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, idUsuario);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                int count = resultSet.getInt(1);
+                return count > 0;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
 }
+
+    
+    
+    
+
+
