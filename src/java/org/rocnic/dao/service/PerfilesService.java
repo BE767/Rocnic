@@ -4,6 +4,10 @@
  */
 package org.rocnic.dao.service;
 
+/**
+ *
+ * @author Evelyn
+ */
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,21 +15,20 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import org.rocnic.dao.Reportes;
-import org.rocnic.dao.Usuarios;
+import org.rocnic.dao.Perfiles;
+import org.rocnic.dao.service.Conexion;
 
-/**
- *
- * @author Evelyn
- */
-public class ReporteServices extends Conexion<Reportes>
+
+public class PerfilesService extends Conexion<Perfiles>
 {
-     public List<Reportes> getReportesList() {
-        List<Reportes> ReportesList = null;
+    
+
+     public List<Perfiles> getPerfilesList() {
+        List<Perfiles> PerfilesList = null;
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
-        Reportes reportes = null;
+        Perfiles perfiles = null;
 
         try {
             connection = getConnection();
@@ -36,39 +39,30 @@ public class ReporteServices extends Conexion<Reportes>
             if (statement == null) {
                 return null;
             }
-            resultSet = statement.executeQuery("SELECT * FROM reportes");
+            resultSet = statement.executeQuery("SELECT * FROM perfiles");
             if (resultSet == null) {
                 return null;
             }
-            ReportesList = new ArrayList<>();
+            PerfilesList = new ArrayList<>();
             while (resultSet.next()) {
-                reportes = new Reportes();
-                reportes.setIdReporte(resultSet.getInt(1));
-                reportes.setIdTipoReporte(resultSet.getInt(2));
-                reportes.setIdLaboratorio(resultSet.getInt(3));
-                reportes.setIdEquipos(resultSet.getInt(4));
-                reportes.setIdUsuario(resultSet.getInt(5));
-                reportes.setIdTipoError(resultSet.getInt(6));
-                reportes.setIdEstatusReporte(resultSet.getInt(7));
-                reportes.setFechaCreacion(resultSet.getDate(8));
-                reportes.setFechaActualizacion(resultSet.getDate(9));
-                reportes.setUsuarioActualizacion(resultSet.getDate(10));
-                reportes.setUsuarioCreacion(resultSet.getDate(11));
-                ReportesList.add(reportes);
+                perfiles = new Perfiles();
+                perfiles.setIdPerfil(resultSet.getInt(1));
+                perfiles.setNombrePerfil(resultSet.getString(2));
+                PerfilesList.add(perfiles);
             }
             resultSet.close();
             closeConnection(connection);
-            return ReportesList;
+            return PerfilesList;
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return ReportesList;
-    }
+        return PerfilesList;
+    } 
      
-    public boolean addReportes(Reportes reportes) {
+       public boolean addUsuarios(Perfiles perfiles) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "INSERT INTO reportes (IdTipoReporte,IdLaboratorio,IdEquipos,IdUsuario,IdTipoError,IdEstatusReporte,FechaCreacion) VALUES(?,?,?,?,?,?,CURDATE())";
+        String sql = "INSERT INTO perfiles (NombrePerfil) VALUES(?)";
         int row = 0;
         try {
             connection = getConnection();
@@ -79,26 +73,21 @@ public class ReporteServices extends Conexion<Reportes>
             if (preparedStatement == null) {
                 return false;
             }
-            preparedStatement.setInt(1, reportes.getIdTipoReporte());
-            preparedStatement.setInt(2, reportes.getIdLaboratorio());
-            preparedStatement.setInt(3, reportes.getIdEquipos());
-            preparedStatement.setInt(4, reportes.getIdUsuario());
-            preparedStatement.setInt(5, reportes.getIdTipoError());
-            preparedStatement.setInt(6, reportes.getIdEstatusReporte());
+            preparedStatement.setInt(1, perfiles.getIdPerfil());
+            preparedStatement.setString(2, perfiles.getNombrePerfil());
             row = preparedStatement.executeUpdate();
             closeConnection(connection);
             return row == 1;
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
         return row < 0;
     }
-
-    public boolean updateReportes (Reportes reportes) {
+     
+     public boolean updateUsuarios(Perfiles perfiles) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "UPDATE reportes SET IdEstatusReporte=? ,FechaActualizacion=?, UsuarioActualizacion=?   WHERE IdReporte=?";
+        String sql = "UPDATE usuarios SET NombrePerfil=?,WHERE IdPerfil=?";
         int row = 0;
         try {
             connection = getConnection();
@@ -109,8 +98,7 @@ public class ReporteServices extends Conexion<Reportes>
             if (preparedStatement == null) {
                 return false;
             }
-            preparedStatement.setInt(1, reportes.getIdEstatusReporte());
-            preparedStatement.setDate(2, dateUtil2DateSql(reportes.getFechaActualizacion()));
+            preparedStatement.setString(1, perfiles.getNombrePerfil());
             row = preparedStatement.executeUpdate();
             closeConnection(connection);
             return row == 1;
@@ -119,13 +107,9 @@ public class ReporteServices extends Conexion<Reportes>
         }
         return false;
     }
-    
-    
-    
-    
-
-    public Reportes getReportesByReportes(String IdReporte) {
-        Reportes aux = null;
+     
+        public Perfiles getPerfilesByPerfiles(String IdPerfil) {
+        Perfiles aux = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -134,28 +118,20 @@ public class ReporteServices extends Conexion<Reportes>
             if (connection == null) {
                 return null;
             }
-            preparedStatement = connection.prepareStatement("SELECT * FROM reportes WHERE IdReporte = ?");
+            preparedStatement = connection.prepareStatement("SELECT * FROM perfiles WHERE IdPerfil = ?");
             if (preparedStatement == null) {
                 return null;
             }
-            preparedStatement.setString(1, IdReporte);
+            preparedStatement.setString(1, IdPerfil);
             resultSet = preparedStatement.executeQuery();
             if (resultSet == null) {
                 return null;
             }
 
-            aux = new Reportes();
+            aux = new Perfiles();
             if (resultSet.next()) {
-                aux.setIdReporte(resultSet.getInt("IdReporte"));
-                aux.setIdTipoReporte(resultSet.getInt("IdTipoReporte"));
-                aux.setIdLaboratorio(resultSet.getInt("IdLaboratorio"));
-                aux.setIdUsuario(resultSet.getInt("IdUsuario"));
-                aux.setIdTipoError(resultSet.getInt("IdTipoError"));
-                aux.setIdEstatusReporte(resultSet.getInt("IdEstatusReporte"));
-                aux.setFechaCreacion(resultSet.getDate("FechaCreacion"));
-                aux.setFechaActualizacion(resultSet.getDate("FechaActualizacion"));
-                aux.setUsuarioActualizacion(resultSet.getDate("UsuarioActualizacion"));
-                aux.setUsuarioCreacion(resultSet.getDate("UsuarioCreacion"));
+                aux.setIdPerfil(resultSet.getInt("IdPerfil"));
+                aux.setNombrePerfil(resultSet.getString("NombrePerfil"));
             }
             resultSet.close();
             closeConnection(connection);
@@ -166,10 +142,10 @@ public class ReporteServices extends Conexion<Reportes>
         return null;
     }
 
-    public boolean deleteUsuario(Reportes reportes) {
+        public boolean deleteUsuario(Perfiles perfiles) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "DELETE FROM reportes WHERE IdReporte = ?";
+        String sql = "DELETE FROM perfiles WHERE IdPerfil = ?";
         int row = 0;
         try {
             connection = getConnection();
@@ -180,7 +156,7 @@ public class ReporteServices extends Conexion<Reportes>
             if (preparedStatement == null) {
                 return false;
             }
-            preparedStatement.setInt(1,reportes.getIdReporte() );
+            preparedStatement.setInt(1, perfiles.getIdPerfil());
             row = preparedStatement.executeUpdate();
             closeConnection(connection);
             return row == 1;
@@ -189,6 +165,7 @@ public class ReporteServices extends Conexion<Reportes>
         }
         return false;
     }
-
-    
+        
+        
+   
 }

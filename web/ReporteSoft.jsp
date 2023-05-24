@@ -1,6 +1,11 @@
 <%-- Document : ReporteSoft Created on : 15 may 2023, 21:33:02 Author : PC --%>
 
-    <%@page contentType="text/html" pageEncoding="UTF-8" %>
+    <%@page import="org.rocnic.dao.service.ReporteServices"%>
+<%@page import="org.rocnic.dao.Reportes"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="org.rocnic.dao.service.Conexion"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
         <!DOCTYPE html>
         <html>
 
@@ -56,7 +61,6 @@
                                                 <input type="checkbox" id="SOFTWARE_MAL_INSTALADO" name="SOFTWARE_MAL_INSTALADO" style="display: inline-block;">
                                                 <label for="SOFTWARE_MAL_INSTALADO" style="display: inline-block; margin-left: 5px; vertical-align: middle;">SOFTWARE MAL INSTALADO</label>
                                             </div>
-                                           
                                         </div>
                                         <div class="campo" style="margin-left: 100px; margin-right: auto;">
                                             <input type="checkbox" id="otro" name="otro" style="display: inline-block;">
@@ -65,9 +69,34 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>       
                 </form>
-                
             </div>
+                 <%
+                            String accion = request.getParameter("accion");
+                            if ("enviar".equals(accion)) {
+                                ReporteServices reporteservice = new ReporteServices();
+                                Reportes reportes = new Reportes();
+                                reportes.setIdEquipos(Integer.parseInt(request.getParameter("EQUIPO")));
+                                reportes.setIdLaboratorio(Integer.parseInt(request.getParameter("Laboratorio")));
+                                reportes.setIdTipoError(Integer.parseInt(request.getParameter("internet")));
+                                reportes.setIdUsuario(Integer.parseInt(request.getParameter("Usuario")));
+                                if (reporteservice.addReportes(reportes))
+                                {
+                        %>
+                        <script>
+                            alert("Has Levantado un Error");
+                        </script>
+                        <%
+                        } else {
+                        %>
+                        <script>
+                            alert("Disculpa se ha generado una exepcion");
+                        </script>
+                        <%
+                                }
+
+                            }
+    %>         
         </body>
 </html>

@@ -61,7 +61,7 @@
                         <% ReporteServices reporte = new ReporteServices();
                             List<Reportes> list = reporte.getReportesList();
                             if (list != null && list.size() > 0) {
-                                for (Reportes rol : list) {
+                            for (Reportes rol : list) {
                         %>
                          <tbody>
                         <tr>
@@ -78,7 +78,6 @@
                     </table>
                 </div>
                 <script>
-
                     $(document).ready(function () {
                         $("#search").keyup(function () {
                             _this = this;

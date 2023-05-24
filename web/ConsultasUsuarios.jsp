@@ -44,14 +44,12 @@
                                 <input type="text" id="campo1" name="campo1">
                             </label>
                         </div>
-
                         <div>
                             <label for="usuarui">
                                 <span>Usuario:</span>
                                 <input type="text" id="campo2" name="campo2">
                             </label>
                         </div>
-
                         <div>
                             <label for="nombre">
                                 <span>Nombre:</span>
