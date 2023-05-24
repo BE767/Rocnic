@@ -7,17 +7,24 @@
             <file>file:/C:/Users/Evelyn/Desktop/Rocnic/src/java/org/rocnic/dao/TipoError.java</file>
             <file>file:/C:/Users/Evelyn/Desktop/Rocnic/src/java/org/rocnic/dao/Usuarios.java</file>
             <file>file:/C:/Users/Evelyn/Desktop/Rocnic/src/java/org/rocnic/dao/EstatusReporte.java</file>
+            <file>file:/C:/Users/Evelyn/Desktop/Rocnic/web/ReporteHard.jsp</file>
             <file>file:/C:/Users/Evelyn/Desktop/Rocnic/src/java/org/rocnic/dao/Equipos.java</file>
+            <file>file:/C:/Users/Evelyn/Desktop/Rocnic/web/ConsultaEquipos.jsp</file>
             <file>file:/C:/Users/Evelyn/Desktop/Rocnic/src/java/org/rocnic/dao/Reportes.java</file>
             <file>file:/C:/Users/Evelyn/Desktop/Rocnic/web/LoginMaestro.jsp</file>
             <file>file:/C:/Users/Evelyn/Desktop/Rocnic/web/ConsultasUsuarios.jsp</file>
             <file>file:/C:/Users/Evelyn/Desktop/Rocnic/src/java/org/rocnic/dao/Laboratorio.java</file>
             <file>file:/C:/Users/Evelyn/Desktop/Rocnic/src/java/org/rocnic/dao/Perfiles.java</file>
             <file>file:/C:/Users/Evelyn/Desktop/Rocnic/web/LoginUDI.jsp</file>
+            <file>file:/C:/Users/Evelyn/Desktop/Rocnic/web/BajasUsuarios.jsp</file>
+            <file>file:/C:/Users/Evelyn/Desktop/Rocnic/web/CambiosUsuarios.jsp</file>
             <file>file:/C:/Users/Evelyn/Desktop/Rocnic/web/index.html</file>
+            <file>file:/C:/Users/Evelyn/Desktop/Rocnic/web/BajasEquipos.jsp</file>
+            <file>file:/C:/Users/Evelyn/Desktop/Rocnic/web/Consulta.jsp</file>
             <file>file:/C:/Users/Evelyn/Desktop/Rocnic/src/java/org/rocnic/dao/Periferico.java</file>
             <file>file:/C:/Users/Evelyn/Desktop/Rocnic/src/java/org/rocnic/dao/TipoReporte.java</file>
             <file>file:/C:/Users/Evelyn/Desktop/Rocnic/src/java/org/rocnic/dao/service/Conexion.java</file>
+            <file>file:/C:/Users/Evelyn/Desktop/Rocnic/web/ReporteSoft.jsp</file>
             <file>file:/C:/Users/Evelyn/Desktop/Rocnic/src/java/org/rocnic/dao/service/UsuariosService.java</file>
         </group>
     </open-files>

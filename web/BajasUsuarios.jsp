@@ -75,7 +75,7 @@
             Usuarios usuarios = new Usuarios();
             if ("borrar".equals(accion)) {
                 usuarios.setIdUsuario(Integer.parseInt(request.getParameter("campo2")));
-                if (ususervice.deleteUsuario(usuarios)) {
+            if (ususervice.deleteUsuario(usuarios)) {
         %>    
         <script>
             alert("Borraste Algo");

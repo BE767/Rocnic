@@ -68,6 +68,7 @@ create table Reportes(
 IdReporte int primary key not null auto_increment,
 IdTipoReporte int,
 IdLaboratorio int,
+IdEquipo int,
 IdUsuario int,
 IdTipoError int,
 IdEstatusReporte int,
@@ -79,7 +80,8 @@ foreign key (IdTipoReporte) references TipoReporte (IdTipoReporte) on delete cas
 foreign key (IdLaboratorio) references Laboratorio (IdLaboratorio) on delete cascade on update cascade,
 foreign key (IdUsuario) references Usuarios (IdUsuario) on delete cascade on update cascade,
 foreign key (IdTipoError) references TipoError (IdTipoError) on delete cascade on update cascade,
-foreign key (IdEstatusReporte) references EstatusReporte (IdEstatusReporte) on delete cascade on update cascade
+foreign key (IdEstatusReporte) references EstatusReporte (IdEstatusReporte) on delete cascade on update cascade,
+foreign key (IdEquipo) references Equipos (IdEquipo) on delete cascade on update cascade
 );
 
 
