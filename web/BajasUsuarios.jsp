@@ -1,6 +1,8 @@
 <%-- Document : BajasUsuarios Created on : 19 may. 2023, 22:35:56 Author : cesar --%>
 
-    <%@page contentType="text/html" pageEncoding="UTF-8" %>
+    <%@page import="org.rocnic.dao.service.UsuariosService"%>
+<%@page import="org.rocnic.dao.Usuarios"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
         <!DOCTYPE html>
         <html>
 
@@ -62,11 +64,29 @@
                             </label>
                           </div>
                       
-                          <button type="delete">Borrar</button>
+                          <button type="delete"  name="accion" id="accion" value="borrar">Borrar</button>
                         </form>
                       </div>
                 </div>
             </div>
+            <%     
+            String accion = request.getParameter("accion");
+            UsuariosService ususervice = new UsuariosService();
+            Usuarios usuarios = new Usuarios();
+            if ("borrar".equals(accion)) {
+                usuarios.setIdUsuario(Integer.parseInt(request.getParameter("campo2")));
+                if (ususervice.deleteUsuario(usuarios)) {
+        %>    
+        <script>
+            alert("Borraste Algo");
+        </script>
+        <% } else { %>
+        <script>
+            alert("No se borró nada");
+        </script>
+        <% }
+            }
+        %>
         </body>
 
         </html>

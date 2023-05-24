@@ -63,7 +63,6 @@ Author : cesar
                 </div>
             </div>
         </div>
-
     </body>
     <%
         String accion = request.getParameter("accion");
@@ -77,19 +76,17 @@ Author : cesar
             if (ususervice.addUsuarios(usuario)) {
         %>
         <script>
-            alert("Ya lo guarde");
+            alert("Se ha dado de alta al Usuario");
         </script>
         <%
         } else {
         %>
         <script>
-            alert("no lo guarde")
+            alert("ha ocurrido un error")
                     );
         </script>
         <%
                 }
             }
         %>
-
-
 </html>
