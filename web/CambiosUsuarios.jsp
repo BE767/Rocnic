@@ -87,18 +87,24 @@
                 usuario.setNombre(request.getParameter("nombre"));
                 usuario.setBoleta(request.getParameter("boleta"));
                 usuario.setIdUsuario(Integer.parseInt(request.getParameter("idu")));
-                if (ususervice.updateUsuarios(usuario)) {
-        %>    
+        %>
         <script>
-            alert("Realizaste un cambio");
+            if (confirm("¿Estás seguro de que deseas realizar los cambios en este usuario?")) {
+                // Se confirmaron los cambios en el usuario
+            <% if (ususervice.updateUsuarios(usuario)) { %>
+                alert("Realizaste un cambio");
+            <% } else { %>
+                alert("No se pudo realizar el cambio");
+            <% } %>
+            } else {
+                // No se confirmaron los cambios en el usuario
+                alert("No se ha realizado el cambio en el usuario");
+            }
         </script>
-        <% } else { %>
-        <script>
-            alert("No se pudo realizar el cambio");
-        </script>
-        <% }
+        <%
             }
         %>
+
 
     </body>
 </html>
