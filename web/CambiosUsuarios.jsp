@@ -44,8 +44,8 @@
 
                         <div>
                             <label for="usuarui">
-                                <span>Usuario:</span>
-                                <input type="text" id="campo2" name="idu">
+                                <span>Usuario-Id:</span>
+                                <input type="text" id="idu" name="idu">
                             </label>
                         </div>
 

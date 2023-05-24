@@ -93,7 +93,7 @@ public class UsuariosService extends Conexion<Usuarios>
     public boolean updateUsuarios(Usuarios usuario) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "UPDATE usuarios SET IdPerfil=?, Usuario=?, Contraseña=?, Nombre=?, Boleta=? WHERE IdUsuario=?";
+        String sql = "UPDATE usuarios SET IdPerfil=?, Usuario=?, Contraseña=?, Nombre=?  WHERE IdUsuario=?";
         int row = 0;
         try {
             connection = getConnection();
@@ -108,8 +108,7 @@ public class UsuariosService extends Conexion<Usuarios>
             preparedStatement.setString(2, usuario.getUsuario());
             preparedStatement.setString(3, usuario.getContraseña());
             preparedStatement.setString(4, usuario.getNombre());
-            preparedStatement.setString(5, usuario.getBoleta());
-            preparedStatement.setInt(6, usuario.getIdUsuario());
+            preparedStatement.setInt(5, usuario.getIdUsuario());
             row = preparedStatement.executeUpdate();
             closeConnection(connection);
             return row == 1;
