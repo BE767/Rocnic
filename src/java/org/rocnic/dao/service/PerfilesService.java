@@ -166,6 +166,36 @@ public class PerfilesService extends Conexion<Perfiles>
         return false;
     }
         
-        
+    public String getNombrePerfil(int idPerfil) {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet resultSet = null;
+    String nombrePerfil = null;
+    try {
+        connection = getConnection();
+        if (connection == null) {
+            return null;
+        }
+        preparedStatement = connection.prepareStatement("SELECT NombrePerfil FROM perfiles WHERE IdPerfil = ?");
+        if (preparedStatement == null) {
+            return null;
+        }
+        preparedStatement.setInt(1, idPerfil);
+        resultSet = preparedStatement.executeQuery();
+        if (resultSet == null) {
+            return null;
+        }
+        if (resultSet.next()) {
+            nombrePerfil = resultSet.getString("NombrePerfil");
+        }
+        resultSet.close();
+        closeConnection(connection);
+        return nombrePerfil;
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+    return null;
+}
+ 
    
 }

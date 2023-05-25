@@ -1,4 +1,4 @@
-
+<%@page import="org.rocnic.dao.service.PerfilesService"%>
 <%@page import="org.rocnic.dao.Usuarios"%>
 <%@page import="org.rocnic.dao.service.UsuariosService"%>
 <%-- 
@@ -35,45 +35,70 @@
                     <h1 class="titulo">CONSULTAS USUARIOS</h1>
                 </div>
 
-
                 <div class="rectangulo-dentro1">
+                    <%
+                        String accion = request.getParameter("accion");
+                        if ("traer".equals(accion)) {
+                            UsuariosService ususervice = new UsuariosService();
+                            Usuarios usuario = ususervice.getUsuariosByUsuarios(request.getParameter("idu"));
+                            if (usuario != null) {
+                    %>
                     <form>
                         <div>
-                            <label for="perfil">
-                                <span>Perfil:</span>
-                                <input type="text" id="campo1" name="campo1">
+                            <label for="idu">
+                                <span>ID Usuario:</span>
+                                <input type="text" id="idu" name="idu">
                             </label>
                         </div>
                         <div>
-                            <label for="usuarui">
+                            <label for="perfil">
+                                <span>Perfil:</span>
+                                <% 
+                                    if (usuario != null) {
+                                        PerfilesService perfilesService = new PerfilesService();
+                                        String perfilNombre = perfilesService.getNombrePerfil(usuario.getIdPerfil());
+                                %>
+                                <input type="text" id="perfil" name="perfil" value="<%= perfilNombre %>" readonly>
+                                <% } else { %>
+                                <input type="text" id="perfil" name="perfil" value="" readonly>
+                                <% } %>
+                            </label>
+                        </div>
+                        <div>
+                            <label for="usuario">
                                 <span>Usuario:</span>
-                                <input type="text" id="campo2" name="campo2">
+                                <input type="text" id="usuario" name="usuario" value="<%= (usuario != null) ? usuario.getUsuario() : ""%>" readonly>
                             </label>
                         </div>
                         <div>
                             <label for="nombre">
                                 <span>Nombre:</span>
-                                <input type="text" id="nombre" name="nombre">
-                            </label>
-
-                            <label for="perfil">
-                                <span>Perfil:</span>
-                                <input type="text" id="perfil" name="perfil">
-                            </label>
-                            <label for="Usuario">
-                                <span>Usuario</span>
-                                <input type="password" id="contrasena" name="contrasena">
-                            </label>
-                            <label for="contrasena">
-                                <span>Contraseña</span>
-                                <input type="password" id="contrasena" name="contrasena">
+                                <input type="text" id="nombre" name="nombre" value="<%= (usuario != null) ? usuario.getNombre() : ""%>" readonly>
                             </label>
                         </div>
-
-                        <button type="cambiar " name="accion" id="accion"  >ENVIAR</button>
+                        <div>
+                            <label for="contrasena">
+                                <span>Contraseña:</span>
+                                <input type="text" id="contrasena" name="contrasena" value="<%= (usuario != null) ? usuario.getContraseña() : ""%>" readonly>
+                            </label>
+                        </div>
+                        <button type="submit" name="accion" value="traer">Traer</button>
                     </form>
                 </div>
             </div>
         </div>
+        <script>
+            alert("Se estara mostrando el usuario");
+        </script>
+        <%
+        } else {
+        %>
+        <script>
+            alert("Disculpe ha ocurrido un error");
+        </script>
+        <%
+                }
+            }
+        %>
     </body>
 </html>

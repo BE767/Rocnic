@@ -18,9 +18,9 @@ import org.rocnic.dao.Usuarios;
  *
  * @author Evelyn
  */
-public class ReporteServices extends Conexion<Reportes>
-{
-     public List<Reportes> getReportesList() {
+public class ReporteServices extends Conexion<Reportes> {
+
+    public List<Reportes> getReportesList() {
         List<Reportes> ReportesList = null;
         Connection connection = null;
         Statement statement = null;
@@ -64,11 +64,11 @@ public class ReporteServices extends Conexion<Reportes>
         }
         return ReportesList;
     }
-     
-    public boolean addReportes(Reportes reportes) {
+
+        public boolean addReportes(Reportes reportes) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "INSERT INTO reportes (IdTipoReporte,IdLaboratorio,IdEquipos,IdUsuario,IdTipoError,IdEstatusReporte,FechaCreacion) VALUES(?,?,?,?,?,?,CURDATE())";
+        String sql = "INSERT INTO reportes (IdLaboratorio, IdEquipo, IdUsuario, IdTipoError, FechaCreacion) VALUES (?, ?, ?, ?, CURDATE())";
         int row = 0;
         try {
             connection = getConnection();
@@ -79,23 +79,35 @@ public class ReporteServices extends Conexion<Reportes>
             if (preparedStatement == null) {
                 return false;
             }
-            preparedStatement.setInt(1, reportes.getIdTipoReporte());
-            preparedStatement.setInt(2, reportes.getIdLaboratorio());
-            preparedStatement.setInt(3, reportes.getIdEquipos());
-            preparedStatement.setInt(4, reportes.getIdUsuario());
-            preparedStatement.setInt(5, reportes.getIdTipoError());
-            preparedStatement.setInt(6, reportes.getIdEstatusReporte());
+            preparedStatement.setInt(1, reportes.getIdLaboratorio());
+            preparedStatement.setInt(2, reportes.getIdEquipos());
+            preparedStatement.setInt(3, reportes.getIdUsuario());
+            preparedStatement.setInt(4, reportes.getIdTipoError());
             row = preparedStatement.executeUpdate();
-            closeConnection(connection);
             return row == 1;
         } catch (SQLException ex) {
             ex.printStackTrace();
+        } finally {
+            // Cerrar la declaración preparada y la conexión
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
         }
-
-        return row < 0;
+        return false;
     }
 
-    public boolean updateReportes (Reportes reportes) {
+    public boolean updateReportes(Reportes reportes) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         String sql = "UPDATE reportes SET IdEstatusReporte=? ,FechaActualizacion=?, UsuarioActualizacion=?   WHERE IdReporte=?";
@@ -119,10 +131,6 @@ public class ReporteServices extends Conexion<Reportes>
         }
         return false;
     }
-    
-    
-    
-    
 
     public Reportes getReportesByReportes(String IdReporte) {
         Reportes aux = null;
@@ -180,7 +188,7 @@ public class ReporteServices extends Conexion<Reportes>
             if (preparedStatement == null) {
                 return false;
             }
-            preparedStatement.setInt(1,reportes.getIdReporte() );
+            preparedStatement.setInt(1, reportes.getIdReporte());
             row = preparedStatement.executeUpdate();
             closeConnection(connection);
             return row == 1;
@@ -190,5 +198,4 @@ public class ReporteServices extends Conexion<Reportes>
         return false;
     }
 
-    
 }

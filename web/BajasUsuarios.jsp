@@ -52,14 +52,13 @@
                                 <span>Nombre   :</span>
                                 <input type="text" id="nombre" name="nombre">
                             </label>
-
                             <label for="perfil">
-                                <span>Apellido Paterno                                         :</span>
+                                <span>Usuario                                         :</span>
                                 <input type="text" id="perfil" name="perfil">
                             </label>
 
                             <label for="contrasena">
-                                <span>Apellido Materno:</span>
+                                <span>Contraseña:</span>
                                 <input type="password" id="contrasena" name="contrasena">
                             </label>
                         </div>

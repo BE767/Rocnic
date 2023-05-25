@@ -26,7 +26,7 @@
         crossorigin="anonymous"></script>
         <title>Reporte de Hadware</title>
     </head>
-        <body style="background-color:#C0CAD2">
+    <body style="background-color:#C0CAD2">
         <div class="containery">
             <div class="rectanguloy">
                 <form>
@@ -35,13 +35,21 @@
                     </div>
                     <div style="margin-top: 20px; margin-left: 50px;">
                         <label for="numero">#EQUIPO</label>
-                        <input type="text" id="eqipos" name="eqipos" 
-                               style="margin-left: 20px; width: 30px;">
-                        <span style="margin-left: 60px;">LAB</span>
-                        <input type="text" id="LAB" name="LAB" 
-                               style="display: inline-block; width: 110px; margin-left: 15px;">
+                        <input type="text" id="equipos" name="equipos" style="margin-left: 20px; width: 30px;">
+
+                        <label for="laboratorio">
+                            <span>Laboratorio</span>
+                            <select name="idLaboratorio" id="idLaboratorio">
+                                <option value="-1">Seleccione Laboratorio</option>
+                                <option value="1">Base de Datos</option>
+                                <option value="2">Nuevas Tecnologias</option>
+                                <option value="3">Desarrollo Web</option>
+                            </select>
+                        </label>
+
+
                         <span style="margin-left:130px;">USUARIO</span>
-                        <input type="text" id="USUARIO" name="USUARIO" value=""
+                        <input type="text" id="Usuario" name="Usuario" 
                                style="display: inline-block; width: 160px; margin-left: 15px;">
 
                         <span style="margin-left: 50px;">Fecha</span>
@@ -49,54 +57,55 @@
                                style="display: inline-block; width: 110px; margin-left: 15px;" readonly="true">
                         <div>
                             <div style="display: flex; margin-top: 20px;">
-                                <div>
-                                    <div style="margin-top: 40px;">SELECCION</div>
-                                    <div class="campo">
-                                        <input type="checkbox" id="TECLADO" name="TECLADO" style="display: inline-block;">
-                                        <label for="TECLADO" style="display: inline-block; margin-left: 5px; vertical-align: middle;">TECLADO</label>
-                                    </div>
-                                    <div class="campo">
-                                        <input type="checkbox" id="RATON" name="RATON" style="display: inline-block;">
-                                        <label for="RATON" style="display: inline-block; margin-left: 5px; vertical-align: middle;">RATON</label>
-                                    </div>
-                                    <div class="campo">
-                                        <input type="checkbox" id="CPU" name="CPU" style="display: inline-block;">
-                                        <label for="CPU" style="display: inline-block; margin-left: 5px; vertical-align: middle;">CPU</label>
-                                    </div>
-
+                                <div class="campo">
+                                    <span>Errores</span>
+                                    <select name="idError" id="idError">
+                                        <option value="-1">Seleccione el error</option>
+                                        <option value="1">TECLADO</option>
+                                        <option value="2">RATON</option>
+                                        <option value="3">CPU</option>
+                                    </select>
                                 </div>
-
                             </div>
                             <button class="boton-enviar" type="submit" name="accion" id="accion" value="enviar">Enviar</button>
                         </div>
                 </form>
             </div>
         </div>
-    
-               <%
-                            String accion = request.getParameter("accion");
-                            if ("enviar".equals(accion)) {
-                                ReporteServices reporteservice = new ReporteServices();
-                                Reportes reportes = new Reportes();
-                                reportes.setIdEquipos(Integer.parseInt(request.getParameter("EQUIPO")));
-                                reportes.setIdLaboratorio(Integer.parseInt(request.getParameter("Laboratorio")));
-                                reportes.setIdTipoError(Integer.parseInt(request.getParameter("internet")));
-                                reportes.setIdUsuario(Integer.parseInt(request.getParameter("Usuario")));
-                                if (reporteservice.addReportes(reportes)) {
-                        %>
-                        <script>
-                            alert("Has Levantado un Error");
-                        </script>
-                        <%
-                        } else {
-                        %>
-                        <script>
-                            alert("Disculpa se ha generado una exepcion");
-                        </script>
-                        <%
-                                }
+       <%
+            String accion = request.getParameter("accion");
+            if ("enviar".equals(accion)) {
+                ReporteServices reporteservice = new ReporteServices();
+                Reportes reportes = new Reportes();
+                reportes.setIdEquipos(Integer.parseInt(request.getParameter("equipos")));
 
-                            }
-                        %>  
+                String idLaboratorioParam = request.getParameter("idLaboratorio");
+                if (idLaboratorioParam != null && !idLaboratorioParam.isEmpty()) {
+                    reportes.setIdLaboratorio(Integer.parseInt(idLaboratorioParam));
+                }
+
+                String idErrorParam = request.getParameter("idError");
+                if (idErrorParam != null && !idErrorParam.isEmpty()) {
+                    reportes.setIdTipoError(Integer.parseInt(idErrorParam));
+                }
+
+                reportes.setIdUsuario(Integer.parseInt(request.getParameter("Usuario")));
+
+                if (reporteservice.addReportes(reportes)) {
+        %>
+        <script>
+            alert("Has Levantado un Reporte");
+        </script>
+        <%
+        } else {
+        %>
+        <script>
+            alert("Disculpa se ha generado una exepcion");
+        </script>
+        <%
+                }
+            }
+        %>
+
     </body>
 </html>
