@@ -29,6 +29,54 @@ public class Reportes implements Serializable
     private int IdTipoError;
     private int IdEstatusReporte;
     private int IdEquipos;
+    
+    private String NombreTipoReporte;
+    private String NombreLaboratorio;
+    private String NombreEquipo;
+    private String NombreError;
+    private String NombreUsuario;
+
+    // Métodos de acceso para los campos adicionales
+    public String getNombreTipoReporte() {
+        return NombreTipoReporte;
+    }
+
+    public void setNombreTipoReporte(String NombreTipoReporte) {
+        this.NombreTipoReporte = NombreTipoReporte;
+    }
+
+    public String getNombreLaboratorio() {
+        return NombreLaboratorio;
+    }
+
+    public void setNombreLaboratorio(String NombreLaboratorio) {
+        this.NombreLaboratorio = NombreLaboratorio;
+    }
+
+    public String getNombreEquipo() {
+        return NombreEquipo;
+    }
+
+    public void setNombreEquipo(String NombreEquipo) {
+        this.NombreEquipo = NombreEquipo;
+    }
+
+    public String getNombreError() {
+        return NombreError;
+    }
+
+    public void setNombreError(String NombreError) {
+        this.NombreError = NombreError;
+    }
+
+    public String getNombreUsuario() {
+        return NombreUsuario;
+    }
+
+    public void setNombreUsuario(String NombreUsuario) {
+        this.NombreUsuario = NombreUsuario;
+    }
+
 
     public int getIdEquipos() {
         return IdEquipos;

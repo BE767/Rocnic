@@ -53,23 +53,23 @@
                             <tr role="row">
                                 <th>Folio</th>
                                 <th>Lab</th>
-                                <th>#Maquina</th>
+                                <th>Numero Maquina</th>
                                 <th>Error</th>
                                 <th>Usuario</th>
                             </tr>
                         </thead>
                         <% ReporteServices reporte = new ReporteServices();
-                            List<Reportes> list = reporte.getReportesList();
+                            List<Reportes> list = reporte.getReportesLista();
                             if (list != null && list.size() > 0) {
                             for (Reportes rol : list) {
                         %>
                          <tbody>
                         <tr>
                             <td><%=rol.getIdReporte()%></td>
-                            <td><%=rol.getIdLaboratorio()%></td>
-                            <td><%=rol.getIdEquipos()%></td>
-                            <td><%=rol.getIdTipoError() %></td>
-                            <td><%=rol.getIdUsuario() %></td>
+                            <td><%=rol.getNombreLaboratorio() %></td>
+                            <td><%=rol.getNombreEquipo() %></td>
+                            <td><%=rol.getNombreError() %></td>
+                            <td><%=rol.getNombreUsuario() %></td>
                         </tr>
                         <%}
                             }

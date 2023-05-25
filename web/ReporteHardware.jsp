@@ -72,7 +72,7 @@
                 </form>
             </div>
         </div>
-       <%
+        <%
             String accion = request.getParameter("accion");
             if ("enviar".equals(accion)) {
                 ReporteServices reporteservice = new ReporteServices();
@@ -106,6 +106,5 @@
                 }
             }
         %>
-
     </body>
 </html>
