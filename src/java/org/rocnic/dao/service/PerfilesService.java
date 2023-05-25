@@ -197,5 +197,45 @@ public class PerfilesService extends Conexion<Perfiles>
     return null;
 }
  
-   
+   public  boolean validarCredenciales(String IUser, String IPassword) {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = getConnection();
+            String query = "SELECT * FROM usuario WHERE usuario = ? AND contraseña = ?";
+            statement = connection.prepareStatement(query);
+            statement.setString(1, IUser);
+            statement.setString(2, IPassword);
+            resultSet = statement.executeQuery();
+            return resultSet.next();
+        } catch (SQLException e) {
+        e.printStackTrace();
+    } finally {
+        if (resultSet != null) {
+            try {
+                resultSet.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if (statement != null) {
+            try {
+                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    return false;
+    }
 }

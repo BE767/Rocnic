@@ -4,6 +4,8 @@
     Author     : Evelyn
 --%>
 
+<%@page import="org.rocnic.dao.service.EquipoService"%>
+<%@page import="org.rocnic.dao.service.UsuariosService"%>
 <%@page import="org.rocnic.dao.Reportes"%>
 <%@page import="org.rocnic.dao.service.ReporteServices"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -75,23 +77,30 @@
         <%
             String accion = request.getParameter("accion");
             if ("enviar".equals(accion)) {
-                ReporteServices reporteservice = new ReporteServices();
-                Reportes reportes = new Reportes();
-                reportes.setIdEquipos(Integer.parseInt(request.getParameter("equipos")));
+                ReporteServices reporteService = new ReporteServices();
+                Reportes reporte = new Reportes();
 
-                String idLaboratorioParam = request.getParameter("idLaboratorio");
-                if (idLaboratorioParam != null && !idLaboratorioParam.isEmpty()) {
-                    reportes.setIdLaboratorio(Integer.parseInt(idLaboratorioParam));
-                }
+                // Obtener los valores del formulario
+                int idEquipo = Integer.parseInt(request.getParameter("equipos"));
+                int idLaboratorio = Integer.parseInt(request.getParameter("idLaboratorio"));
+                int idError = Integer.parseInt(request.getParameter("idError"));
+                int idUsuario = Integer.parseInt(request.getParameter("Usuario"));
 
-                String idErrorParam = request.getParameter("idError");
-                if (idErrorParam != null && !idErrorParam.isEmpty()) {
-                    reportes.setIdTipoError(Integer.parseInt(idErrorParam));
-                }
+                // Validar si existe el usuario y el equipo en la base de datos
+                UsuariosService usuarioService = new UsuariosService();
+                boolean existeUsuario = usuarioService.existeUsuario(idUsuario);
 
-                reportes.setIdUsuario(Integer.parseInt(request.getParameter("Usuario")));
+                EquipoService equiposService = new EquipoService();
+                boolean existeEquipo = equiposService.existeEquipo(idEquipo);
 
-                if (reporteservice.addReportes(reportes)) {
+                if (existeUsuario && existeEquipo) {
+                    // Asignar los valores al objeto reporte
+                    reporte.setIdEquipos(idEquipo);
+                    reporte.setIdLaboratorio(idLaboratorio);
+                    reporte.setIdTipoError(idError);
+                    reporte.setIdUsuario(idUsuario);
+
+                    if (reporteService.addReportes(reporte)) {
         %>
         <script>
             alert("Has Levantado un Reporte");
@@ -100,11 +109,19 @@
         } else {
         %>
         <script>
-            alert("Disculpa se ha generado una exepcion");
+            alert("Disculpa se ha generado una excepción");
+        </script>
+        <%
+            }
+        } else {
+        %>
+        <script>
+            alert("El usuario o el equipo no existen");
         </script>
         <%
                 }
             }
         %>
+
     </body>
 </html>

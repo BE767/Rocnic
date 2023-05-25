@@ -69,7 +69,7 @@
                             <td><%=rol.getNombreLaboratorio() %></td>
                             <td><%=rol.getNombreEquipo() %></td>
                             <td><%=rol.getNombreError() %></td>
-                            <td><%=rol.getNombreUsuario() %></td>
+                            <td><%=rol.getNombreUsuario()%></td>
                         </tr>
                         <%}
                             }

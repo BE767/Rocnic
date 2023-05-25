@@ -87,22 +87,6 @@ public class ReporteServices extends Conexion<Reportes> {
             return row == 1;
         } catch (SQLException ex) {
             ex.printStackTrace();
-        } finally {
-            // Cerrar la declaración preparada y la conexión
-            if (preparedStatement != null) {
-                try {
-                    preparedStatement.close();
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
-            }
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
-            }
         }
         return false;
     }
@@ -237,17 +221,56 @@ public class ReporteServices extends Conexion<Reportes> {
         e.printStackTrace();
     }
     return reportesList;
+ 
 }
 
+   
+     public List<Reportes> getReportesListaByUser(int folio)
+     {
+    List<Reportes> reportesList = new ArrayList<>();
+    Connection connection = null;
+    PreparedStatement statement = null;
+    ResultSet resultSet = null;
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    try {
+        connection = getConnection();
+        if (connection != null) {
+            String query = " u.IdUsuario,  s.IdEstatusReporte, l.NombreLaboratorio, e.NombreEquipo ,t.NombreError,u.Nombre "
+                    + "FROM reportes  r "
+                    + "INNER JOIN laboratorio l on r.IdLaboratorio = l.IdLaboratorio  "
+                    + "INNER JOIN equipos e on r.IdEquipo= e.IdEquipo "
+                    + "INNER JOIN usuarios u on r.IdUsuario= u.IdUsuario "
+                    + "INNER JOIN estatusreporte s on r.IdEstatusReporte= s.IdEstatusReporte "
+                    + "INNER JOIN tipoerror t on r.IdTipoError = t.IdTipoError "
+                    + "WHERE r.IdReporte = ?";
+              
+            statement = connection.prepareStatement(query);
+            statement.setInt(1, folio);
+            resultSet = statement.executeQuery();
+            
+            while (resultSet.next()) {
+                int idReporte = resultSet.getInt("IdReporte");
+                String nombreLaboratorio = resultSet.getString("NombreLaboratorio");
+                String nombreEquipo = resultSet.getString("NombreEquipo");
+                String nombreError = resultSet.getString("NombreError");
+                String nombreUsuario = resultSet.getString("Nombre");
+
+                Reportes reporte = new Reportes();
+                reporte.setIdReporte(idReporte);
+                reporte.setNombreLaboratorio(nombreLaboratorio);
+                reporte.setNombreEquipo(nombreEquipo); // Ajuste en el método setNombreEquipos
+                reporte.setNombreError(nombreError);
+                reporte.setNombreUsuario(nombreUsuario);
+
+                reportesList.add(reporte);
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return reportesList;
+ 
+}
+  
 
 }

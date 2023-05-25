@@ -6,11 +6,12 @@
             <file>file:/C:/Users/Evelyn/Documents/Anime/Rocnic/web/InicioUDI.jsp</file>
             <file>file:/C:/Users/Evelyn/Documents/Anime/Rocnic/web/AltasUsuarios.jsp</file>
             <file>file:/C:/Users/Evelyn/Documents/Anime/Rocnic/web/LoginUDI.jsp</file>
+            <file>file:/C:/Users/Evelyn/Documents/Anime/Rocnic/web/ConsultasUsuario.jsp</file>
             <file>file:/C:/Users/Evelyn/Documents/Anime/Rocnic/web/LoginMaestro.jsp</file>
             <file>file:/C:/Users/Evelyn/Documents/Anime/Rocnic/web/ReporteHardware.jsp</file>
             <file>file:/C:/Users/Evelyn/Documents/Anime/Rocnic/web/BajasEquipos.jsp</file>
-            <file>file:/C:/Users/Evelyn/Documents/Anime/Rocnic/web/ReporteHard.jsp</file>
             <file>file:/C:/Users/Evelyn/Documents/Anime/Rocnic/src/java/org/rocnic/dao/service/EquipoService.java</file>
+            <file>file:/C:/Users/Evelyn/Documents/Anime/Rocnic/web/WEB-INF/web.xml</file>
             <file>file:/C:/Users/Evelyn/Documents/Anime/Rocnic/web/ConsultaEquipos.jsp</file>
             <file>file:/C:/Users/Evelyn/Documents/Anime/Rocnic/src/java/org/rocnic/dao/Perfiles.java</file>
             <file>file:/C:/Users/Evelyn/Documents/Anime/Rocnic/src/java/org/rocnic/dao/service/Conexion.java</file>
@@ -18,18 +19,19 @@
             <file>file:/C:/Users/Evelyn/Documents/Anime/Rocnic/web/ReporteSofrtMae.jsp</file>
             <file>file:/C:/Users/Evelyn/Documents/Anime/Rocnic/src/java/org/rocnic/dao/Equipos.java</file>
             <file>file:/C:/Users/Evelyn/Documents/Anime/Rocnic/web/InicioAlumno.jsp</file>
-            <file>file:/C:/Users/Evelyn/Documents/Anime/Rocnic/web/ReporteHardMae.jsp</file>
+            <file>file:/C:/Users/Evelyn/Documents/Anime/Rocnic/src/java/org/rocnic/dao/Reportes.java</file>
             <file>file:/C:/Users/Evelyn/Documents/Anime/Rocnic/web/CambiosUsuarios.jsp</file>
-            <file>file:/C:/Users/Evelyn/Documents/Anime/Rocnic/web/Historial.jsp</file>
             <file>file:/C:/Users/Evelyn/Documents/Anime/Rocnic/web/ReporteSoft.jsp</file>
             <file>file:/C:/Users/Evelyn/Documents/Anime/Rocnic/src/java/org/rocnic/dao/service/UsuariosService.java</file>
             <file>file:/C:/Users/Evelyn/Documents/Anime/Rocnic/web/CambiosEquipos.jsp</file>
             <file>file:/C:/Users/Evelyn/Documents/Anime/Rocnic/src/java/org/rocnic/dao/EstatusReporte.java</file>
             <file>file:/C:/Users/Evelyn/Documents/Anime/Rocnic/web/InicioMaestro.jsp</file>
             <file>file:/C:/Users/Evelyn/Documents/Anime/Rocnic/web/ConsultaAlu.jsp</file>
+            <file>file:/C:/Users/Evelyn/Documents/Anime/Rocnic/src/java/org/rocnic/dao/service/TablaAdicionalService.java</file>
             <file>file:/C:/Users/Evelyn/Documents/Anime/Rocnic/src/java/org/rocnic/dao/service/PerfilesService.java</file>
             <file>file:/C:/Users/Evelyn/Documents/Anime/Rocnic/src/java/org/rocnic/dao/service/ReporteServices.java</file>
             <file>file:/C:/Users/Evelyn/Documents/Anime/Rocnic/web/Consulta.jsp</file>
+            <file>file:/C:/Users/Evelyn/Documents/Anime/Rocnic/src/java/org/rocnic/dao/Laboratorio.java</file>
             <file>file:/C:/Users/Evelyn/Documents/Anime/Rocnic/web/AltasEquipos.jsp</file>
             <file>file:/C:/Users/Evelyn/Documents/Anime/Rocnic/web/ConsultasUsuarios.jsp</file>
         </group>

@@ -79,7 +79,7 @@
 
                     <h1 class="titulo" style="text-align: center; color: white;">CONSULTAS</h1>
                     <div class="botones-container" style="text-align: center;">
-                        <a href="ConsultasUsuarios.jsp" >
+                        <a href="ConsultasUsuario.jsp" >
                             <button class="boton">USUARIOS</button>
                           </a>
                           <a href="CambiosUsuarios.jsp" >

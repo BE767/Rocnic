@@ -274,5 +274,37 @@ public class EquipoService extends Conexion<Equipos> {
     
     return false;
 }
+  
+  
+  
+  
+    public boolean existeEquipo(int idEquipo) {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        boolean existe = false;
+
+        try {
+            connection = getConnection();
+            if (connection != null) {
+                String query = "SELECT COUNT(*) AS count FROM Equipos WHERE IdEquipo = ?";
+                statement = connection.prepareStatement(query);
+                statement.setInt(1, idEquipo);
+                resultSet = statement.executeQuery();
+
+                if (resultSet.next()) {
+                    int count = resultSet.getInt("count");
+                    existe = count > 0;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Cerrar recursos (resultSet, statement, connection)
+        }
+
+        return existe;
+    }
+
 
 }

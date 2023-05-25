@@ -29,12 +29,20 @@ public class Reportes implements Serializable
     private int IdTipoError;
     private int IdEstatusReporte;
     private int IdEquipos;
-    
     private String NombreTipoReporte;
     private String NombreLaboratorio;
     private String NombreEquipo;
     private String NombreError;
     private String NombreUsuario;
+    private String NombreEstatus;
+
+    public String getNombreEstatus() {
+        return NombreEstatus;
+    }
+
+    public void setNombreEstatus(String NombreEstatus) {
+        this.NombreEstatus = NombreEstatus;
+    }
 
     // Métodos de acceso para los campos adicionales
     public String getNombreTipoReporte() {
