@@ -16,10 +16,6 @@ NombreTipoReporte varchar (20),
 FechaCreacion datetime
 );
 
-/*create table EquipoLaboratorio(
-IdEquipoLaboratorio int primary key,
-IdLaboratorio int
-);*/
 
 create table EstatusReporte(
 IdEstatusReporte int primary key not null auto_increment,
@@ -63,7 +59,6 @@ foreign key (IdTipoReporte) references TipoReporte (IdTipoReporte) on delete cas
 );
 
 
-
 create table Reportes(
 IdReporte int primary key not null auto_increment,
 IdTipoReporte int,
@@ -83,6 +78,9 @@ foreign key (IdTipoError) references TipoError (IdTipoError) on delete cascade o
 foreign key (IdEstatusReporte) references EstatusReporte (IdEstatusReporte) on delete cascade on update cascade,
 foreign key (IdEquipo) references Equipos (IdEquipo) on delete cascade on update cascade
 );
+
+
+
 
 
 
