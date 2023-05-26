@@ -92,7 +92,6 @@
                             // Puedes asignar un valor por defecto o mostrar un mensaje de error
                             equipo.setIdLaboratorio(0); // Por ejemplo, asignar un valor 0 como valor por defecto
                         }
-
                         String nombreEquipo = request.getParameter("nombreEquipo");
                         if (nombreEquipo != null && !nombreEquipo.isEmpty()) {
                             equipo.setNombreEquipo(nombreEquipo);

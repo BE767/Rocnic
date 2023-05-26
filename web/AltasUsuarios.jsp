@@ -74,7 +74,7 @@ Author : cesar
                 UsuariosService ususervice = new UsuariosService();
                 Usuarios usuario = new Usuarios();
                 usuario.setUsuario(request.getParameter("usuario"));
-                usuario.setContraseña(request.getParameter("contrasena"));
+                usuario.setContrasena(request.getParameter("contrasena"));
                 usuario.setNombre(request.getParameter("nombre"));
 
                 String perfilParam = request.getParameter("perfil");
@@ -88,7 +88,7 @@ Author : cesar
                 }
 
                 // Verificar si el usuario y contraseña ya existen
-                if (ususervice.existeUsuario(usuario.getUsuario(), usuario.getContraseña())) {
+                if (ususervice.existeUsuario(usuario.getUsuario(), usuario.getContrasena())) {
         %>
         <script>
             alert("El usuario y contraseña ya existen");
@@ -112,7 +112,6 @@ Author : cesar
                 }
             }
         %>
-
     </body>
 
 </html>
