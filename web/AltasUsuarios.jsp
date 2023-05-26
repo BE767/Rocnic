@@ -45,7 +45,6 @@ Author : cesar
                             <div class="form-floating">
                                 <input type="text" class="form-control"  id="nombre" name="nombre" >
                             </div>
-                            <br>
                             <label for="perfil">
                                 <span>Perfil:</span>
                             </label>
