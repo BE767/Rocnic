@@ -84,48 +84,61 @@ Author : cesar
         </div>
     </div>
     <%
-        String accion = request.getParameter("accion");
-        if ("enviar".equals(accion)) {
-            UsuariosService ususervice = new UsuariosService();
-            Usuarios usuario = new Usuarios();
-            usuario.setUsuario(request.getParameter("usuario"));
-            usuario.setContrasena(request.getParameter("contrasena"));
-            usuario.setNombre(request.getParameter("nombre"));
+    String accion = request.getParameter("accion");
+    if ("enviar".equals(accion)) {
+        UsuariosService ususervice = new UsuariosService();
+        Usuarios usuario = new Usuarios();
+        usuario.setUsuario(request.getParameter("usuario"));
+        usuario.setContrasena(request.getParameter("contrasena"));
+        usuario.setNombre(request.getParameter("nombre"));
 
-            String perfilParam = request.getParameter("perfil");
-            if (perfilParam != null && !perfilParam.isEmpty()) {
+        String perfilParam = request.getParameter("perfil");
+
+        if (perfilParam != null && !perfilParam.isEmpty()) {
+            // Verificar si el perfil existe
+            if (ususervice.existePerfil(Integer.parseInt(perfilParam))) {
                 usuario.setIdPerfil(Integer.parseInt(perfilParam));
-            } else {
-                // Manejar el caso cuando no se ha seleccionado ningún perfil
-                // Puedes asignar un valor por defecto o mostrar un mensaje de error
-                usuario.setIdPerfil(0); // Por ejemplo, asignar un valor 0 como valor por defecto
-            }
 
-            // Verificar si el usuario y contraseña ya existen
-            if (ususervice.existeUsuario(usuario.getUsuario(), usuario.getContrasena())) {
-    %>
-    <script>
-        alert("El usuario y contraseña ya existen");
-    </script>
-    <%
-    } else {
-        // Proceder con el alta del usuario si no existe
-        if (ususervice.addUsuarios(usuario)) {
-    %>
-    <script>
-        alert("Se ha dado de alta al Usuario");
-    </script>
-    <%
-    } else {
-    %>
-    <script>
-        alert("Ha ocurrido un error");
-    </script>
-    <%
+                // Verificar si el usuario y contraseña ya existen
+                if (ususervice.existeUsuario(usuario.getUsuario(), usuario.getContrasena())) {
+        %>
+        <script>
+            alert("El usuario y contraseña ya existen");
+        </script>
+        <%
+                } else {
+                    // Proceder con el alta del usuario si no existe
+                    if (ususervice.addUsuarios(usuario)) {
+        %>
+        <script>
+            alert("Se ha dado de alta al Usuario");
+        </script>
+        <%
+                    } else {
+        %>
+        <script>
+            alert("Ha ocurrido un error");
+        </script>
+        <%
+                    }
                 }
+            } else {
+        %>
+        <script>
+            alert("El perfil seleccionado no existe");
+        </script>
+        <%
             }
+        } else {
+        %>
+        <script>
+            alert("No se ha seleccionado ningún perfil");
+        </script>
+        <%
         }
-    %>
+    }
+%>
+
 </body>
 
 </html>

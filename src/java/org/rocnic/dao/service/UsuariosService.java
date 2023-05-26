@@ -382,6 +382,38 @@ public class UsuariosService extends Conexion<Usuarios>
     
     return null;
 }
+    
+    
+    
+    public boolean existePerfil(int idPerfil) {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet resultSet = null;
+    try {
+        connection = getConnection();
+        preparedStatement = connection.prepareStatement("SELECT COUNT* FROM perfiles WHERE IdPerfil = ?");
+        preparedStatement.setInt(1, idPerfil);
+        resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+            int count = resultSet.getInt(1);
+            return count > 0;
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    } 
+    return false;
+}
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 }
 
