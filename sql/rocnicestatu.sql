@@ -7,14 +7,17 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema mydb
 -- -----------------------------------------------------
+SHOW WARNINGS;
 -- -----------------------------------------------------
 -- Schema rocnicestatus
 -- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `rocnicestatus` ;
 
 -- -----------------------------------------------------
 -- Schema rocnicestatus
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `rocnicestatus` DEFAULT CHARACTER SET utf8 ;
+SHOW WARNINGS;
 USE `rocnicestatus` ;
 
 -- -----------------------------------------------------
@@ -22,13 +25,13 @@ USE `rocnicestatus` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `rocnicestatus`.`laboratorio` (
   `IdLaboratorio` INT NOT NULL AUTO_INCREMENT,
-  `NombreLaboratorio` VARCHAR(16) NULL DEFAULT NULL,
+  `NombreLaboratorio` VARCHAR(16) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NULL DEFAULT NULL,
   PRIMARY KEY (`IdLaboratorio`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 4
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+DEFAULT CHARACTER SET = utf8;
 
+SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `rocnicestatus`.`perifericos`
@@ -39,21 +42,21 @@ CREATE TABLE IF NOT EXISTS `rocnicestatus`.`perifericos` (
   PRIMARY KEY (`IdPeriferico`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 6
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+DEFAULT CHARACTER SET = utf8;
 
+SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `rocnicestatus`.`equipos`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `rocnicestatus`.`equipos` (
   `IdEquipo` INT NOT NULL AUTO_INCREMENT,
-  `NombreEquipo` VARCHAR(20) NULL DEFAULT NULL,
+  `NombreEquipo` VARCHAR(20) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NULL DEFAULT NULL,
   `IdLaboratorio` INT NULL DEFAULT NULL,
   `IdPeriferico` INT NULL DEFAULT NULL,
   PRIMARY KEY (`IdEquipo`),
-  INDEX `IdLaboratorio` (`IdLaboratorio` ASC) VISIBLE,
-  INDEX `IdPeriferico` (`IdPeriferico` ASC) VISIBLE,
+  INDEX `IdLaboratorio` (`IdLaboratorio` ASC),
+  INDEX `IdPeriferico` (`IdPeriferico` ASC),
   CONSTRAINT `equipos_ibfk_1`
     FOREIGN KEY (`IdLaboratorio`)
     REFERENCES `rocnicestatus`.`laboratorio` (`IdLaboratorio`)
@@ -65,9 +68,9 @@ CREATE TABLE IF NOT EXISTS `rocnicestatus`.`equipos` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+DEFAULT CHARACTER SET = utf8;
 
+SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `rocnicestatus`.`estatusreporte`
@@ -77,9 +80,9 @@ CREATE TABLE IF NOT EXISTS `rocnicestatus`.`estatusreporte` (
   `NombreEstatus` VARCHAR(20) NULL DEFAULT NULL,
   PRIMARY KEY (`IdEstatusReporte`))
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+DEFAULT CHARACTER SET = utf8;
 
+SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `rocnicestatus`.`perfiles`
@@ -90,9 +93,9 @@ CREATE TABLE IF NOT EXISTS `rocnicestatus`.`perfiles` (
   PRIMARY KEY (`IdPerfil`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 4
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+DEFAULT CHARACTER SET = utf8;
 
+SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `rocnicestatus`.`tiporeporte`
@@ -103,9 +106,9 @@ CREATE TABLE IF NOT EXISTS `rocnicestatus`.`tiporeporte` (
   `FechaCreacion` DATETIME NULL DEFAULT NULL,
   PRIMARY KEY (`IdTipoReporte`))
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+DEFAULT CHARACTER SET = utf8;
 
+SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `rocnicestatus`.`usuarios`
@@ -117,7 +120,7 @@ CREATE TABLE IF NOT EXISTS `rocnicestatus`.`usuarios` (
   `Contrasena` VARCHAR(20) NULL DEFAULT NULL,
   `Nombre` VARCHAR(20) NULL DEFAULT NULL,
   PRIMARY KEY (`IdUsuario`),
-  INDEX `IdPerfil` (`IdPerfil` ASC) VISIBLE,
+  INDEX `IdPerfil` (`IdPerfil` ASC),
   CONSTRAINT `usuarios_ibfk_1`
     FOREIGN KEY (`IdPerfil`)
     REFERENCES `rocnicestatus`.`perfiles` (`IdPerfil`)
@@ -125,9 +128,9 @@ CREATE TABLE IF NOT EXISTS `rocnicestatus`.`usuarios` (
     ON UPDATE CASCADE)
 ENGINE = InnoDB
 AUTO_INCREMENT = 2
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+DEFAULT CHARACTER SET = utf8;
 
+SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `rocnicestatus`.`tipoerror`
@@ -137,7 +140,7 @@ CREATE TABLE IF NOT EXISTS `rocnicestatus`.`tipoerror` (
   `NombreError` VARCHAR(50) NULL DEFAULT NULL,
   `IdTipoReporte` INT NULL DEFAULT NULL,
   PRIMARY KEY (`IdTipoError`),
-  INDEX `IdTipoReporte` (`IdTipoReporte` ASC) VISIBLE,
+  INDEX `IdTipoReporte` (`IdTipoReporte` ASC),
   CONSTRAINT `tipoerror_ibfk_1`
     FOREIGN KEY (`IdTipoReporte`)
     REFERENCES `rocnicestatus`.`tiporeporte` (`IdTipoReporte`)
@@ -145,9 +148,9 @@ CREATE TABLE IF NOT EXISTS `rocnicestatus`.`tipoerror` (
     ON UPDATE CASCADE)
 ENGINE = InnoDB
 AUTO_INCREMENT = 8
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+DEFAULT CHARACTER SET = utf8;
 
+SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `rocnicestatus`.`reportes`
@@ -165,12 +168,12 @@ CREATE TABLE IF NOT EXISTS `rocnicestatus`.`reportes` (
   `UsuarioActualizacion` DATETIME NULL DEFAULT NULL,
   `UsuarioCreacion` DATETIME NULL DEFAULT NULL,
   PRIMARY KEY (`IdReporte`),
-  INDEX `IdTipoReporte` (`IdTipoReporte` ASC) VISIBLE,
-  INDEX `IdLaboratorio` (`IdLaboratorio` ASC) VISIBLE,
-  INDEX `IdUsuario` (`IdUsuario` ASC) VISIBLE,
-  INDEX `IdTipoError` (`IdTipoError` ASC) VISIBLE,
-  INDEX `IdEstatusReporte` (`IdEstatusReporte` ASC) VISIBLE,
-  INDEX `IdEquipo` (`IdEquipo` ASC) VISIBLE,
+  INDEX `IdTipoReporte` (`IdTipoReporte` ASC),
+  INDEX `IdLaboratorio` (`IdLaboratorio` ASC),
+  INDEX `IdUsuario` (`IdUsuario` ASC),
+  INDEX `IdTipoError` (`IdTipoError` ASC),
+  INDEX `IdEstatusReporte` (`IdEstatusReporte` ASC),
+  INDEX `IdEquipo` (`IdEquipo` ASC),
   CONSTRAINT `reportes_ibfk_1`
     FOREIGN KEY (`IdTipoReporte`)
     REFERENCES `rocnicestatus`.`tiporeporte` (`IdTipoReporte`)
@@ -202,9 +205,9 @@ CREATE TABLE IF NOT EXISTS `rocnicestatus`.`reportes` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+DEFAULT CHARACTER SET = utf8;
 
+SHOW WARNINGS;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
