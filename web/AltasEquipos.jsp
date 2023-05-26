@@ -28,7 +28,7 @@
 
     </head>
 
-    <body style="background-color:#C0CAD2">
+    <body style="background-color:#F4F6F7">
         <div class="containery">
             <div class="rectanguloy">
                 <form>

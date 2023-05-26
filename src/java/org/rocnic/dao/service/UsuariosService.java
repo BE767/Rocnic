@@ -382,9 +382,7 @@ public class UsuariosService extends Conexion<Usuarios>
     
     return null;
 }
-    
-    
-    
+
     public boolean existePerfil(int idPerfil) {
     Connection connection = null;
     PreparedStatement preparedStatement = null;
@@ -403,15 +401,7 @@ public class UsuariosService extends Conexion<Usuarios>
     } 
     return false;
 }
-
-    
-    
-    
-    
-    
-    
-    
-    
+  
     
     
 

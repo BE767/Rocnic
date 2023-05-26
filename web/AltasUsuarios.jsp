@@ -28,7 +28,7 @@ Author : cesar
         crossorigin="anonymous"></script>
     </head>
 
-    <body style="background-color:#C0CAD2">
+    <body style="background-color:#F4F6F7">
         <div class="containery">
             <div class="rectanguloy">
 
@@ -83,21 +83,24 @@ Author : cesar
             </div>
         </div>
     </div>
-    <%
-    String accion = request.getParameter("accion");
-    if ("enviar".equals(accion)) {
-        UsuariosService ususervice = new UsuariosService();
-        Usuarios usuario = new Usuarios();
-        usuario.setUsuario(request.getParameter("usuario"));
-        usuario.setContrasena(request.getParameter("contrasena"));
-        usuario.setNombre(request.getParameter("nombre"));
+   <%
+            String accion = request.getParameter("accion");
+            if ("enviar".equals(accion)) {
+                UsuariosService ususervice = new UsuariosService();
+                Usuarios usuario = new Usuarios();
+                usuario.setUsuario(request.getParameter("usuario"));
+                usuario.setContrasena(request.getParameter("contrasena"));
+                usuario.setNombre(request.getParameter("nombre"));
 
-        String perfilParam = request.getParameter("perfil");
-
-        if (perfilParam != null && !perfilParam.isEmpty()) {
-            // Verificar si el perfil existe
-            if (ususervice.existePerfil(Integer.parseInt(perfilParam))) {
-                usuario.setIdPerfil(Integer.parseInt(perfilParam));
+                String perfilParam = request.getParameter("perfil");
+                
+                if (perfilParam != null && !perfilParam.isEmpty()) {
+                    usuario.setIdPerfil(Integer.parseInt(perfilParam));
+                } else {
+                    // Manejar el caso cuando no se ha seleccionado ningún perfil
+                    // Puedes asignar un valor por defecto o mostrar un mensaje de error
+                    usuario.setIdPerfil(0); // Por ejemplo, asignar un valor 0 como valor por defecto
+                }
 
                 // Verificar si el usuario y contraseña ya existen
                 if (ususervice.existeUsuario(usuario.getUsuario(), usuario.getContrasena())) {
@@ -106,15 +109,15 @@ Author : cesar
             alert("El usuario y contraseña ya existen");
         </script>
         <%
-                } else {
-                    // Proceder con el alta del usuario si no existe
-                    if (ususervice.addUsuarios(usuario)) {
+        } else {
+            // Proceder con el alta del usuario si no existe
+            if (ususervice.addUsuarios(usuario)) {
         %>
         <script>
             alert("Se ha dado de alta al Usuario");
         </script>
         <%
-                    } else {
+        } else {
         %>
         <script>
             alert("Ha ocurrido un error");
@@ -122,22 +125,8 @@ Author : cesar
         <%
                     }
                 }
-            } else {
-        %>
-        <script>
-            alert("El perfil seleccionado no existe");
-        </script>
-        <%
             }
-        } else {
         %>
-        <script>
-            alert("No se ha seleccionado ningún perfil");
-        </script>
-        <%
-        }
-    }
-%>
 
 </body>
 
