@@ -31,87 +31,101 @@ Author : cesar
     <body style="background-color:#C0CAD2">
         <div class="containery">
             <div class="rectanguloy">
+
                 <div class="encabezado">
                     <img src="imagenes/Usuarioa.png" class="logo">
                     <h1 class="titulo">ALTAS USUARIOS</h1>
                 </div>
                 <div class="rectangulo-dentro1">
-                    <form>
-                        <label for="nombre">
-                            <span>Nombre:</span>
-                            <input type="text" id="nombre" name="nombre">
-                        </label>
-
-                        <label for="perfil">
-                            <span>Perfil:</span>
-                            <select name="perfil" id="perfil">
-                                <option value="-1">Seleccione Perfil</option>
-                                <option value="1">Maestro</option>
-                                <option value="2">UDI</option>
-                                <option value="3">Alumno</option>
-                            </select>
-                        </label>
-
-
-                        <label for="usuario">
-                            <span>Usuario:</span>
-                            <input type="text" id="usuario" name="usuario">
-                        </label>
-
-                        <label for="contrasena">
-                            <span>Contraseña:</span>
-                            <input type="password" id="contrasena" name="contrasena">
-                        </label>
-
-                        <button type="submit" name="accion" id="accion" value="enviar">Enviar</button>
-                    </form>
+                    <div>
+                        <form>
+                            <label for="nombre">
+                                <span>Nombre:</span>
+                            </label>
+                            <div class="form-floating">
+                                <input type="text" class="form-control"  id="nombre" name="nombre" >
+                            </div>
+                            <br>
+                            <label for="perfil">
+                                <span>Perfil:</span>
+                            </label>
+                            <label>
+                                <div class="col-md3">
+                                    <div class="form-floating">
+                                        <select class="form-select"  id="perfil" name="perfil" aria-label="Floating label select example">
+                                            <option value="-1">Seleccione Perfil</option>
+                                            <option value="1">Maestro</option>
+                                            <option value="2">UDI</option>
+                                            <option value="3">Alumno</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </label>
+                            <div>
+                                <br>
+                                <label for="usuario">
+                                    <span>Usuario:</span>
+                                </label>
+                                <div class="form-floating">
+                                    <input type="text" class="form-control"  id="usuario" name="usuario" >
+                                </div>
+                                <br>
+                                <label for="contrasena">
+                                    <span>Contraseña:</span>
+                                </label>
+                                <div class="form-floating">
+                                    <input type="password" class="form-control"  id="contrasena" name="contrasena" placeholder="Password">
+                                </div>
+                                <button type="submit" name="accion" id="accion" value="enviar">Enviar</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-        <%
-            String accion = request.getParameter("accion");
-            if ("enviar".equals(accion)) {
-                UsuariosService ususervice = new UsuariosService();
-                Usuarios usuario = new Usuarios();
-                usuario.setUsuario(request.getParameter("usuario"));
-                usuario.setContrasena(request.getParameter("contrasena"));
-                usuario.setNombre(request.getParameter("nombre"));
+    </div>
+    <%
+        String accion = request.getParameter("accion");
+        if ("enviar".equals(accion)) {
+            UsuariosService ususervice = new UsuariosService();
+            Usuarios usuario = new Usuarios();
+            usuario.setUsuario(request.getParameter("usuario"));
+            usuario.setContrasena(request.getParameter("contrasena"));
+            usuario.setNombre(request.getParameter("nombre"));
 
-                String perfilParam = request.getParameter("perfil");
-                
-                if (perfilParam != null && !perfilParam.isEmpty()) {
-                    usuario.setIdPerfil(Integer.parseInt(perfilParam));
-                } else {
-                    // Manejar el caso cuando no se ha seleccionado ningún perfil
-                    // Puedes asignar un valor por defecto o mostrar un mensaje de error
-                    usuario.setIdPerfil(0); // Por ejemplo, asignar un valor 0 como valor por defecto
-                }
+            String perfilParam = request.getParameter("perfil");
+            if (perfilParam != null && !perfilParam.isEmpty()) {
+                usuario.setIdPerfil(Integer.parseInt(perfilParam));
+            } else {
+                // Manejar el caso cuando no se ha seleccionado ningún perfil
+                // Puedes asignar un valor por defecto o mostrar un mensaje de error
+                usuario.setIdPerfil(0); // Por ejemplo, asignar un valor 0 como valor por defecto
+            }
 
-                // Verificar si el usuario y contraseña ya existen
-                if (ususervice.existeUsuario(usuario.getUsuario(), usuario.getContrasena())) {
-        %>
-        <script>
-            alert("El usuario y contraseña ya existen");
-        </script>
-        <%
-        } else {
-            // Proceder con el alta del usuario si no existe
-            if (ususervice.addUsuarios(usuario)) {
-        %>
-        <script>
-            alert("Se ha dado de alta al Usuario");
-        </script>
-        <%
-        } else {
-        %>
-        <script>
-            alert("Ha ocurrido un error");
-        </script>
-        <%
-                    }
+            // Verificar si el usuario y contraseña ya existen
+            if (ususervice.existeUsuario(usuario.getUsuario(), usuario.getContrasena())) {
+    %>
+    <script>
+        alert("El usuario y contraseña ya existen");
+    </script>
+    <%
+    } else {
+        // Proceder con el alta del usuario si no existe
+        if (ususervice.addUsuarios(usuario)) {
+    %>
+    <script>
+        alert("Se ha dado de alta al Usuario");
+    </script>
+    <%
+    } else {
+    %>
+    <script>
+        alert("Ha ocurrido un error");
+    </script>
+    <%
                 }
             }
-        %>
-    </body>
+        }
+    %>
+</body>
 
 </html>

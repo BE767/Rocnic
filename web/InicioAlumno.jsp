@@ -41,7 +41,6 @@
                     <div class="campo-entrada">
                         <form action="ConsultaAlu.jsp" method="post">
                             <input type="text" id="folioInput" name="folioInput" placeholder="Escriba aquí">
-                            <button type="submit">Buscar</button>
                         </form>
                     </div>
                 </div>
@@ -49,6 +48,7 @@
                     <a href="ConsultaAlu.jsp"><button type="submit">Buscar</button></a>
                 </div>     
             </div>
+
             <div class="rectangulo-dentro">
                 <h1 class="titulo" style="text-align: center; color: white;">REPORTES</h1>
                 <div class="botones text-center">
@@ -63,10 +63,6 @@
                 </div>
             </div>
         </div>
-        
-   
-        
-        
     </body>
 
 </html>
