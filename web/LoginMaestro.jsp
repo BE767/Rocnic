@@ -19,7 +19,7 @@
                 crossorigin="anonymous"></script>
         </head>
 
-        <body style="background-color:#C0CAD2">
+        <body style="background-color:#F4F6F7">
             <div class="container1">
                 <div class="rectangulo3">
                     <div class="imagen-container">

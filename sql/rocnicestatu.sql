@@ -115,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `rocnicestatus`.`usuarios` (
   `IdUsuario` INT NOT NULL AUTO_INCREMENT,
   `IdPerfil` INT NULL DEFAULT NULL,
   `Usuario` VARCHAR(20) NULL DEFAULT NULL,
-  `Contraseña` VARCHAR(20) NULL DEFAULT NULL,
+  `Contrasena` VARCHAR(20) NULL DEFAULT NULL,
   `Nombre` VARCHAR(20) NULL DEFAULT NULL,
   PRIMARY KEY (`IdUsuario`),
   INDEX `IdPerfil` (`IdPerfil` ASC) VISIBLE,
@@ -204,6 +204,29 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
+insert into perfiles (NombrePerfil) values ('Maestro');
+insert into perfiles (NombrePerfil) values ('UDI');
+insert into perfiles (NombrePerfil) values ('AlUMNO');
+
+insert into laboratorio  (NombreLaboratorio)  values ('BD');
+insert into laboratorio  (NombreLaboratorio)  values ('NT');
+insert into laboratorio  (NombreLaboratorio)  values ('DS');
+
+insert into perifericos  (NombrePerifericos)  values ('CPU');
+insert into perifericos  (NombrePerifericos)  values ('Teclado');
+insert into perifericos  (NombrePerifericos)  values ('Raton');
+insert into perifericos  (NombrePerifericos)  values ('Pantalla');
+insert into perifericos  (NombrePerifericos)  values ('Otro');
+
+insert into tipoerror (NombreError) values ('TECLADO');
+insert into tipoerror (NombreError) values ('RATON');
+insert into tipoerror (NombreError) values ('CPU');
+insert into tipoerror (NombreError) values ('INTERNET');
+insert into tipoerror (NombreError) values ('SOFTWARE MAL INSTALDO');
+insert into tipoerror (NombreError) values ('Internet');
+insert into tipoerror (NombreError) values ('Falta_Actualizaciones');
+
+insert into usuarios (IdPerfil,Usuario,Contrasena,Nombre) values (2,'Main','123','Master');
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

@@ -46,8 +46,8 @@ Author : cesar
                             <span>Perfil:</span>
                             <select name="perfil" id="perfil">
                                 <option value="-1">Seleccione Perfil</option>
-                                <option value="1">UDI</option>
-                                <option value="2">Maestro</option>
+                                <option value="1">Maestro</option>
+                                <option value="2">UDI</option>
                                 <option value="3">Alumno</option>
                             </select>
                         </label>

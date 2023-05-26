@@ -17,7 +17,7 @@ public class Usuarios implements Serializable {
     }
 
     private String Usuario;
-    private String Contraseña;
+    private String Contrasena;
     private String Nombre;
     private String Boleta;
     private int IdUsuario;
@@ -47,12 +47,12 @@ public class Usuarios implements Serializable {
         this.Usuario = Usuario;
     }
 
-    public String getContraseña() {
-        return Contraseña;
+    public String getContrasena() {
+        return Contrasena;
     }
 
-    public void setContraseña(String Contraseña) {
-        this.Contraseña = Contraseña;
+    public void setContrasena(String Contrasena) {
+        this.Contrasena = Contrasena;
     }
 
     public String getNombre() {

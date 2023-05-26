@@ -34,10 +34,10 @@
 
                         <h1 class="titulo" style="text-align: center; color: white;">REPORTES</h1>
                         <div class="botones-container" style="text-align: center;">
-                            <a href="ReporteSofrtMae.jsp">
+                            <a href="ReporteSoft.jsp">
                                 <button class="boton">SOFTWARE</button>
                             </a>
-                            <a href="ReporteHardMae.jsp">
+                            <a href="ReporteHardware.jsp">
                                 <button class="boton">HARDWARE</button>
                             </a>
                         </div>
@@ -66,10 +66,6 @@
                             
                             <button class="boton" type="submit">BUSCAR</button>
                         </div>
-                        
-                        
-                        
-                            
                     </div>
                 </div>
         </body>

@@ -47,7 +47,7 @@ public class UsuariosService extends Conexion<Usuarios>
                 usuarios.setIdUsuario(resultSet.getInt(1));
                 usuarios.setIdPerfil(resultSet.getInt(2));
                 usuarios.setUsuario(resultSet.getString(3));
-                usuarios.setContraseña(resultSet.getString(4));
+                usuarios.setContrasena(resultSet.getString(4));
                 usuarios.setNombre(resultSet.getString(5));
                 UsuariosList.add(usuarios);
             }
@@ -63,7 +63,7 @@ public class UsuariosService extends Conexion<Usuarios>
     public boolean addUsuarios(Usuarios usuario) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "INSERT INTO usuarios (IdPerfil,Usuario,Contraseña,Nombre) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO usuarios (IdPerfil,Usuario,Contrasena,Nombre) VALUES(?,?,?,?)";
         int row = 0;
         try {
             
@@ -78,7 +78,7 @@ public class UsuariosService extends Conexion<Usuarios>
             }
             preparedStatement.setInt(1, usuario.getIdPerfil());
             preparedStatement.setString(2, usuario.getUsuario());
-            preparedStatement.setString(3, usuario.getContraseña());
+            preparedStatement.setString(3, usuario.getContrasena());
             preparedStatement.setString(4, usuario.getNombre());
             row = preparedStatement.executeUpdate();
             closeConnection(connection);
@@ -106,7 +106,7 @@ public class UsuariosService extends Conexion<Usuarios>
             }
             preparedStatement.setInt(1, usuario.getIdPerfil());
             preparedStatement.setString(2, usuario.getUsuario());
-            preparedStatement.setString(3, usuario.getContraseña());
+            preparedStatement.setString(3, usuario.getContrasena());
             preparedStatement.setString(4, usuario.getNombre());
             preparedStatement.setInt(5, usuario.getIdUsuario());
             row = preparedStatement.executeUpdate();
@@ -143,7 +143,7 @@ public class UsuariosService extends Conexion<Usuarios>
                 aux.setIdUsuario(resultSet.getInt("IdUsuario"));
                 aux.setIdPerfil(resultSet.getInt("IdPerfil"));
                 aux.setUsuario(resultSet.getString("Usuario"));
-                aux.setContraseña(resultSet.getString("Contraseña"));
+                aux.setContrasena(resultSet.getString("Contraseña"));
                 aux.setNombre(resultSet.getString("Nombre"));
                 aux.setBoleta(resultSet.getString("Boleta"));
             }
@@ -347,7 +347,47 @@ public class UsuariosService extends Conexion<Usuarios>
         }
         return false;
     }
+     
+    public Usuarios getUsuariosByLogin(String usuario, String contrasena) {
+    Usuarios aux = null;
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet resultSet = null;
+    try {
+        connection = getConnection();
+        if (connection == null) {
+            return null;
+        }
+        
+        String query = "SELECT * FROM usuarios WHERE Usuario = ? AND Contrasena = ?";
+        preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, usuario);
+        preparedStatement.setString(2, contrasena);
+        
+        resultSet = preparedStatement.executeQuery();
+        
+        if (resultSet.next()) {
+            aux = new Usuarios();
+            aux.setUsuario(resultSet.getString("Usuario"));
+            aux.setContrasena(resultSet.getString("Contrasena"));
+            aux.setIdPerfil(resultSet.getInt("IdPerfil"));
+        }
+        resultSet.close();
+        closeConnection(connection);
+        
+        return aux;
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+    
+    return null;
 }
+
+}
+
+     
+
+
 
     
     
