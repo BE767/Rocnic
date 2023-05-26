@@ -69,14 +69,15 @@ Author : cesar
                                 <div class="form-floating">
                                     <input type="text" class="form-control"  id="usuario" name="usuario" >
                                 </div>
-                                <br>
+                                    <button type="submit" name="accion" id="accion" value="enviar">Enviar</button>
                                 <label for="contrasena">
                                     <span>Contraseña:</span>
                                 </label>
+                            
                                 <div class="form-floating">
                                     <input type="password" class="form-control"  id="contrasena" name="contrasena" placeholder="Password">
                                 </div>
-                                <button type="submit" name="accion" id="accion" value="enviar">Enviar</button>
+                                
                         </form>
                     </div>
                 </div>
