@@ -62,7 +62,6 @@
                 </div>
                 <div class="rectangulo-dentro3">
 
-
                     <h1 class="titulo" style="text-align: center; color: white;">CAMBIOS</h1>
                     <div class="botones-container" style="text-align: center;">
                         <a href="CambiosUsuarios.jsp" >
@@ -72,11 +71,8 @@
                             <button class="boton">EQUIPOS</button>
                             </a>
                     </div>
-
                 </div>
                 <div class="rectangulo-dentro4">
-
-
                     <h1 class="titulo" style="text-align: center; color: white;">CONSULTAS</h1>
                     <div class="botones-container" style="text-align: center;">
                         <a href="ConsultasUsuario.jsp" >
@@ -89,7 +85,6 @@
                                 <button class="boton">HISTORIAL</button>
                                 </a>
                     </div>
-
                 </div>
             </div>
         </body>

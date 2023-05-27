@@ -58,20 +58,12 @@ Author : cesar
                                 <div class="col-md3">
                                     <div class="form-floating">
 
-                                        <select id="perfilescombos" name="perfilescombos">
+                                        <select id="perfilescombos" name="perfilescombos"  class="form-select">
                                             <option value="">Seleccionar Perfil</option>
                                             <% for (Perfiles perf : perfiles) {%>
                                             <option value="<%= perf.getIdPerfil()%>"><%= perf.getNombrePerfil()%></option>
                                             <% } %>
                                         </select>
-                                        <script>
-                                            document.getElementById("perfilescombos").addEventListener("change", function () {
-                                                var selectedId = this.value;
-                                                if (selectedId) {
-                                                    alert("ID de perfil seleccionado: " + selectedId);
-                                                }
-                                            });
-                                        </script>
                                     </div>
                                 </div>
                             </label>
@@ -143,5 +135,4 @@ Author : cesar
         }
     %>
 </body>
-
 </html>
