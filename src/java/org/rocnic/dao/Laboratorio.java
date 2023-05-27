@@ -14,19 +14,10 @@ public class Laboratorio  implements Serializable
 {
     private int IdLaboratorio;
     private String NombreLaboratorio;
-    private int NumeroDeEquipo;
-    private int IdPeriferico;
     
     public Laboratorio() {
     }
 
-    public int getIdPeriferico() {
-        return IdPeriferico;
-    }
-
-    public void setIdPeriferico(int IdPeriferico) {
-        this.IdPeriferico = IdPeriferico;
-    }
 
     public int getIdLaboratorio() {
         return IdLaboratorio;
@@ -43,17 +34,5 @@ public class Laboratorio  implements Serializable
     public void setNombreLaboratorio(String NombreLaboratorio) {
         this.NombreLaboratorio = NombreLaboratorio;
     }
-
-    public int getNumeroDeEquipo() {
-        return NumeroDeEquipo;
-    }
-
-    public void setNumeroDeEquipo(int NumeroDeEquipo) {
-        this.NumeroDeEquipo = NumeroDeEquipo;
-    }
-
- 
-    
-    
-    
+  
 }
