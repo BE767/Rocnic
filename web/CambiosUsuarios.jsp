@@ -48,7 +48,6 @@
                                 <input type="text" id="idu" name="idu">
                             </label>
                         </div>
-
                         <div>
                             <label for="nombre">
                                 <span>Nombre:</span>

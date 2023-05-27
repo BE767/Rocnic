@@ -3,8 +3,11 @@ AltasUsuarios Created on : 19 may. 2023, 22:35:38
 Author : cesar 
 --%>
 
+<%@page import="java.util.List"%>
 <%@page import="org.rocnic.dao.service.UsuariosService"%>
+<%@page import="org.rocnic.dao.service.PerfilesService"%>
 <%@page import="org.rocnic.dao.Usuarios"%>
+<%@page import="org.rocnic.dao.Perfiles"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 
 <!DOCTYPE html>
@@ -27,6 +30,10 @@ Author : cesar
         crossorigin="anonymous"></script>
     </head>
     <body style="background-color:#F4F6F7">
+        <%
+            PerfilesService perfilservice = new PerfilesService();
+            List<Perfiles> perfiles = perfilservice.getPerfilesList();
+        %>
         <div class="containery">
             <div class="rectanguloy">
 
@@ -46,18 +53,29 @@ Author : cesar
                             <label for="perfil">
                                 <span>Perfil:</span>
                             </label>
+
                             <label>
                                 <div class="col-md3">
                                     <div class="form-floating">
-                                        <select class="form-select"  id="perfil" name="perfil" aria-label="Floating label select example">
-                                            <option value="-1">Seleccione Perfil</option>
-                                            <option value="1">Maestro</option>
-                                            <option value="2">UDI</option>
-                                            <option value="3">Alumno</option>
+
+                                        <select id="perfilescombos" name="perfilescombos">
+                                            <option value="">Seleccionar Perfil</option>
+                                            <% for (Perfiles perf : perfiles) {%>
+                                            <option value="<%= perf.getIdPerfil()%>"><%= perf.getNombrePerfil()%></option>
+                                            <% } %>
                                         </select>
+                                        <script>
+                                            document.getElementById("perfilescombos").addEventListener("change", function () {
+                                                var selectedId = this.value;
+                                                if (selectedId) {
+                                                    alert("ID de perfil seleccionado: " + selectedId);
+                                                }
+                                            });
+                                        </script>
                                     </div>
                                 </div>
                             </label>
+
                             <div>
                                 <br>
                                 <label for="usuario">
@@ -66,11 +84,11 @@ Author : cesar
                                 <div class="form-floating">
                                     <input type="text" class="form-control"  id="usuario" name="usuario" >
                                 </div>
-                                    <button type="submit" name="accion" id="accion" value="enviar">Enviar</button>
+                                <button type="submit" name="accion" id="accion" value="enviar">Enviar</button>
                                 <label for="contrasena">
                                     <span>Contraseña:</span>
                                 </label>
-                            
+
                                 <div class="form-floating">
                                     <input type="password" class="form-control"  id="contrasena" name="contrasena" placeholder="Password">
                                 </div>     
@@ -80,50 +98,50 @@ Author : cesar
             </div>
         </div>
     </div>
-   <%
-            String accion = request.getParameter("accion");
-            if ("enviar".equals(accion)) {
-                UsuariosService ususervice = new UsuariosService();
-                Usuarios usuario = new Usuarios();
-                usuario.setUsuario(request.getParameter("usuario"));
-                usuario.setContrasena(request.getParameter("contrasena"));
-                usuario.setNombre(request.getParameter("nombre"));
+    <%
+        String accion = request.getParameter("accion");
+        if ("enviar".equals(accion)) {
+            UsuariosService ususervice = new UsuariosService();
+            Usuarios usuario = new Usuarios();
+            usuario.setUsuario(request.getParameter("usuario"));
+            usuario.setContrasena(request.getParameter("contrasena"));
+            usuario.setNombre(request.getParameter("nombre"));
 
-                String perfilParam = request.getParameter("perfil");
-                
-                if (perfilParam != null && !perfilParam.isEmpty()) {
-                    usuario.setIdPerfil(Integer.parseInt(perfilParam));
-                } else {
-                    // Manejar el caso cuando no se ha seleccionado ningún perfil
-                    // Puedes asignar un valor por defecto o mostrar un mensaje de error
-                    usuario.setIdPerfil(0); // Por ejemplo, asignar un valor 0 como valor por defecto
-                }
+            String perfilParam = request.getParameter("perfilescombos");
 
-                // Verificar si el usuario y contraseña ya existen
-                if (ususervice.existeUsuario(usuario.getUsuario(), usuario.getContrasena())) {
-        %>
-        <script>
-            alert("El usuario y contraseña ya existen");
-        </script>
-        <%
-        } else {
-            // Proceder con el alta del usuario si no existe
-            if (ususervice.addUsuarios(usuario)) {
-        %>
-        <script>
-            alert("Se ha dado de alta al Usuario");
-        </script>
-        <%
-        } else {
-        %>
-        <script>
-            alert("Ha ocurrido un error");
-        </script>
-        <%
-                    }
+            if (perfilParam != null && !perfilParam.isEmpty()) {
+                usuario.setIdPerfil(Integer.parseInt(perfilParam));
+            } else {
+                // Manejar el caso cuando no se ha seleccionado ningún perfil
+                // Puedes asignar un valor por defecto o mostrar un mensaje de error
+                usuario.setIdPerfil(0); // Por ejemplo, asignar un valor 0 como valor por defecto
+            }
+
+            // Verificar si el usuario y contraseña ya existen
+            if (ususervice.existeUsuario(usuario.getUsuario(), usuario.getContrasena())) {
+    %>
+    <script>
+        alert("El usuario y contraseña ya existen");
+    </script>
+    <%
+    } else {
+        // Proceder con el alta del usuario si no existe
+        if (ususervice.addUsuarios(usuario)) {
+    %>
+    <script>
+        alert("Se ha dado de alta al Usuario");
+    </script>
+    <%
+    } else {
+    %>
+    <script>
+        alert("Ha ocurrido un error");
+    </script>
+    <%
                 }
             }
-        %>
+        }
+    %>
 </body>
 
 </html>

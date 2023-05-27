@@ -79,7 +79,7 @@
                         <div>
                             <label for="contrasena">
                                 <span>Contraseña:</span>
-                                <input type="text" id="contrasena" name="contrasena" value="<%= (usuario != null) ? usuario.getContraseña() : ""%>" readonly>
+                                <input type="text" id="contrasena" name="contrasena" value="<%= (usuario != null) ? usuario.getContrasena() : ""%>" readonly>
                             </label>
                         </div>
                         <button type="submit" name="accion" value="traer">Traer</button>
