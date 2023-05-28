@@ -40,30 +40,20 @@
                         <h1 class="titulo">Altas Equipos</h1>
                     </div>
                     <div style="margin-top: 20px; margin-left: 50px;">
-
-
                         <label for="numero">#EQUIPO</label>
-                        <input type="number" id="nombreEquipo" name="nombreEquipo" 
+                             <input type="number" id="nombreEquipo" name="nombreEquipo" 
                                style="margin-left: 20px; width: 30px;">
                         <label for="laboratorio">
                             <%
                                 LaboratorioService laboratorioService = new LaboratorioService();
                                 List<Laboratorio> laboratorios = laboratorioService.getLaboratorioList();
                             %>
-                            <select id="idLaboratorio" name="idLaboratorio">
+                            <select id="idLaboratorio" name="idLaboratorio" class="form-select" >
                                 <option value="">Seleccionar laboratorio</option>
                                 <% for (Laboratorio laboratorio : laboratorios) {%>
                                 <option value="<%= laboratorio.getIdLaboratorio()%>"><%= laboratorio.getNombreLaboratorio()%></option>
                                 <% } %>
                             </select>
-                            <script>
-                                document.getElementById("laboratorioSelect").addEventListener("change", function () {
-                                    var selectedId = this.value;
-                                    if (selectedId) {
-                                        alert("ID de laboratorio seleccionado: " + selectedId);
-                                    }
-                                });
-                            </script>
                         </label>
                         <span style="margin-left: 50px;">Fecha</span>
                         <input type="text" id="Fecha" name="Fecha" value=""

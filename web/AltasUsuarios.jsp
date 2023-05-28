@@ -56,7 +56,6 @@ Author : cesar
                             <label>
                                 <div class="col-md3">
                                     <div class="form-floating">
-
                                         <select id="perfilescombos" name="perfilescombos"  class="form-select">
                                             <option value="">Seleccionar Perfil</option>
                                             <% for (Perfiles perf : perfiles) {%>
