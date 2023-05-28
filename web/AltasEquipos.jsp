@@ -3,8 +3,11 @@
     Created on : 19 may. 2023, 22:37:04
     Author     : cesar
 --%>
+<%@page import="java.util.List"%>
+<%@page import="org.rocnic.dao.Laboratorio"%>
 <%@page import="org.rocnic.dao.Equipos"%>
 <%@page import="org.rocnic.dao.service.EquipoService"%>
+<%@page import="org.rocnic.dao.service.LaboratorioService"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -28,27 +31,39 @@
 
     </head>
 
-    <body style="background-color:#F4F6F7">
+    <body style="background-color:#D5D5D5">
         <div class="containery">
             <div class="rectanguloy">
                 <form>
                     <div class="encabezado">
+                        <img src="imagenes/Usuarioa.png" class="logo">
                         <h1 class="titulo">Altas Equipos</h1>
                     </div>
                     <div style="margin-top: 20px; margin-left: 50px;">
 
 
                         <label for="numero">#EQUIPO</label>
-                        <input type="text" id="nombreEquipo" name="nombreEquipo" 
+                        <input type="number" id="nombreEquipo" name="nombreEquipo" 
                                style="margin-left: 20px; width: 30px;">
                         <label for="laboratorio">
-                            <span>Perfil:</span>
-                            <select name="idLaboratorio" id="idLaboratorio">
-                                <option value="-1">Seleccione Laboratorio</option>
-                                <option value="1">Base de Datos</option>
-                                <option value="2">Nuevas Tecnologias</option>
-                                <option value="3">Desarrollo Web</option>
+                            <%
+                                LaboratorioService laboratorioService = new LaboratorioService();
+                                List<Laboratorio> laboratorios = laboratorioService.getLaboratorioList();
+                            %>
+                            <select id="idLaboratorio" name="idLaboratorio">
+                                <option value="">Seleccionar laboratorio</option>
+                                <% for (Laboratorio laboratorio : laboratorios) {%>
+                                <option value="<%= laboratorio.getIdLaboratorio()%>"><%= laboratorio.getNombreLaboratorio()%></option>
+                                <% } %>
                             </select>
+                            <script>
+                                document.getElementById("laboratorioSelect").addEventListener("change", function () {
+                                    var selectedId = this.value;
+                                    if (selectedId) {
+                                        alert("ID de laboratorio seleccionado: " + selectedId);
+                                    }
+                                });
+                            </script>
                         </label>
                         <span style="margin-left: 50px;">Fecha</span>
                         <input type="text" id="Fecha" name="Fecha" value=""

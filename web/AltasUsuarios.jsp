@@ -12,7 +12,6 @@ Author : cesar
 
 <!DOCTYPE html>
 <html>
-
     <head>
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
@@ -29,7 +28,7 @@ Author : cesar
                 integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
     </head>
-    <body style="background-color:#F4F6F7">
+    <body style="background-color:#D5D5D5">
         <%
             PerfilesService perfilservice = new PerfilesService();
             List<Perfiles> perfiles = perfilservice.getPerfilesList();
@@ -67,7 +66,6 @@ Author : cesar
                                     </div>
                                 </div>
                             </label>
-
                             <div>
                                 <br>
                                 <label for="usuario">
@@ -110,7 +108,7 @@ Author : cesar
             }
 
             // Verificar si el usuario y contraseña ya existen
-            if (ususervice.existeUsuario(usuario.getUsuario(), usuario.getContrasena())) {
+            if (ususervice.existeUsuario(usuario.getUsuario(),usuario.getContrasena())) {
     %>
     <script>
         alert("El usuario y contraseña ya existen");
