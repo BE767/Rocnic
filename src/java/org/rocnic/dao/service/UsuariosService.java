@@ -18,9 +18,8 @@ import org.rocnic.dao.Usuarios;
  *
  * @author Evelyn
  */
-public class UsuariosService extends Conexion<Usuarios>
+public class UsuariosService extends Conexion<Usuarios> {
 
-{
     public List<Usuarios> getUsuarioList() {
         List<Usuarios> UsuariosList = null;
         Connection connection = null;
@@ -66,9 +65,9 @@ public class UsuariosService extends Conexion<Usuarios>
         String sql = "INSERT INTO usuarios (IdPerfil,Usuario,Contrasena,Nombre) VALUES(?,?,?,?)";
         int row = 0;
         try {
-            
+
             connection = getConnection();
-            
+
             if (connection == null) {
                 return false;
             }
@@ -90,7 +89,7 @@ public class UsuariosService extends Conexion<Usuarios>
         return row < 0;
     }
 
-    public boolean updateUsuarios(Usuarios usuario) {
+    public boolean updateUsuariosporID(Usuarios usuario) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         String sql = "UPDATE usuarios SET IdPerfil=?, Usuario=?, Contraseña=?, Nombre=?  WHERE IdUsuario=?";
@@ -253,21 +252,20 @@ public class UsuariosService extends Conexion<Usuarios>
             while (resultSet.next()) {
                 int idPerfil = resultSet.getInt("IdPerfil");
                 String nombrePerfil = resultSet.getString("NombrePerfil");
-                
+
                 Perfiles perfil = new Perfiles();
                 perfil.setIdPerfil(idPerfil);
                 perfil.setNombrePerfil(nombrePerfil);
-                
+
                 perfiles.add(perfil);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
-        } 
+        }
 
         return perfiles;
     }
-    
-    
+
     public List<Usuarios> obtenerUsuariosPorPerfil(int idPerfil) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -285,22 +283,20 @@ public class UsuariosService extends Conexion<Usuarios>
             while (resultSet.next()) {
                 int idUsuario = resultSet.getInt("IdUsuario");
                 String boleta = resultSet.getString("Boleta");
-                
+
                 Usuarios usuario = new Usuarios();
                 usuario.setIdUsuario(idUsuario);
                 usuario.setBoleta(boleta);
-                
+
                 usuarios.add(usuario);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
-        } 
+        }
         return usuarios;
     }
 
-    
     // ...
-
     public boolean existeUsuario(String usuario, String contraseña) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -321,11 +317,11 @@ public class UsuariosService extends Conexion<Usuarios>
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
-        } 
+        }
         return false;
     }
 
-     public boolean existeUsuario(int idUsuario) {
+    public boolean existeUsuario(int idUsuario) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -347,72 +343,250 @@ public class UsuariosService extends Conexion<Usuarios>
         }
         return false;
     }
-     
+
     public Usuarios getUsuariosByLogin(String usuario, String contrasena) {
-    Usuarios aux = null;
-    Connection connection = null;
-    PreparedStatement preparedStatement = null;
-    ResultSet resultSet = null;
-    try {
-        connection = getConnection();
-        if (connection == null) {
-            return null;
+        Usuarios aux = null;
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = getConnection();
+            if (connection == null) {
+                return null;
+            }
+
+            String query = "SELECT * FROM usuarios WHERE Usuario = ? AND Contrasena = ?";
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, usuario);
+            preparedStatement.setString(2, contrasena);
+
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                aux = new Usuarios();
+                aux.setUsuario(resultSet.getString("Usuario"));
+                aux.setContrasena(resultSet.getString("Contrasena"));
+                aux.setIdPerfil(resultSet.getInt("IdPerfil"));
+            }
+            resultSet.close();
+            closeConnection(connection);
+
+            return aux;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
-        
-        String query = "SELECT * FROM usuarios WHERE Usuario = ? AND Contrasena = ?";
-        preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setString(1, usuario);
-        preparedStatement.setString(2, contrasena);
-        
-        resultSet = preparedStatement.executeQuery();
-        
-        if (resultSet.next()) {
-            aux = new Usuarios();
-            aux.setUsuario(resultSet.getString("Usuario"));
-            aux.setContrasena(resultSet.getString("Contrasena"));
-            aux.setIdPerfil(resultSet.getInt("IdPerfil"));
-        }
-        resultSet.close();
-        closeConnection(connection);
-        
-        return aux;
-    } catch (SQLException ex) {
-        ex.printStackTrace();
+
+        return null;
     }
-    
-    return null;
-}
 
     public boolean existePerfil(int idPerfil) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement("SELECT COUNT* FROM perfiles WHERE IdPerfil = ?");
+            preparedStatement.setInt(1, idPerfil);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                int count = resultSet.getInt(1);
+                return count > 0;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    public Usuarios getUsuarioPorNombre(String nombreUsuario) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Usuarios usuario = null;
+
+        try {
+            conn = getConnection();
+
+            String query = "SELECT * FROM usuarios WHERE Usuario = ?";
+            stmt = conn.prepareStatement(query);
+            stmt.setString(1, nombreUsuario);
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                usuario = new Usuarios();
+                usuario.setIdUsuario(rs.getInt("idUsuario"));
+                usuario.setUsuario(rs.getString("usuario"));
+                usuario.setContrasena(rs.getString("contrasena"));
+                usuario.setNombre(rs.getString("nombre"));
+                usuario.setIdPerfil(rs.getInt("idPerfil"));
+                // Asignar otros atributos según corresponda
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return usuario;
+    }
+
+    public boolean updateUsuarios(Usuarios usuario) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        String sql = "UPDATE usuarios SET IdPerfil=?, Usuario=?, Contrasena=?, Nombre=?  WHERE Usuario=?";
+        int row = 0;
+        try {
+            connection = getConnection();
+            if (connection == null) {
+                return false;
+            }
+            preparedStatement = connection.prepareStatement(sql);
+            if (preparedStatement == null) {
+                return false;
+            }
+            preparedStatement.setInt(1, usuario.getIdPerfil());
+            preparedStatement.setString(2, usuario.getUsuario());
+            preparedStatement.setString(3, usuario.getContrasena());
+            preparedStatement.setString(4, usuario.getNombre());
+            preparedStatement.setString(5, usuario.getUsuario()); // Utilizar el nombre de usuario para la cláusula WHERE
+            row = preparedStatement.executeUpdate();
+            closeConnection(connection);
+            return row == 1;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    public String getNombrePerfil(Usuarios usuario) {
+        String nombrePerfil = "";
+
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = getConnection();
+            String sql = "SELECT NombrePerfil FROM perfiles WHERE IdPerfil = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, usuario.getIdPerfil());
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                nombrePerfil = resultSet.getString("NombrePerfil");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return nombrePerfil;
+    }
+
+    public int getIdUsuarioPorNombre(String nombreUsuario) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        int idUsuario = -1;
+
+        try {
+            connection = getConnection();
+            String query = "SELECT IdUsuario FROM usuarios WHERE Usuario = ?";
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, nombreUsuario);
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                idUsuario = resultSet.getInt("IdUsuario");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return idUsuario;
+    }
+
+    public Usuarios getUsuarioPorId(int IdUsuario) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        Usuarios usuario = null;
+
+        try {
+            connection = getConnection();
+            String query = "SELECT * FROM usuarios WHERE IdUsuario = ?";
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, IdUsuario);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                usuario = new Usuarios();
+                usuario.setIdUsuario(resultSet.getInt("IdUsuario"));
+                usuario.setUsuario(resultSet.getString("Usuario"));
+                usuario.setContrasena(resultSet.getString("Contrasena"));
+                usuario.setNombre(resultSet.getString("Nombre"));
+                usuario.setBoleta(resultSet.getString("Boleta"));
+                usuario.setIdPerfil(resultSet.getInt("IdPerfil"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return usuario;
+    }
+
+   
+    public boolean deleteUsuarioPorNombre(String nombreUsuario) {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    String sql = "DELETE FROM usuarios WHERE usuario = ?";
+    int rowsDeleted = 0;
+    
+    try {
+        connection = getConnection(); // Obtener la conexión de la clase Conexion
+        preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, nombreUsuario);
+        rowsDeleted = preparedStatement.executeUpdate();
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    } 
+    return rowsDeleted > 0;
+
+}
+    
+    
+    public boolean existeUsuarioPorNombre(String nombreUsuario) {
     Connection connection = null;
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
+    String sql = "SELECT * FROM usuarios WHERE Usuario = ?";
     try {
         connection = getConnection();
-        preparedStatement = connection.prepareStatement("SELECT COUNT* FROM perfiles WHERE IdPerfil = ?");
-        preparedStatement.setInt(1, idPerfil);
+        preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, nombreUsuario);
         resultSet = preparedStatement.executeQuery();
-        if (resultSet.next()) {
-            int count = resultSet.getInt(1);
-            return count > 0;
-        }
+        return resultSet.next();
     } catch (SQLException ex) {
         ex.printStackTrace();
     } 
     return false;
 }
-  
     
     
-
+    public int obtenerIdUsuarioPorNombre(String nombreUsuario) {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet resultSet = null;
+    String sql = "SELECT idUsuario FROM usuarios WHERE usuario = ?";
+    try {
+        connection =getConnection();
+        preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, nombreUsuario);
+        resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+            return resultSet.getInt("idUsuario");
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+    return 0;  // Retorna 0 si no se encuentra el usuario
 }
 
-     
-
-
-
+ 
     
-    
-    
-
-
+}

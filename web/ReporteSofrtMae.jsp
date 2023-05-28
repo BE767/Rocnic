@@ -1,5 +1,12 @@
 <%-- Document : ReporteSoft Created on : 15 may 2023, 21:33:02 Author : PC --%>
 
+<%@page import="org.rocnic.dao.service.UsuariosService"%>
+<%@page import="org.rocnic.dao.service.EquipoService"%>
+<%@page import="org.rocnic.dao.TipoError"%>
+<%@page import="org.rocnic.dao.service.TipoErrorService"%>
+<%@page import="org.rocnic.dao.Laboratorio"%>
+<%@page import="java.util.List"%>
+<%@page import="org.rocnic.dao.service.LaboratorioService"%>
 <%@page import="org.rocnic.dao.Reportes"%>
 <%@page import="org.rocnic.dao.service.ReporteServices"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
@@ -34,10 +41,22 @@
                     <div style="margin-top: 20px; margin-left: 50px;">
                         <label for="numero">#EQUIPO</label>
                         <input type="text" id="EQUIPO" name="EQUIPO" value="" style="margin-left: 20px; width: 30px;">
+
                         <span style="margin-left: 60px;">Laboratorio</span>
-                        <input type="text" id="Laboratorio" name="Laboratorio" value="" style="display: inline-block; width: 110px; margin-left: 15px;">
+                        <label for="laboratorio">
+                            <%
+                                LaboratorioService laboratorioService = new LaboratorioService();
+                                List<Laboratorio> laboratorios = laboratorioService.getLaboratorioList();
+                            %>
+                            <select id="idLaboratorio" name="idLaboratorio" class="form-select" >
+                                <option value="">Seleccionar laboratorio</option>
+                                <% for (Laboratorio laboratorio : laboratorios) {%>
+                                <option value="<%= laboratorio.getIdLaboratorio()%>"><%= laboratorio.getNombreLaboratorio()%></option>
+                                <% } %>
+                            </select>
+                        </label>
                         <span style="margin-left: 130px;">USUARIO</span>
-                        <input type="text" id="Boleta" name="Boleta" value="" style="display: inline-block; width: 160px; margin-left: 15px;">
+                        <input type="text" id="usuario" name="usuario" value="" style="display: inline-block; width: 160px; margin-left: 15px;">
                         <span style="margin-left: 50px;">Fecha</span>
                         <input type="text" id="Fecha" name="Fecha" value="" style="display: inline-block; width: 110px; margin-left: 15px;" readonly="true">
                         <div>
@@ -46,12 +65,15 @@
                                     <div style="margin-top: 40px;">SELECCION</div>
                                     <div style="display: flex; margin-top: 20px;">
                                         <div class="campo">
-                                            <span>Errores</span>
-                                            <select name="idError" id="idError">
-                                                <option value="-1">Seleccione el error</option>
-                                                <option value="1">TECLADO</option>
-                                                <option value="2">RATON</option>
-                                                <option value="3">CPU</option>
+                                            <%
+                                                TipoErrorService errorService = new TipoErrorService();
+                                                List<TipoError> errores = errorService.getTipoErrorList();
+                                            %>
+                                            <select id="idError" name="idError" class="form-select" >
+                                                <option value="">Seleccionar Error</option>
+                                                <% for (TipoError error : errores) {%>
+                                                <option value="<%= error.getIdTipoError()%>"><%= error.getNombreError()%></option>
+                                                <% } %>
                                             </select>
                                         </div>
                                     </div>
@@ -71,23 +93,31 @@
         <%
             String accion = request.getParameter("accion");
             if ("enviar".equals(accion)) {
-                ReporteServices reporteservice = new ReporteServices();
-                Reportes reportes = new Reportes();
-                reportes.setIdEquipos(Integer.parseInt(request.getParameter("equipos")));
+                ReporteServices reporteService = new ReporteServices();
+                Reportes reporte = new Reportes();
 
-                String idLaboratorioParam = request.getParameter("idLaboratorio");
-                if (idLaboratorioParam != null && !idLaboratorioParam.isEmpty()) {
-                    reportes.setIdLaboratorio(Integer.parseInt(idLaboratorioParam));
-                }
+                // Obtener los valores del formulario
+                String nombreEquipo = request.getParameter("equipos");
+                int idLaboratorio = Integer.parseInt(request.getParameter("idLaboratorio"));
+                int idError = Integer.parseInt(request.getParameter("idError"));
+                String nombreUsuario = request.getParameter("Usuario");
 
-                String idErrorParam = request.getParameter("idError");
-                if (idErrorParam != null && !idErrorParam.isEmpty()) {
-                    reportes.setIdTipoError(Integer.parseInt(idErrorParam));
-                }
+                // Obtener el ID del equipo por su nombre
+                EquipoService equipoService = new EquipoService();
+                int idEquipo = equipoService.obtenerIdEquipoPorNombre(nombreEquipo);
 
-                reportes.setIdUsuario(Integer.parseInt(request.getParameter("Usuario")));
+                // Obtener el ID del usuario por su nombre
+                UsuariosService usuarioService = new UsuariosService();
+                int idUsuario = usuarioService.obtenerIdUsuarioPorNombre(nombreUsuario);
 
-                if (reporteservice.addReportes(reportes)) {
+                if (idEquipo != 0 && idUsuario != 0) {
+                    // Asignar los valores al objeto reporte
+                    reporte.setIdEquipos(idEquipo);
+                    reporte.setIdLaboratorio(idLaboratorio);
+                    reporte.setIdTipoError(idError);
+                    reporte.setIdUsuario(idUsuario);
+
+                    if (reporteService.addReportes(reporte)) {
         %>
         <script>
             alert("Has Levantado un Reporte");
@@ -96,12 +126,18 @@
         } else {
         %>
         <script>
-            alert("Disculpa se ha generado una exepcion");
+            alert("Disculpa se ha generado una excepción");
+        </script>
+        <%
+            }
+        } else {
+        %>
+        <script>
+            alert("El equipo o el usuario no existen");
         </script>
         <%
                 }
             }
         %>
-
     </body>
 </html>

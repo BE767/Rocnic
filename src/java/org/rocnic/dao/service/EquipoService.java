@@ -305,6 +305,30 @@ public class EquipoService extends Conexion<Equipos> {
 
         return existe;
     }
+    
+    public int obtenerIdEquipoPorNombre(String nombreEquipo) {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet resultSet = null;
+    String sql = "SELECT IdEquipo FROM equipos WHERE NombreEquipo = ?";
+    try {
+        connection = getConnection();
+        preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, nombreEquipo);
+        resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+            return resultSet.getInt("idEquipo");
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    } 
+    return 0;  // Retorna 0 si no se encuentra el equipo
+}
+
+    
+    
+    
+    
 
 
 }

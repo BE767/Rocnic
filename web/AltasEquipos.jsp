@@ -56,8 +56,11 @@
                             </select>
                         </label>
                         <span style="margin-left: 50px;">Fecha</span>
-                        <input type="text" id="Fecha" name="Fecha" value=""
-                               style="display: inline-block; width: 110px; margin-left: 15px;" readonly="true">
+                        <label>
+                            <div class="form-floating">
+                                <input type="text" id="Fecha" name="Fecha" value="" style="display: inline-block; width: 110px; margin-left: 15px;" readonly="true">
+                            </div>
+                        </label>
                         <div>
                             <div style="display: flex;  margin-top: 20px; ">
                                 <div>
@@ -131,7 +134,6 @@
                         }
                     }
                 %>
-
             </div>
         </div>
     </body>

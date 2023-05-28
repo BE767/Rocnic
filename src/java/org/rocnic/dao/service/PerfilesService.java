@@ -59,7 +59,7 @@ public class PerfilesService extends Conexion<Perfiles>
         return PerfilesList;
     } 
      
-       public boolean addUsuarios(Perfiles perfiles) {
+       public boolean addPerfiles(Perfiles perfiles) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         String sql = "INSERT INTO perfiles (NombrePerfil) VALUES(?)";
@@ -73,8 +73,7 @@ public class PerfilesService extends Conexion<Perfiles>
             if (preparedStatement == null) {
                 return false;
             }
-            preparedStatement.setInt(1, perfiles.getIdPerfil());
-            preparedStatement.setString(2, perfiles.getNombrePerfil());
+            preparedStatement.setString(1, perfiles.getNombrePerfil());
             row = preparedStatement.executeUpdate();
             closeConnection(connection);
             return row == 1;

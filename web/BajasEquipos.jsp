@@ -76,10 +76,13 @@
                                         <input type="checkbox" id="CPU" name="CPU" style="display: inline-block;">
                                         <label for="CPU" style="display: inline-block; margin-left: 5px; vertical-align: middle;">Teclado</label>
                                     </div>
+                                    
+                                    
                                     <div class="campo" style="margin-left: 100px; margin-right: auto;">
                                         <label for="otro" style="display: inline-block; margin-left: 10px; vertical-align: middle;">Estado</label>
                                         <input type="text" id="campo-texto" name="campo-texto" style="margin-top: 120px; margin-right: 40px; width: 100%; height: 100px; resize: vertical;">
                                     </div>
+                                    
                                 </div>
                                 <button class="boton-enviar" type="submit"  name="accion" id="accion" value="borrar" style="margin-top: 20%;";>Borrar</button>
                             </div>

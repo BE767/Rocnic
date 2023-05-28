@@ -21,7 +21,6 @@
     </head>
     <%
     String folio = request.getParameter("folio");
-    
         session = request.getSession();
         session.setAttribute("folio", folio);
     %>
