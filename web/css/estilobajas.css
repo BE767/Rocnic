@@ -36,11 +36,11 @@
 
 }
 
- .rectangulo-dentro1 button[type="delete"] {
+ .rectangulo-dentro1 button[type="submit"] {
     width: 20%;
     height: 50px;
     margin-left: 70%;
-    margin-top: 30%;
+    margin-top: 25%;
     font-size: 20px;
     background-color: #727272; /* Color de fondo del botón */
     color: #ffffff; /* Color del texto del botón */
@@ -49,11 +49,26 @@
     transition: background-color 0.3s; /* Transición suave al cambio de color */
   }
 
-  .rectangulo-dentro1 button[type="delete"]:hover {
+  .rectangulo-dentro1 button[type="submit2"] {
+    width: 20%;
+    height: 50px;
+    margin-left: 70%;
+  
+    font-size: 20px;
+    background-color: #727272; /* Color de fondo del botón */
+    color: #ffffff; /* Color del texto del botón */
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s; /* Transición suave al cambio de color */
+  }
+  .rectangulo-dentro1 button[type="submit"]:hover {
     background-color: #0063d5; /* Color de fondo del botón al pasar el mouse */
     color: white; /* Color del texto del botón al pasar el mouse */
   }
-
+  .rectangulo-dentro1 button[type="submit2"]:hover {
+    background-color: #0063d5; /* Color de fondo del botón al pasar el mouse */
+    color: white; /* Color del texto del botón al pasar el mouse */
+  }
 
 @media only screen and (max-width: 1000px) {
   .rectangulo-dentro1 input {
@@ -61,7 +76,7 @@
     
   }
 
-  .rectangulo-dentro1 button[type="delete"] {
+  .rectangulo-dentro1 button[type="submit2"] {
     width: 20%;
   
   }

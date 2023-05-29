@@ -65,8 +65,9 @@
                             <input type="text" id="perfil" name="perfil">
                         </label>
                     </div>
-                    <button type="submit" name="accion" id="accion" value="buscar">Buscar</button>
-                    <button type="submit" name="accion" id="accion" value="borrar">Borrar</button>
+                   <div> <button type="submit" name="accion" id="accion" value="buscar">Buscar</button>
+                    <button type="submit2" name="accion" id="accion" value="borrar">Borrar</button>
+                </div>
                 </form>
             </div>
         </div>

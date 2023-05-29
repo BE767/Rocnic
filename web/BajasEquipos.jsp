@@ -21,7 +21,7 @@
               integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
               crossorigin="anonymous">
         <link rel="stylesheet" href="css/estilos.css">
-        <link rel="stylesheet" href="css/estilossoft.css">
+        <link rel="stylesheet" href="css/estilosf.css">
         <link rel="shortcut icon" href="imagenes/Patita.png">
         <script src="Funciones/js1.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
@@ -77,14 +77,9 @@
                                         <label for="CPU" style="display: inline-block; margin-left: 5px; vertical-align: middle;">Teclado</label>
                                     </div>
                                     
-                                    
-                                    <div class="campo" style="margin-left: 100px; margin-right: auto;">
-                                        <label for="otro" style="display: inline-block; margin-left: 10px; vertical-align: middle;">Estado</label>
-                                        <input type="text" id="campo-texto" name="campo-texto" style="margin-top: 120px; margin-right: 40px; width: 100%; height: 100px; resize: vertical;">
-                                    </div>
-                                    
+                                 
                                 </div>
-                                <button class="boton-enviar" type="submit"  name="accion" id="accion" value="borrar" style="margin-top: 20%;";>Borrar</button>
+                                <button class="boton-enviar" type="submit"  name="accion" id="accion" value="borrar" style="margin-top: 20%; margin-left: 50%;";>Borrar</button>
                             </div>
                         </div>
                     </div>

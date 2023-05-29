@@ -40,8 +40,6 @@
                         <span>Usuario:</span>
                         <input type="text" id="usuario" name="usuario">
                     </label>
-                    <button type="submit" name="accion" id="accion" value="buscar">Buscar</button>
-                </div>
                 <div>
                     <label for="perfil">
                         <span>Perfil:</span>
@@ -59,7 +57,10 @@
                         <input type="password" id="contrasena" name="contrasena">
                     </label>
                 </div>
-                <button type="submit" name="accion" id="accion" value="cambiar">Cambiar</button>
+                <div> 
+                    <button type="cambiar" name="accion" id="accion" value="buscar" >Buscar</button>             </div>
+<button type="cambiar" name="accion" id="accion" value="cambiar">Cambiar</button>
+                
             </form>
         </div>
     </div>

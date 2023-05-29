@@ -44,7 +44,7 @@
 
                         <span style="margin-left: 60px;">Laboratorio</span>
                         <label for="laboratorio">
-                            <%
+                            <%--
                                 LaboratorioService laboratorioService = new LaboratorioService();
                                 List<Laboratorio> laboratorios = laboratorioService.getLaboratorioList();
                             %>
