@@ -170,9 +170,6 @@ public class EquipoService extends Conexion<Equipos> {
         }
         return false;
     }
-    
-    
-    
 
     public List<Equipos> getEquiposById(int idEquipo) {
         List<Equipos> equipos = new ArrayList<>();
@@ -325,8 +322,56 @@ public class EquipoService extends Conexion<Equipos> {
     return 0;  // Retorna 0 si no se encuentra el equipo
 }
 
-    
-    
+    public boolean deleteEquipoLab(Equipos equipo) {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    String sql = "DELETE FROM equipos WHERE NombreEquipo = ? AND IdLaboratorio = ?";
+    int row = 0;
+    try {
+        connection = getConnection();
+        if (connection == null) {
+            return false;
+        }
+        preparedStatement = connection.prepareStatement(sql);
+        if (preparedStatement == null) {
+            return false;
+        }
+        preparedStatement.setString(1, equipo.getNombreEquipo());
+        preparedStatement.setInt(2, equipo.getIdLaboratorio());
+        row = preparedStatement.executeUpdate();
+        closeConnection(connection);
+        return row == 1;
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+    return false;
+}
+
+    public boolean existeEquipoNombre(String nombreEquipo) {
+    Connection connection = null;
+    PreparedStatement statement = null;
+    ResultSet resultSet = null;
+    boolean existe = false;
+
+    try {
+        connection = getConnection();
+        if (connection != null) {
+            String query = "SELECT COUNT(*) AS count FROM Equipos WHERE NombreEquipo = ?";
+            statement = connection.prepareStatement(query);
+            statement.setString(1, nombreEquipo);
+            resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                int count = resultSet.getInt("count");
+                existe = count > 0;
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    } 
+    return existe;
+}
+
     
     
 

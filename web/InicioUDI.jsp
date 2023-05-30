@@ -75,7 +75,7 @@
                 <div class="rectangulo-dentro4">
                     <h1 class="titulo" style="text-align: center; color: white;">CONSULTAS</h1>
                     <div class="botones-container" style="text-align: center;">
-                        <a href="ConsultasUsuario.jsp" >
+                        <a href="ConsultasUsuarios.jsp" >
                             <button class="boton">USUARIOS</button>
                           </a>
                           <a href="CambiosUsuarios.jsp" >

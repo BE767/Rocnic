@@ -1,13 +1,14 @@
+
 <%-- 
-    Document   : ConsultasUsuario
-    Created on : 24 may. 2023, 21:15:18
-    Author     : Evelyn
+    Document   : CambiosUsuarios
+    Created on : 19 may. 2023, 22:36:17
+    Author     : cesar
 --%>
 
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="org.rocnic.dao.service.PerfilesService"%>
 <%@page import="org.rocnic.dao.Usuarios"%>
 <%@page import="org.rocnic.dao.service.UsuariosService"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>

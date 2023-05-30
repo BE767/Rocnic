@@ -1,12 +1,9 @@
 <%-- Document : InicioAlumno Created on : 7 may. 2023, 07:26:12 Author : Evelyn --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
-
     <head>
-        <title>Inicio
-        </title>
+        <title>Inicio</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -19,12 +16,6 @@
                 integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
     </head>
-    <%
-    String folio = request.getParameter("folio");
-        session = request.getSession();
-        session.setAttribute("folio", folio);
-    %>
-
     <body style="background-color:#C0CAD2">
         <div class="containery">
             <div class="rectanguloy">
@@ -38,13 +29,13 @@
                 <div class="folio">
                     <h2 class="titulo-folio">Folio</h2>
                     <div class="campo-entrada">
-                        <form action="ConsultaAlu.jsp" method="post">
-                            <input type="text" id="folioInput" name="folioInput" placeholder="Escriba aquí">
+                        <form>
+                            <input type="text" id="folioInput" placeholder="Escriba aquí">
                         </form>
                     </div>
                 </div>
                 <div class="campo-buscar">
-                    <a href="ConsultaAlu.jsp"><button type="submit">Buscar</button></a>
+                    <button type="button" onclick="buscarReporte()">Buscar</button>
                 </div>     
             </div>
 
@@ -62,6 +53,13 @@
                 </div>
             </div>
         </div>
-    </body>
 
+        <script>
+            function buscarReporte() {
+                var folioInput = document.getElementById("folioInput").value;
+                var url = "ConsultaAlu.jsp?idReporte=" + folioInput;
+                window.location.href = url;
+            }
+        </script>
+    </body>
 </html>

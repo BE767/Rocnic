@@ -57,27 +57,19 @@
             </div>
         </div>
         <%
-            String accion = request.getParameter("accion");
-            if ("inicio".equals(accion)) {
-                UsuariosService ususervi = new UsuariosService();
-                Usuarios usuario = ususervi.getUsuariosByLogin(request.getParameter("usuario"), request.getParameter("contrasena"));
-                if (usuario != null) {
-                    if (usuario.getIdPerfil() == 1) {
-        
-                        response.sendRedirect("InicioMaestro.jsp");
-                    }
-                    else 
-                    {
-                    if (usuario.getIdPerfil() == 2) {
-        
-                        response.sendRedirect("InicioUDI.jsp");
-                    }
-            
-                    }
-                }
+    String accion = request.getParameter("accion");
+    if ("inicio".equals(accion)) {
+        UsuariosService ususervi = new UsuariosService();
+        Usuarios usuario = ususervi.getUsuariosByLogin(request.getParameter("usuario"), request.getParameter("contrasena"));
+        if (usuario != null) {
+            String nombrePerfil = ususervi.getNombrePerfiles(usuario.getIdPerfil());
+            if ("MAESTRO".equals(nombrePerfil)) {
+                response.sendRedirect("InicioMaestro.jsp");
+            } else if ("UDI".equals(nombrePerfil)) {
+                response.sendRedirect("InicioUDI.jsp");
             }
-        %>
+        }
+    }
+%>
     </body>
-
-
 </html>

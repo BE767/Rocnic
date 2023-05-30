@@ -427,11 +427,10 @@ public class UsuariosService extends Conexion<Usuarios> {
         }
         return usuario;
     }
-
     public boolean updateUsuarios(Usuarios usuario) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "UPDATE usuarios SET IdPerfil=?, Usuario=?, Contrasena=?, Nombre=?  WHERE Usuario=?";
+        String sql = "UPDATE usuarios SET  Usuario=?, Contrasena=?, Nombre=?  WHERE Usuario=?";
         int row = 0;
         try {
             connection = getConnection();
@@ -442,11 +441,10 @@ public class UsuariosService extends Conexion<Usuarios> {
             if (preparedStatement == null) {
                 return false;
             }
-            preparedStatement.setInt(1, usuario.getIdPerfil());
-            preparedStatement.setString(2, usuario.getUsuario());
-            preparedStatement.setString(3, usuario.getContrasena());
-            preparedStatement.setString(4, usuario.getNombre());
-            preparedStatement.setString(5, usuario.getUsuario()); // Utilizar el nombre de usuario para la cláusula WHERE
+            preparedStatement.setString(1, usuario.getUsuario());
+            preparedStatement.setString(2, usuario.getContrasena());
+            preparedStatement.setString(3, usuario.getNombre());
+            preparedStatement.setString(4, usuario.getUsuario()); // Utilizar el nombre de usuario para la cláusula WHERE
             row = preparedStatement.executeUpdate();
             closeConnection(connection);
             return row == 1;
@@ -462,7 +460,6 @@ public class UsuariosService extends Conexion<Usuarios> {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-
         try {
             connection = getConnection();
             String sql = "SELECT NombrePerfil FROM perfiles WHERE IdPerfil = ?";
@@ -476,10 +473,8 @@ public class UsuariosService extends Conexion<Usuarios> {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
         return nombrePerfil;
     }
-
     public int getIdUsuarioPorNombre(String nombreUsuario) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -586,7 +581,40 @@ public class UsuariosService extends Conexion<Usuarios> {
     }
     return 0;  // Retorna 0 si no se encuentra el usuario
 }
+    
+   public String getNombrePerfiles(int idPerfil) {
+    Connection connection = null;
+    PreparedStatement statement = null;
+    ResultSet resultSet = null;
+    String nombrePerfil = null;
 
+    try {
+        connection = getConnection();
+        if (connection != null) {
+            String query = "SELECT NombrePerfil FROM Perfiles WHERE IdPerfil = ?";
+            statement = connection.prepareStatement(query);
+            statement.setInt(1, idPerfil);
+            resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                nombrePerfil = resultSet.getString("NombrePerfil");
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    } finally {
+        // Cerrar recursos (resultSet, statement, connection)
+    }
+
+    return nombrePerfil;
+}
  
+    
+    
+    
+    
+    
+    
+    
     
 }

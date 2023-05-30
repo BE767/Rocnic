@@ -91,9 +91,6 @@
 <%
         }
 
-
-
-
     } else if ("cambiar".equals(accion)) {
         String nombreUsuario = request.getParameter("usuario");
         Usuarios usuarioExistente = ususervice.getUsuarioPorNombre(nombreUsuario);

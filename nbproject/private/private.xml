@@ -3,7 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/Evelyn/Documents/BATIZ/Rocnic/src/java/org/rocnic/dao/service/TipoErrorService.java</file>
             <file>file:/C:/Users/Evelyn/Documents/BATIZ/Rocnic/src/java/org/rocnic/dao/TipoError.java</file>
+            <file>file:/C:/Users/Evelyn/Documents/BATIZ/Rocnic/web/AltasInventario.jsp</file>
+            <file>file:/C:/Users/Evelyn/Documents/BATIZ/Rocnic/web/ReporteSofrtMae.jsp</file>
             <file>file:/C:/Users/Evelyn/Documents/BATIZ/Rocnic/web/LoginUDI.jsp</file>
             <file>file:/C:/Users/Evelyn/Documents/BATIZ/Rocnic/src/java/org/rocnic/dao/Usuarios.java</file>
             <file>file:/C:/Users/Evelyn/Documents/BATIZ/Rocnic/src/java/org/rocnic/dao/Reportes.java</file>
@@ -12,24 +15,30 @@
             <file>file:/C:/Users/Evelyn/Documents/BATIZ/Rocnic/web/AltasEquipos.jsp</file>
             <file>file:/C:/Users/Evelyn/Documents/BATIZ/Rocnic/src/java/org/rocnic/dao/Perfiles.java</file>
             <file>file:/C:/Users/Evelyn/Documents/BATIZ/Rocnic/web/CambiosUsuarios.jsp</file>
-            <file>file:/C:/Users/Evelyn/Documents/BATIZ/Rocnic/web/ConsultasUsuario.jsp</file>
+            <file>file:/C:/Users/Evelyn/Documents/BATIZ/Rocnic/web/ConsultaUsu.jsp</file>
             <file>file:/C:/Users/Evelyn/Documents/BATIZ/Rocnic/web/css/estiloaltas.css</file>
+            <file>file:/C:/Users/Evelyn/Documents/BATIZ/Rocnic/web/ReporteSoft.jsp</file>
             <file>file:/C:/Users/Evelyn/Documents/BATIZ/Rocnic/web/css/estilos.css</file>
             <file>file:/C:/Users/Evelyn/Documents/BATIZ/Rocnic/web/Consulta.jsp</file>
             <file>file:/C:/Users/Evelyn/Documents/BATIZ/Rocnic/web/css/estilobajas.css</file>
+            <file>file:/C:/Users/Evelyn/Documents/BATIZ/Rocnic/web/ReporteHardware.jsp</file>
             <file>file:/C:/Users/Evelyn/Documents/BATIZ/Rocnic/web/BajasUsuarios.jsp</file>
             <file>file:/C:/Users/Evelyn/Documents/BATIZ/Rocnic/src/java/org/rocnic/dao/service/PerfilesService.java</file>
+            <file>file:/C:/Users/Evelyn/Documents/BATIZ/Rocnic/src/java/org/rocnic/dao/Equipos.java</file>
+            <file>file:/C:/Users/Evelyn/Documents/BATIZ/Rocnic/web/ConsultaUDI.jsp</file>
             <file>file:/C:/Users/Evelyn/Documents/BATIZ/Rocnic/src/java/org/rocnic/dao/service/UsuariosService.java</file>
             <file>file:/C:/Users/Evelyn/Documents/BATIZ/Rocnic/src/java/org/rocnic/dao/service/Conexion.java</file>
-            <file>file:/C:/Users/Evelyn/Documents/BATIZ/Rocnic/web/CambiosEquipos.jsp</file>
             <file>file:/C:/Users/Evelyn/Documents/BATIZ/Rocnic/web/InicioAlumno.jsp</file>
             <file>file:/C:/Users/Evelyn/Documents/BATIZ/Rocnic/web/ConsultasUsuarios.jsp</file>
-            <file>file:/C:/Users/Evelyn/Documents/BATIZ/Rocnic/web/ConsultaEquipos.jsp</file>
+            <file>file:/C:/Users/Evelyn/Documents/BATIZ/Rocnic/web/ConsultaDeUsu.jsp</file>
             <file>file:/C:/Users/Evelyn/Documents/BATIZ/Rocnic/web/InicioMaestro.jsp</file>
             <file>file:/C:/Users/Evelyn/Documents/BATIZ/Rocnic/web/AltasUsuarios.jsp</file>
+            <file>file:/C:/Users/Evelyn/Documents/BATIZ/Rocnic/src/java/org/rocnic/dao/service/EstatusService.java</file>
             <file>file:/C:/Users/Evelyn/Documents/BATIZ/Rocnic/web/InicioUDI.jsp</file>
             <file>file:/C:/Users/Evelyn/Documents/BATIZ/Rocnic/src/java/org/rocnic/dao/Laboratorio.java</file>
             <file>file:/C:/Users/Evelyn/Documents/BATIZ/Rocnic/web/BajasEquipos.jsp</file>
+            <file>file:/C:/Users/Evelyn/Documents/BATIZ/Rocnic/src/java/org/rocnic/dao/service/LaboratorioService.java</file>
+            <file>file:/C:/Users/Evelyn/Documents/BATIZ/Rocnic/src/java/org/rocnic/dao/service/EquipoService.java</file>
             <file>file:/C:/Users/Evelyn/Documents/BATIZ/Rocnic/web/ConsultaAlu.jsp</file>
         </group>
     </open-files>

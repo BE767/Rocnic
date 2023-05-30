@@ -1,18 +1,13 @@
 <%@page import="org.rocnic.dao.Reportes"%>
-<%@page import="java.util.List"%>
 <%@page import="org.rocnic.dao.service.ReporteServices"%>
-<%@page import="org.rocnic.dao.service.Conexion"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-
     <head>
-        <title>TODO supply a title</title>
+        <title>Consulta de Alumnos</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
               integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <link rel="stylesheet" href="css/estilos.css">
         <link rel="stylesheet" href="css/estiloscambios.css">
@@ -22,12 +17,15 @@
                 integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
     </head>
-
     <body style="background-color:#C0CAD2">
-        
         <%
-       session = request.getSession();
-        String folio = (String) session.getAttribute("folio");
+            String idReporte = request.getParameter("idReporte");
+            ReporteServices reporteServices = new ReporteServices();
+            Reportes reporte = null;
+
+            if (idReporte != null && !idReporte.isEmpty()) {
+                reporte = reporteServices.getReportePorIdConInnerJoin(Integer.parseInt(idReporte));
+            }
         %>
         <div class="containery">
             <div class="rectanguloy">
@@ -36,37 +34,27 @@
                     <h1 class="titulo">CONSULTAS ALUMNOS</h1>
                 </div>
                 <div class="rectangulo-dentro1">
-                    <% ReporteServices reporte = new ReporteServices();
-                        List<Reportes> list = reporte.getReportesLista();
-                        if (list != null && list.size() > 0) {
-                            for (Reportes rol : list) {
-                    %>
                     <div style="margin-top: 20px; margin-left: 50px;">
                         <span>#EQUIPO</span>
-                        <input type="text" id="EQUIPO" name="EQUIPO" value="<%=rol.getNombreEquipo()%>"
+                        <input type="text" id="EQUIPO" name="EQUIPO" value="<%= (reporte != null) ? reporte.getNombreEquipo() : ""%>"
                                style="margin-left: 20px; width: 30px;">
                         <span style="margin-left: 60px;">Laboratorio</span>
-                        <input type="text" id="Laboratorio" name="Laboratorio" value="<%=rol.getNombreLaboratorio()%>"
+                        <input type="text" id="Laboratorio" name="Laboratorio" value="<%= (reporte != null) ? reporte.getNombreLaboratorio() : ""%>"
                                style="display: inline-block; width: 110px; margin-left: 15px;">
 
                         <span style="margin-left: 50px;">Fecha</span>
-                        <input type="text" id="Fecha" name="Fecha" value="<%=rol.getFechaCreacion()%>"
+                        <input type="text" id="Fecha" name="Fecha" value="<%= (reporte != null) ? reporte.getFechaCreacion() : ""%>"
                                style="display: inline-block; width: 110px; margin-left: 15px;" readonly="true">
-
-                        <span style="margin-left: 60px;">ESTADO</span>
-                        <input type="text" id="Laboratorio" name="Laboratorio" value="<%=rol.getNombreEstatus()%>"
-                               style="display: inline-block; width: 110px; margin-left: 15px;">
-                        <div>
-                        </div>
                     </div>
-                    <BR> <BR> <BR> <BR>
-                    <span style="margin-left: 60px;">DESCRIPCION</span>
-                    <%}
-                        }
-                    %>
+                    <br>
+                    <div style="margin-left: 50px;">
+                        <span>Descripcion del Problema</span>
+                        <textarea id="Problema" name="Problema" style="display: inline-block; margin-left: 15px; width: 500px; height: 100px;"
+                                  readonly="true"><%= (reporte != null) ? reporte.getNombreError() : ""%></textarea>
+                    </div>
+                    <br>
                 </div>
             </div>
         </div>
     </body>
-
 </html>

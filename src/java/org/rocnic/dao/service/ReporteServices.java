@@ -91,30 +91,31 @@ public class ReporteServices extends Conexion<Reportes> {
         return false;
     }
 
-    public boolean updateReportes(Reportes reportes) {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        String sql = "UPDATE reportes SET IdEstatusReporte=? ,FechaActualizacion=?, UsuarioActualizacion=?   WHERE IdReporte=?";
-        int row = 0;
-        try {
-            connection = getConnection();
-            if (connection == null) {
-                return false;
-            }
-            preparedStatement = connection.prepareStatement(sql);
-            if (preparedStatement == null) {
-                return false;
-            }
-            preparedStatement.setInt(1, reportes.getIdEstatusReporte());
-            preparedStatement.setDate(2, dateUtil2DateSql(reportes.getFechaActualizacion()));
-            row = preparedStatement.executeUpdate();
-            closeConnection(connection);
-            return row == 1;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+   public boolean updateReportes(Reportes reportes) {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    String sql = "UPDATE reportes SET IdEstatusReporte=? WHERE IdReporte=?";
+    int row = 0;
+    try {
+        connection = getConnection();
+        if (connection == null) {
+            return false;
         }
-        return false;
+        preparedStatement = connection.prepareStatement(sql);
+        if (preparedStatement == null) {
+            return false;
+        }
+        preparedStatement.setInt(1, reportes.getIdEstatusReporte());
+        preparedStatement.setInt(2, reportes.getIdReporte());
+        row = preparedStatement.executeUpdate();
+        closeConnection(connection);
+        return row == 1;
+    } catch (SQLException ex) {
+        ex.printStackTrace();
     }
+    return false;
+}
+
 
     public Reportes getReportesByReportes(String IdReporte) {
         Reportes aux = null;
@@ -271,6 +272,93 @@ public class ReporteServices extends Conexion<Reportes> {
     return reportesList;
  
 }
-  
+     
+    public Reportes getReportePorIdConInnerJoin(int idReporte) {
+    Reportes reporte = null;
+    String query = "SELECT r.IdReporte, e.NombreEquipo, te.NombreError, l.NombreLaboratorio, et.NombreEstatus " +
+                   "FROM reportes r " +
+                   "INNER JOIN equipos e ON e.IdEquipo = r.IdEquipo " +
+                   "INNER JOIN tipoerror te ON te.IdTipoError = r.IdTipoError " +
+                   "INNER JOIN laboratorio l ON l.IdLaboratorio = r.IdLaboratorio " +
+                   "LEFT JOIN estatusreporte et ON et.IdEstatusReporte = r.IdEstatusReporte " +
+                   "WHERE r.IdReporte = ?";
+    
+    try (
+         Connection conn = getConnection();
+         PreparedStatement statement = conn.prepareStatement(query)) 
+    {
+        statement.setInt(1, idReporte);
+        ResultSet resultSet = statement.executeQuery();
+        
+        if (resultSet.next()) {
+            reporte = new Reportes();
+            reporte.setIdReporte(resultSet.getInt("IdReporte"));
+            reporte.setNombreEquipo(resultSet.getString("NombreEquipo"));
+            reporte.setNombreError(resultSet.getString("NombreError"));
+            reporte.setNombreLaboratorio(resultSet.getString("NombreLaboratorio"));
+            reporte.setNombreEstatus(resultSet.getString("NombreEstatus"));
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    
+    return reporte;
+}
+    
+    
+    public int addReporte(Reportes reportes) {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    String sql = "INSERT INTO reportes (IdLaboratorio, IdEquipo, IdUsuario, IdTipoError, FechaCreacion) VALUES (?, ?, ?, ?, CURDATE())";
+    int row = 0;
+    int idReporteGenerado = 0; // Variable para almacenar el ID del reporte generado
+
+    try {
+        connection = getConnection();
+        if (connection == null) {
+            return 0;
+        }
+        preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        if (preparedStatement == null) {
+            return 0;
+        }
+        preparedStatement.setInt(1, reportes.getIdLaboratorio());
+        preparedStatement.setInt(2, reportes.getIdEquipos());
+        preparedStatement.setInt(3, reportes.getIdUsuario());
+        preparedStatement.setInt(4, reportes.getIdTipoError());
+        row = preparedStatement.executeUpdate();
+
+        // Obtener el ID del reporte generado
+        ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+        if (generatedKeys.next()) {
+            idReporteGenerado = generatedKeys.getInt(1);
+        }
+
+        return idReporteGenerado;
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    } finally {
+        // Cerrar recursos (preparedStatement y connection) aquí si es necesario
+    }
+
+    return 0;
+}
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
 
 }

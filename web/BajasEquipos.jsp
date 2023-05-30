@@ -3,6 +3,9 @@
     Created on : 19 may. 2023, 22:37:22
     Author     : cesar
 --%>
+<%@page import="org.rocnic.dao.Laboratorio"%>
+<%@page import="java.util.List"%>
+<%@page import="org.rocnic.dao.service.LaboratorioService"%>
 <%@page import="org.rocnic.dao.Equipos"%>
 <%@page import="org.rocnic.dao.service.EquipoService"%>
 <%@page import="org.rocnic.dao.service.UsuariosService"%>
@@ -44,12 +47,15 @@
 
 
                         <label for="laboratorio">
-                            <span>Laboratorio</span>
-                            <select name="idLaboratorio" id="idLaboratorio">
-                                <option value="-1">Seleccione Laboratorio</option>
-                                <option value="1">Base de Datos</option>
-                                <option value="2">Nuevas Tecnologias</option>
-                                <option value="3">Desarrollo Web</option>
+                            <%
+                                LaboratorioService laboratorioService = new LaboratorioService();
+                                List<Laboratorio> laboratorios = laboratorioService.getLaboratorioList();
+                            %>
+                            <select id="idLaboratorio" name="idLaboratorio" class="form-select" >
+                                <option value="">Seleccionar laboratorio</option>
+                                <% for (Laboratorio laboratorio : laboratorios) {%>
+                                <option value="<%= laboratorio.getIdLaboratorio()%>"><%= laboratorio.getNombreLaboratorio()%></option>
+                                <% } %>
                             </select>
                         </label>
 
@@ -76,8 +82,8 @@
                                         <input type="checkbox" id="CPU" name="CPU" style="display: inline-block;">
                                         <label for="CPU" style="display: inline-block; margin-left: 5px; vertical-align: middle;">Teclado</label>
                                     </div>
-                                    
-                                 
+
+
                                 </div>
                                 <button class="boton-enviar" type="submit"  name="accion" id="accion" value="borrar" style="margin-top: 20%; margin-left: 50%;";>Borrar</button>
                             </div>
@@ -92,34 +98,41 @@
             Equipos equipo = new Equipos();
 
             if ("borrar".equals(accion)) {
-                equipo.setIdEquipo(Integer.parseInt(request.getParameter("nombreequipo")));
-                equipo.setIdLaboratorio(Integer.parseInt(request.getParameter("idLaboratorio")));
+                equipo.setNombreEquipo(request.getParameter("nombreequipo"));
+
+                String idLaboratorioParam = request.getParameter("idLaboratorio");
+                if (idLaboratorioParam != null && !idLaboratorioParam.isEmpty()) {
+                    equipo.setIdLaboratorio(Integer.parseInt(idLaboratorioParam));
+                } else {
+                    // Manejar el caso cuando no se ha seleccionado ningún laboratorio
+                    // Puedes asignar un valor por defecto o mostrar un mensaje de error
+                    equipo.setIdLaboratorio(0); // Por ejemplo, asignar un valor 0 como valor por defecto
+                }
 
                 // Verificar si el equipo existe antes de eliminarlo
-                if (!equipoService.existeEquipos(equipo.getIdEquipo())) {
+                if (!equipoService.existeEquipoNombre(equipo.getNombreEquipo())) {
         %>
         <script>
             alert("El equipo no existe");
         </script>
         <%
         } else {
+            if (equipoService.deleteEquipoLab(equipo)) {
         %>
         <script>
-            if (confirm("¿Estás seguro de que deseas eliminar el equipo?")) {
-                // Eliminar el equipo
-                if (equipoService.deleteEquipo(equipo)) {
-                    alert("Se ha eliminado el equipo exitosamente");
-                    window.location.href = "pagina_destino"; // Redirige a la página de destino después de la eliminación exitosa
-                } else {
-                    alert("No se pudo eliminar el equipo");
-                }
-            } else {
-                alert("Eliminación del equipo cancelada");
-            }
+            alert("El equipo se ha eliminado");
         </script>
         <%
+        } else {
+        %>
+        <script>
+            alert("No se pudo eliminar el equipo");
+        </script>
+        <%
+                    }
                 }
             }
         %>
+
     </body>
 </html>
