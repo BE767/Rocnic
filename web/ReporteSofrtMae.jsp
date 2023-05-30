@@ -84,62 +84,62 @@
                                     <input type="text" id="campo-texto" name="campo-texto" style="margin-top: 120px; margin-right: 40px; width: 100%; height: 100px; resize: vertical;">
                                 </div>
                             </div>
-                            <button class="boton-enviar" type="submit">Enviar</button>
+                            <button class="boton-enviar" type="submit" name="accion" id="accion" value="enviar">Enviar</button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
         <%
-    String accion = request.getParameter("accion");
-    if ("enviar".equals(accion)) {
-        ReporteServices reporteService = new ReporteServices();
-        Reportes reporte = new Reportes();
+            String accion = request.getParameter("accion");
+            if ("enviar".equals(accion)) {
+                ReporteServices reporteService = new ReporteServices();
+                Reportes reporte = new Reportes();
 
-        // Obtener los valores del formulario
-        String nombreEquipo = request.getParameter("equipos");
-        int idLaboratorio = Integer.parseInt(request.getParameter("idLaboratorio"));
-        int idError = Integer.parseInt(request.getParameter("idError"));
-        String nombreUsuario = request.getParameter("Usuario");
+                // Obtener los valores del formulario
+                String nombreEquipo = request.getParameter("equipos");
+                int idLaboratorio = Integer.parseInt(request.getParameter("idLaboratorio"));
+                int idError = Integer.parseInt(request.getParameter("idError"));
+                String nombreUsuario = request.getParameter("Usuario");
 
-        // Obtener el ID del equipo por su nombre
-        EquipoService equipoService = new EquipoService();
-        int idEquipo = equipoService.obtenerIdEquipoPorNombre(nombreEquipo);
+                // Obtener el ID del equipo por su nombre
+                EquipoService equipoService = new EquipoService();
+                int idEquipo = equipoService.obtenerIdEquipoPorNombre(nombreEquipo);
 
-        // Obtener el ID del usuario por su nombre
-        UsuariosService usuarioService = new UsuariosService();
-        int idUsuario = usuarioService.obtenerIdUsuarioPorNombre(nombreUsuario);
+                // Obtener el ID del usuario por su nombre
+                UsuariosService usuarioService = new UsuariosService();
+                int idUsuario = usuarioService.obtenerIdUsuarioPorNombre(nombreUsuario);
 
-        if (idEquipo != 0 && idUsuario != 0) {
-            // Asignar los valores al objeto reporte
-            reporte.setIdEquipos(idEquipo);
-            reporte.setIdLaboratorio(idLaboratorio);
-            reporte.setIdTipoError(idError);
-            reporte.setIdUsuario(idUsuario);
+                if (idEquipo != 0 && idUsuario != 0) {
+                    // Asignar los valores al objeto reporte
+                    reporte.setIdEquipos(idEquipo);
+                    reporte.setIdLaboratorio(idLaboratorio);
+                    reporte.setIdTipoError(idError);
+                    reporte.setIdUsuario(idUsuario);
 
-            int idReporte = reporteService.addReporte(reporte); // Obtener el ID del reporte generado
+                    int idReporte = reporteService.addReporte(reporte); // Obtener el ID del reporte generado
 
-            if (idReporte != 0) {
-%>
-<script>
-    alert("Se ha levantado un reporte con el ID: <%= idReporte %>");
-</script>
-<%
-    } else {
-%>
-<script>
-    alert("Disculpa, se ha generado una excepción");
-</script>
-<%
-    }
-} else {
-%>
-<script>
-    alert("El equipo o el usuario no existen");
-</script>
-<%
-    }
-}
-%>
+                    if (idReporte != 0) {
+        %>
+        <script>
+    alert("Se ha levantado un reporte con el ID: <%= idReporte%>");
+        </script>
+        <%
+        } else {
+        %>
+        <script>
+            alert("Disculpa, se ha generado una excepción");
+        </script>
+        <%
+            }
+        } else {
+        %>
+        <script>
+            alert("El equipo o el usuario no existen");
+        </script>
+        <%
+                }
+            }
+        %>
     </body>
 </html>
