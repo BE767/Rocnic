@@ -1,6 +1,6 @@
 
-drop database if exists RocnicEstatus;
-create database RocnicEstatus;
+drop database if exists rocnicestatus;
+create database rocnicestatus;
 use RocnicEstatus;
 
 
