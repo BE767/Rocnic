@@ -1,8 +1,3 @@
-<%-- 
-    Document   : Consultasusuarios
-    Created on : 30 may 2023, 0:02:00
-    Author     : PC
---%>
 
 <%-- 
     Document   : CambiosUsuarios
