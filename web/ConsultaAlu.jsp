@@ -55,6 +55,11 @@
                     <br>
                 </div>
             </div>
+                      <span style="margin-left: 60px;">Estatus</span>
+                        <input type="text" id="Estatus" name="Estatus" value="<%= (reporte != null) ? reporte.getNombreEstatus():""%>"
+                               style="display: inline-block; width: 110px; margin-left: 15px;">
         </div>
+                  
+
     </body>
 </html>

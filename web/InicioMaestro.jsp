@@ -47,7 +47,7 @@
 
                         <h1 class="titulo" style="text-align: center; color: white;">HISTORIAL</h1>
                         <div class="botones-container" style="text-align: center;">
-                            <a href="Historial.jsp">
+                            <a href="Consulta.jsp">
                                 <button class="boton1">BUSCAR</button>
                             </a>
                             
@@ -64,10 +64,17 @@
                             
                             </div>
                             
-                            <button class="boton" type="submit">BUSCAR</button>
+                            <button class="boton" type="button" onclick="buscarReporte()" >BUSCAR</button>
                         </div>
                     </div>
                 </div>
+            <script>
+            function buscarReporte() {
+                var folioInput = document.getElementById("folioInput").value;
+                var url = "ConsultaAlu.jsp?idReporte=" + folioInput;
+                window.location.href = url;
+            }
+        </script>
         </body>
 
         </html>

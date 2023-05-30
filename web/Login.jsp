@@ -43,9 +43,9 @@
                                 <label for="floatingPassword">Contraseña</label>
                             </div>
 
-                            <a href="InicioUDI.jsp" >
+                            
                                 <button type="submit"  name="accion" id="accion" value="inicio">Ingresar</button>
-                            </a>
+                       
                         </form>
                     </div>
                 </div>

@@ -62,29 +62,34 @@
                 </div>
                 <div class="rectangulo-dentro3">
 
-                    <h1 class="titulo" style="text-align: center; color: white;">CAMBIOS</h1>
-                    <div class="botones-container" style="text-align: center;">
-                        <a href="CambiosUsuarios.jsp" >
-                            <button class="boton">USUARIOS</button>
-                          </a>
-                          <a href="CambiosEquipos.jsp" >
-                            <button class="boton">EQUIPOS</button>
-                            </a>
-                    </div>
-                </div>
-                <div class="rectangulo-dentro4">
+                    
                     <h1 class="titulo" style="text-align: center; color: white;">CONSULTAS</h1>
                     <div class="botones-container" style="text-align: center;">
-                        <a href="ConsultasUsuarios.jsp" >
+                        <a href="Consultasusuarios.jsp" >
                             <button class="boton">USUARIOS</button>
                           </a>
-                          <a href="CambiosUsuarios.jsp" >
+                          <a href="ConsultaUDI.jsp" >
                             <button class="boton">EQUIPOS</button>
                             </a>
                             <a href="Consulta.jsp" >
                                 <button class="boton">HISTORIAL</button>
                                 </a>
+                          
                     </div>
+                </div>
+               
+                <div class="rectangulo-dentro4">
+                     <h1 class="titulo" style="text-align: center; color: white;">EXTRAS</h1>
+                     <div class="botones-container" style="text-align: center;">
+                        <a href="CambiosUsuarios.jsp" >
+                            <button class="boton">CAMBIOS</button>
+                          </a>
+                       
+                         <a href="AltasInventario.jsp" >
+                        <button class="boton" style="margin-left: 20px">ALTAS</button>
+                                </a>
+                    </div>
+                   
                 </div>
             </div>
         </body>

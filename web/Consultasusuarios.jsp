@@ -1,17 +1,16 @@
+<%-- 
+    Document   : Consultasusuarios
+    Created on : 30 may 2023, 0:02:00
+    Author     : PC
+--%>
+
 <%@page import="org.rocnic.dao.service.PerfilesService"%>
 <%@page import="org.rocnic.dao.Usuarios"%>
 <%@page import="org.rocnic.dao.service.UsuariosService"%>
-<%-- 
-    Document   : CambiosUsuarios
-    Created on : 19 may. 2023, 22:36:17
-    Author     : cesar
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <title>TODO supply a title</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,6 +25,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
+        <title>JSP Page</title>
     </head>
     <body style="background-color:#C0CAD2">
         <div class="containery">
@@ -41,7 +41,7 @@
                         if ("traer".equals(accion)) {
                             UsuariosService ususervice = new UsuariosService();
                             Usuarios usuario = ususervice.getUsuariosByUsuarios(request.getParameter("idu"));
-                            if (usuario != null) {
+                        if (usuario != null) {
                     %>
                     <form>
                         <div>
