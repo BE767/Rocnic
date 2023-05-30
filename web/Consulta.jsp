@@ -39,7 +39,7 @@
                     </div>
                     <style>
                         .table-container {
-                          height: 300px; 
+                          height: 500px; 
                           overflow: auto;
                         }
                       </style>

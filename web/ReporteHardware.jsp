@@ -38,7 +38,7 @@
     <div class="rectanguloy">
         <form>
             <div class="encabezado">
-                <h1 class="titulo">Hardware</h1>
+                <h1 class="titulo">REPORTE</h1>
             </div>
             <div style="margin-top: 20px; margin-left: 50px;">
                 <label for="numero">#EQUIPO</label>

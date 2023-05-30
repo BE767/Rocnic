@@ -14,7 +14,7 @@
 .rectangulo-dentro1 form {
  
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
   font-size: 20px;
 }
 
@@ -30,7 +30,7 @@
 }
 
 .rectangulo-dentro1 input {
-  width: 30%;
+  width: 25%;
 
 }
 

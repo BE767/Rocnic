@@ -4,14 +4,21 @@
     Author     : PC
 --%>
 
+<%-- 
+    Document   : CambiosUsuarios
+    Created on : 19 may. 2023, 22:36:17
+    Author     : cesar
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="org.rocnic.dao.service.PerfilesService"%>
 <%@page import="org.rocnic.dao.Usuarios"%>
 <%@page import="org.rocnic.dao.service.UsuariosService"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -25,7 +32,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
-        <title>JSP Page</title>
     </head>
     <body style="background-color:#C0CAD2">
         <div class="containery">
@@ -34,70 +40,73 @@
                     <img src="imagenes/Usuarioa.png" class="logo">
                     <h1 class="titulo">CONSULTAS USUARIOS</h1>
                 </div>
-
                 <div class="rectangulo-dentro1">
-                    <%
-                        String accion = request.getParameter("accion");
-                        if ("traer".equals(accion)) {
-                            UsuariosService ususervice = new UsuariosService();
-                            Usuarios usuario = ususervice.getUsuariosByUsuarios(request.getParameter("idu"));
-                        if (usuario != null) {
-                    %>
                     <form>
-                        <div>
+                        <div class="form-element">
                             <label for="idu">
                                 <span>ID Usuario:</span>
-                                <input type="text" id="idu" name="idu">
+                                <input type="text" id="idu" name="idu" value="">
                             </label>
                         </div>
-                        <div>
+                        <div class="form-element">
                             <label for="perfil">
                                 <span>Perfil:</span>
-                                <% 
-                                    if (usuario != null) {
-                                        PerfilesService perfilesService = new PerfilesService();
-                                        String perfilNombre = perfilesService.getNombrePerfil(usuario.getIdPerfil());
-                                %>
-                                <input type="text" id="perfil" name="perfil" value="<%= perfilNombre %>" readonly>
-                                <% } else { %>
                                 <input type="text" id="perfil" name="perfil" value="" readonly>
-                                <% } %>
                             </label>
                         </div>
-                        <div>
+                        <div class="form-element">
                             <label for="usuario">
                                 <span>Usuario:</span>
-                                <input type="text" id="usuario" name="usuario" value="<%= (usuario != null) ? usuario.getUsuario() : ""%>" readonly>
+                                <input type="text" id="usuario" name="usuario" value="" readonly>
                             </label>
                         </div>
-                        <div>
+                        <div class="form-element">
                             <label for="nombre">
                                 <span>Nombre:</span>
-                                <input type="text" id="nombre" name="nombre" value="<%= (usuario != null) ? usuario.getNombre() : ""%>" readonly>
+                                <input type="text" id="nombre" name="nombre" value="" readonly>
                             </label>
                         </div>
-                        <div>
+                        <div class="form-element">
                             <label for="contrasena">
                                 <span>Contraseña:</span>
-                                <input type="text" id="contrasena" name="contrasena" value="<%= (usuario != null) ? usuario.getContrasena() : ""%>" readonly>
+                                <input type="text" id="contrasena" name="contrasena" value="" readonly>
                             </label>
                         </div>
-                        <button type="submit" name="accion" value="traer">Traer</button>
+                        
+                        <button type="submit" name="accion" value="buscar" class="custom-button">Buscar</button>
                     </form>
                 </div>
             </div>
         </div>
+        <%
+            String accion = request.getParameter("accion");
+            if ("buscar".equals(accion)) {
+                UsuariosService ususervice = new UsuariosService();
+                String usuarioCambio = request.getParameter("idu");
+                Usuarios usuario = ususervice.getUsuarioPorNombres(usuarioCambio);
+                if (usuario != null) {
+        %>
         <script>
-            alert("Se estara mostrando el usuario");
+            var usuarios = {
+                nombre: "<%= usuario.getNombre() %>",
+                usuario: "<%= usuario.getUsuario() %>",
+                contrasena: "<%= usuario.getContrasena() %>",
+                perfil: "<%= usuario.getIdPerfil() %>"
+            };
+            document.getElementById("nombre").value = usuarios.nombre;
+            document.getElementById("usuario").value = usuarios.usuario;
+            document.getElementById("contrasena").value = usuarios.contrasena;
+            document.getElementById("perfil").value = usuarios.perfil;
         </script>
         <%
         } else {
         %>
         <script>
-            alert("Disculpe ha ocurrido un error");
+            alert("El usuario no existe");
         </script>
         <%
                 }
+
             }
         %>
     </body>

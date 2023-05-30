@@ -28,7 +28,7 @@
             <div class="rectanguloy">
                 <div class="encabezado">
                     <img src="imagenes/Usuarioa.png" class="logo">
-                    <h1 class="titulo">CONSULTAS Reportes</h1>
+                    <h1 class="titulo">CONSULTAS REPORTE</h1>
                 </div>
                 <div class="rectangulo-dentro1">
                     <form method="post">
@@ -132,6 +132,5 @@
             }
         %>
     </body>
-</html>
-</body>
+
 </html>

@@ -34,11 +34,9 @@
 
                         <h1 class="titulo" style="text-align: center; color: white;">REPORTES</h1>
                         <div class="botones-container" style="text-align: center;">
-                            <a href="ReporteSoft.jsp">
-                                <button class="boton">SOFTWARE</button>
-                            </a>
+                         
                             <a href="ReporteHardware.jsp">
-                                <button class="boton">HARDWARE</button>
+                                <button class="boton">ENTRAR</button>
                             </a>
                         </div>
                     </div>

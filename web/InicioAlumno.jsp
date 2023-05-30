@@ -42,13 +42,9 @@
             <div class="rectangulo-dentro">
                 <h1 class="titulo" style="text-align: center; color: white;">REPORTES</h1>
                 <div class="botones text-center">
-                    <a href="ReporteSofrtMae.jsp">
-                        <button class="btn btn-primary btn-sm" type="button"
-                                style="margin-top: 50px; color: #727272;">SOFTWARE</button>
-                    </a>
                     <a href="ReporteHardware.jsp">
                         <button class="btn btn-primary btn-sm" type="button"
-                                style="color: #727272;">HARDWARE</button>
+                                style="color: #727272;">ENTRAR</button>
                     </a>
                 </div>
             </div>

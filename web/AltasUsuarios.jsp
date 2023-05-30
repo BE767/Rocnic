@@ -28,7 +28,7 @@ Author : cesar
                 integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
     </head>
-    <body style="background-color:#D5D5D5">
+    <body style="background-color:#C0CAD2">
         <%
             PerfilesService perfilservice = new PerfilesService();
             List<Perfiles> perfiles = perfilservice.getPerfilesList();
@@ -47,7 +47,7 @@ Author : cesar
                                 <span>Nombre:</span>
                             </label>
                             <div class="form-floating">
-                                <input type="text" class="form-control"  id="nombre" name="nombre" >
+                                <input type="text"  id="nombre" name="nombre" >
                             </div>
                             <label for="perfil">
                                 <span>Perfil:</span>
@@ -69,9 +69,10 @@ Author : cesar
                                 <br>
                                 <label for="usuario">
                                     <span>Usuario:</span>
+                                    
                                 </label>
                                 <div class="form-floating">
-                                    <input type="text" class="form-control"  id="usuario" name="usuario" >
+                                    <input type="text"   id="usuario" name="usuario" >
                                 </div>
                                 <button type="submit" name="accion" id="accion" value="enviar">Enviar</button>
                                 <label for="contrasena">
@@ -79,7 +80,7 @@ Author : cesar
                                 </label>
 
                                 <div class="form-floating">
-                                    <input type="password" class="form-control"  id="contrasena" name="contrasena" placeholder="Password">
+                                    <input type="password"  id="contrasena" name="contrasena" placeholder="Password">
                                 </div>     
                         </form>
                     </div>

@@ -31,7 +31,7 @@
 
     </head>
 
-    <body style="background-color:#D5D5D5">
+    <body style="background-color:#C0CAD2">
         <div class="containery">
             <div class="rectanguloy">
                 <form>

@@ -608,6 +608,33 @@ public class UsuariosService extends Conexion<Usuarios> {
 
     return nombrePerfil;
 }
+   public Usuarios getUsuarioPorNombres(String nombreUsuario) {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        Usuarios usuario = null;
+
+        try {
+            connection = getConnection();
+            String query = "SELECT * FROM Usuarios WHERE usuario = ?";
+            statement = connection.prepareStatement(query);
+            statement.setString(1, nombreUsuario);
+            resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                usuario = new Usuarios();
+                usuario.setIdUsuario(resultSet.getInt("idUsuario"));
+                usuario.setNombre(resultSet.getString("nombre"));
+                usuario.setUsuario(resultSet.getString("usuario"));
+                usuario.setContrasena(resultSet.getString("contrasena"));
+                usuario.setIdPerfil(resultSet.getInt("idPerfil"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } 
+
+        return usuario;
+    }
  
     
     
