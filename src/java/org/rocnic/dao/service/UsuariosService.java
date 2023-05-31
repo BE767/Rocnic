@@ -578,7 +578,7 @@ public class UsuariosService extends Conexion<Usuarios> {
     Connection connection = null;
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
-    String sql = "SELECT idUsuario FROM usuarios WHERE usuario = ?";
+    String sql = "SELECT IdUsuario FROM usuarios WHERE Usuario = ?";
     try {
         connection =getConnection();
         preparedStatement = connection.prepareStatement(sql);

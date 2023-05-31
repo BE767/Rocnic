@@ -347,6 +347,7 @@ public class EquipoService extends Conexion<Equipos> {
     return false;
 }
 
+    
     public boolean existeEquipoNombre(String nombreEquipo) {
     Connection connection = null;
     PreparedStatement statement = null;
