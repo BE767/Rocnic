@@ -69,7 +69,7 @@ Author : cesar
                                 <br>
                                 <label for="usuario">
                                     <span>Usuario:</span>
-                                    
+
                                 </label>
                                 <div class="form-floating">
                                     <input type="text"   id="usuario" name="usuario" >
@@ -108,15 +108,16 @@ Author : cesar
             }
 
             // Verificar si el usuario y contraseña ya existen
-            if (ususervice.existeUsuario(usuario.getUsuario(),usuario.getContrasena())) {
+            if (ususervice.existeUsuario(usuario.getUsuario(), usuario.getContrasena())) {
     %>
     <script>
         alert("El usuario y contraseña ya existen");
     </script>
     <%
     } else {
-        // Proceder con el alta del usuario si no existe
-        if (ususervice.addUsuarios(usuario)) {
+        try {
+            // Proceder con el alta del usuario si no existe
+            if (ususervice.addUsuarios(usuario)) {
     %>
     <script>
         alert("Se ha dado de alta al Usuario");
@@ -128,9 +129,17 @@ Author : cesar
         alert("Ha ocurrido un error");
     </script>
     <%
+        }
+    } catch (Exception e) {
+    %>
+    <script>
+        alert("Ha ocurrido un error: <%= e.getMessage()%>");
+    </script>
+    <%
                 }
             }
         }
     %>
+
 </body>
 </html>

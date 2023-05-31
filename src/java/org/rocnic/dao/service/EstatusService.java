@@ -158,10 +158,7 @@ public class EstatusService extends Conexion<EstatusReporte>
         }
         return false;
     }
-    
-    
-    
-    
+ 
     public EstatusReporte getEstatusReporteByEstatusReporte( String rol) 
     {
         EstatusReporte aux = null;

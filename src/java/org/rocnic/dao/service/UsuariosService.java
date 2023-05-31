@@ -82,17 +82,20 @@ public class UsuariosService extends Conexion<Usuarios> {
             row = preparedStatement.executeUpdate();
             closeConnection(connection);
             return row == 1;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException ex)
+        {
+             ex.printStackTrace();
         }
 
         return row < 0;
     }
 
+
+    
     public boolean updateUsuariosporID(Usuarios usuario) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "UPDATE usuarios SET IdPerfil=?, Usuario=?, Contraseña=?, Nombre=?  WHERE IdUsuario=?";
+        String sql = "UPDATE usuarios SET IdPerfil=?, Usuario=?, Contrasena=?, Nombre=?  WHERE IdUsuario=?";
         int row = 0;
         try {
             connection = getConnection();
@@ -142,7 +145,7 @@ public class UsuariosService extends Conexion<Usuarios> {
                 aux.setIdUsuario(resultSet.getInt("IdUsuario"));
                 aux.setIdPerfil(resultSet.getInt("IdPerfil"));
                 aux.setUsuario(resultSet.getString("Usuario"));
-                aux.setContrasena(resultSet.getString("Contraseña"));
+                aux.setContrasena(resultSet.getString("Contrasena"));
                 aux.setNombre(resultSet.getString("Nombre"));
                 aux.setBoleta(resultSet.getString("Boleta"));
             }
@@ -188,7 +191,7 @@ public class UsuariosService extends Conexion<Usuarios> {
         try {
             connection = getConnection(); // Obtener conexión a la base de datos
 
-            String sql = "SELECT * FROM usuarios WHERE Usuario = ? OR Contraseña = ? OR Boleta = ?";
+            String sql = "SELECT * FROM usuarios WHERE Usuario = ? OR Contrasena = ? OR Boleta = ?";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, usuario);
             preparedStatement.setString(2, contraseña);
@@ -301,7 +304,7 @@ public class UsuariosService extends Conexion<Usuarios> {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        String sql = "SELECT * FROM usuarios WHERE usuario = ? AND contraseña = ?";
+        String sql = "SELECT * FROM usuarios WHERE usuario = ? AND contrasena = ?";
         try {
             connection = getConnection();
             if (connection == null) {
@@ -427,6 +430,9 @@ public class UsuariosService extends Conexion<Usuarios> {
         }
         return usuario;
     }
+    
+    
+    
     public boolean updateUsuarios(Usuarios usuario) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -475,6 +481,8 @@ public class UsuariosService extends Conexion<Usuarios> {
         }
         return nombrePerfil;
     }
+    
+    
     public int getIdUsuarioPorNombre(String nombreUsuario) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -498,6 +506,9 @@ public class UsuariosService extends Conexion<Usuarios> {
         return idUsuario;
     }
 
+    
+    
+    
     public Usuarios getUsuarioPorId(int IdUsuario) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -561,7 +572,7 @@ public class UsuariosService extends Conexion<Usuarios> {
     } 
     return false;
 }
-    
+  
     
     public int obtenerIdUsuarioPorNombre(String nombreUsuario) {
     Connection connection = null;
@@ -591,7 +602,7 @@ public class UsuariosService extends Conexion<Usuarios> {
     try {
         connection = getConnection();
         if (connection != null) {
-            String query = "SELECT NombrePerfil FROM Perfiles WHERE IdPerfil = ?";
+            String query = "SELECT NombrePerfil FROM perfiles WHERE IdPerfil = ?";
             statement = connection.prepareStatement(query);
             statement.setInt(1, idPerfil);
             resultSet = statement.executeQuery();
@@ -608,15 +619,15 @@ public class UsuariosService extends Conexion<Usuarios> {
 
     return nombrePerfil;
 }
+
    public Usuarios getUsuarioPorNombres(String nombreUsuario) {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         Usuarios usuario = null;
-
         try {
             connection = getConnection();
-            String query = "SELECT * FROM Usuarios WHERE usuario = ?";
+            String query = "SELECT * FROM usuarios WHERE Usuario = ?";
             statement = connection.prepareStatement(query);
             statement.setString(1, nombreUsuario);
             resultSet = statement.executeQuery();
@@ -632,7 +643,6 @@ public class UsuariosService extends Conexion<Usuarios> {
         } catch (SQLException e) {
             e.printStackTrace();
         } 
-
         return usuario;
     }
  

@@ -76,7 +76,8 @@
     String accion = request.getParameter("accion");
     UsuariosService ususervice = new UsuariosService();
     Usuarios usuarios = new Usuarios();
-    if ("buscar".equals(accion)) {
+    if ("buscar".equals(accion))
+    {
         String usuarioCambio = request.getParameter("campo2");
 
         // Verificar existencia del usuario

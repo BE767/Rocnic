@@ -356,7 +356,7 @@ public class EquipoService extends Conexion<Equipos> {
     try {
         connection = getConnection();
         if (connection != null) {
-            String query = "SELECT COUNT(*) AS count FROM Equipos WHERE NombreEquipo = ?";
+            String query = "SELECT COUNT(*) AS count FROM equipos WHERE NombreEquipo = ?";
             statement = connection.prepareStatement(query);
             statement.setString(1, nombreEquipo);
             resultSet = statement.executeQuery();

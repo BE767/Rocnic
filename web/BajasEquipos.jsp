@@ -105,13 +105,15 @@
                     equipo.setIdLaboratorio(Integer.parseInt(idLaboratorioParam));
                 } else {
                     // Manejar el caso cuando no se ha seleccionado ningún laboratorio
-                    // Puedes asignar un valor por defecto o mostrar un mensaje de error
-                    equipo.setIdLaboratorio(0); // Por ejemplo, asignar un valor 0 como valor por defecto
-                }
-
-                // Verificar si el equipo existe antes de eliminarlo
-                if (!equipoService.existeEquipoNombre(equipo.getNombreEquipo())) {
         %>
+        <script>
+            alert("No seleccionaste ningun laboratorio");
+        </script>
+        <%
+            }
+            // Verificar si el equipo existe antes de eliminarlo
+            if (!equipoService.existeEquipoNombre(equipo.getNombreEquipo())) {
+        %>        
         <script>
             alert("El equipo no existe");
         </script>

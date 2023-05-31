@@ -203,7 +203,7 @@ public class PerfilesService extends Conexion<Perfiles>
 
         try {
             connection = getConnection();
-            String query = "SELECT * FROM usuario WHERE usuario = ? AND contraseña = ?";
+            String query = "SELECT * FROM usuario WHERE Usuario = ? AND contrasena = ?";
             statement = connection.prepareStatement(query);
             statement.setString(1, IUser);
             statement.setString(2, IPassword);
